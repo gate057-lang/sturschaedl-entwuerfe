@@ -194,7 +194,8 @@ function st_options_page() {
 	$tab    = isset( $_GET['tab'] ) && isset( $schema[ sanitize_key( $_GET['tab'] ) ] ) ? sanitize_key( $_GET['tab'] ) : 'design';
 	?>
 	<div class="wrap st-opt">
-		<h1><img src="<?php echo esc_url( ST_URI . '/assets/img/bulle-dunkel.png' ); ?>" alt="" width="40"> Sturschädl – Inhalte pflegen</h1>
+		<h1><img src="<?php echo esc_url( ST_URI . '/assets/img/bulle-dunkel.png' ); ?>" alt="" width="40"> Sturschädl – Inhalte pflegen
+			<a class="page-title-action" href="<?php echo esc_url( ST_URI . '/anleitung.pdf' ); ?>" target="_blank" rel="noopener">Anleitung öffnen (PDF)</a></h1>
 		<?php settings_errors(); ?>
 		<nav class="nav-tab-wrapper">
 			<?php foreach ( $schema as $k => $t ) : ?>
