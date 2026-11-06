@@ -1,0 +1,26 @@
+.st-opt h1{display:flex;align-items:center;gap:12px}
+.st-opt .st-h th{padding:28px 0 0}
+.st-opt .st-h h2{margin:0;font-size:1.25em;border-bottom:1px solid #dcdcde;padding-bottom:8px}
+.st-vorschau img{max-width:260px;max-height:160px;display:block;margin-bottom:8px;border-radius:4px;object-fit:cover}
+.st-galerie{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.st-galerie li{position:relative;margin:0;cursor:move}
+.st-galerie img{width:96px;height:96px;object-fit:cover;display:block;border-radius:4px}
+.st-x{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;border:0;background:#d63638;color:#fff;cursor:pointer;line-height:20px;font-size:16px}
+.st-zeile{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #dcdcde;border-radius:6px;padding:12px;margin-bottom:10px;max-width:980px}
+.st-griff{cursor:move;color:#8c8f94;margin-top:4px}
+.st-felder{display:flex;flex-wrap:wrap;gap:12px 18px;flex:1}
+.st-f{display:flex;flex-direction:column;gap:4px;min-width:180px;flex:1}
+.st-f-textarea{flex-basis:100%}
+.st-f-bild{flex:0 0 auto;min-width:0}
+.st-f .st-vorschau img{max-width:140px;max-height:100px}
+.st-l{font-weight:600;font-size:12px;color:#50575e}
+.st-f input[type=text],.st-f textarea,.st-f select{width:100%}
+.st-zeile-weg{color:#b32d2e!important;white-space:nowrap}
+.st-designs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;max-width:1240px}
+.st-design-karte{display:flex;flex-direction:column;gap:6px;border:2px solid #dcdcde;border-radius:8px;padding:10px;background:#fff;cursor:pointer}
+.st-design-karte img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:4px}
+.st-design-karte input{position:absolute;opacity:0}
+.st-design-karte:has(input:checked){border-color:#e3262b;box-shadow:0 0 0 2px #e3262b}
+.st-design-karte b{font-size:15px}
+.st-design-karte span{color:#646970;font-size:13px}
+.st-hinweis{margin-top:24px;color:#646970}

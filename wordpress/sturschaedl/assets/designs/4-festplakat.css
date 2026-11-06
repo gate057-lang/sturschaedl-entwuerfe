@@ -1,0 +1,34 @@
+/* Entwurf Festplakat – erzeugt aus quelle/build.py */
+body{--fh:Oswald,sans-serif;--fb:"Courier Prime",monospace;--bg:#e6d3ac;--bg2:#dcc597;--card:#efe1c2;--ink:#1b1410;--mute:#5a4630;--red:#c4271f;--red2:#9e1e18;--navc:#1b1410;--line:rgba(27,20,16,.3);
+ background-image:radial-gradient(rgba(80,50,20,.10) 1px,transparent 1.4px),radial-gradient(rgba(255,255,255,.25) 1px,transparent 1.2px);background-size:5px 5px,7px 7px;font-size:16px}
+body h1,body h2{font-family:"Alfa Slab One",serif;font-weight:400}
+.nav .lg-h{display:none}.nav .lg-d{display:block}
+.nav{border-bottom:3px double var(--ink)}
+.pl-hero{padding:130px 0 70px;text-align:center}
+.poster{max-width:900px;margin:0 auto;border:6px solid var(--ink);outline:2px solid var(--ink);outline-offset:6px;padding:46px 40px 40px;background:rgba(255,248,230,.35);position:relative}
+.poster .top{font:700 18px/1 Oswald;letter-spacing:.4em;text-transform:uppercase}
+.poster .stars{color:var(--red);letter-spacing:.6em;margin:14px 0}
+.poster h1{font-size:clamp(56px,11vw,150px);line-height:.88;color:var(--red);text-shadow:4px 4px 0 var(--ink)}
+.poster .sub{font:700 clamp(20px,3vw,34px)/1.1 Oswald;letter-spacing:.18em;text-transform:uppercase;margin:16px 0 26px;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:10px 0}
+.poster img.ph{width:100%;display:block;filter:grayscale(1) contrast(1.25) sepia(.35);mix-blend-mode:multiply;border:3px solid var(--ink)}
+.poster .bull{position:absolute;width:120px;right:-50px;top:-50px;transform:rotate(14deg)}
+.poster .bottom{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:22px;font:600 15px/1.3 Oswald;text-transform:uppercase;letter-spacing:.1em}
+.poster .bottom div{border-right:2px solid var(--ink);padding:6px}.poster .bottom div:last-child{border:0}
+.poster .bottom b{display:block;font-size:26px;color:var(--red)}
+.btn{border-radius:0 !important;font-family:Oswald !important;box-shadow:4px 4px 0 var(--ink)}
+.btn.ghost{background:transparent}
+.strip{background:var(--ink);color:#e6d3ac;font-family:"Alfa Slab One" !important;font-weight:400 !important}
+.offer{border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+.offer img{filter:sepia(.3) contrast(1.1)}
+.offer h3{font-family:"Alfa Slab One";font-weight:400}
+.facts{border-top:3px double var(--ink);border-bottom:3px double var(--ink)}
+.facts b{font-family:"Alfa Slab One" !important;color:var(--red)}
+.gig .d{border:3px solid var(--ink);background:var(--card)}
+.phead{background:var(--ink)}.phead .bg{filter:grayscale(1) sepia(.4)}
+.phead h1{color:#e6d3ac}
+.photo-frame img,.st-content .is-style-rahmen img{filter:sepia(.25);border:3px solid var(--ink)}
+.photo-frame::before,.st-content .is-style-rahmen::before{border:3px solid var(--red)}
+.cta-band{background:var(--red)}.cta-band .btn.red{background:var(--ink)}
+.insta img,.gal img{filter:sepia(.2) contrast(1.05);border:2px solid var(--ink)}
+form.f,.side .box,.member{border:3px solid var(--ink) !important;box-shadow:6px 6px 0 var(--ink)}
+@media (max-width:760px){.poster{padding:28px 18px}.poster .bull{width:80px;right:-12px;top:-40px}.poster .bottom{grid-template-columns:1fr}.poster .bottom div{border-right:0;border-bottom:2px solid var(--ink)}.pl-hero{padding:100px 0 50px}}

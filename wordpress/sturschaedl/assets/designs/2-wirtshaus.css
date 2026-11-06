@@ -1,0 +1,25 @@
+/* Entwurf Wirtshaus – erzeugt aus quelle/build.py */
+body{--fh:Alegreya,serif;--fb:"Alegreya Sans",sans-serif;--bg:#f4ecdc;--bg2:#eadcc2;--card:#fbf5ea;--ink:#2b1d14;--mute:#6e5a48;--red:#b3261e;--red2:#8e1c16;--navc:#2b1d14;--line:rgba(43,29,20,.18)}
+body h1,body h2,body h3{text-transform:none;letter-spacing:-.01em;font-weight:800}
+body .kicker{color:#8a5a2b;font-family:"Alegreya Sans";letter-spacing:.2em}
+.btn{font-family:"Alegreya Sans" !important;border-radius:40px !important}
+.nav .lg-h{display:none}.nav .lg-d{display:block}
+.nav{background:rgba(244,236,220,.94);border-bottom:1px solid var(--line);position:sticky !important;top:0}
+.nav a:hover,.nav a.cur{box-shadow:0 2px 0 var(--red)}
+.wh-hero{padding:70px 0 90px;position:relative}
+.wh-hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+.wh-hero h1{font-size:clamp(54px,7.5vw,104px);line-height:.95;margin:14px 0 22px}
+.wh-hero h1 em{font-family:var(--fx);font-style:normal;color:var(--red);display:block;font-size:.7em}
+.wh-hero p{font-size:20px;color:var(--mute);max-width:500px;margin-bottom:30px}
+.wh-hero .pic{position:relative}
+.wh-hero .pic img{width:100%;display:block;border:12px solid #fff;box-shadow:0 30px 60px rgba(60,35,15,.25);transform:rotate(1.5deg)}
+.wh-hero .stamp{position:absolute;left:-40px;bottom:-34px;width:150px;height:150px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font:700 17px/1.1 Alegreya;transform:rotate(-12deg);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.wh-hero .badge{display:flex;gap:26px;margin-top:34px;color:var(--mute);font-size:15px}
+.wh-hero .badge b{display:block;font:800 34px/1 Alegreya;color:var(--ink)}
+.strip{background:#2b1d14;font-family:Alegreya !important;text-transform:none !important;font-style:italic}
+.offer{border-radius:6px}
+.phead{padding-top:120px}
+.phead h1{text-transform:none}
+.cta-band{background:#2b1d14}
+.photo-frame::before,.st-content .is-style-rahmen::before{border-color:#8a5a2b}
+@media (max-width:760px){.wh-hero .wrap{grid-template-columns:1fr;gap:50px}.wh-hero .stamp{left:auto;right:-6px;width:110px;height:110px;font-size:14px}.wh-hero{padding:40px 0 60px}}

@@ -1,0 +1,30 @@
+/* Entwurf Hochzeit Elegant – erzeugt aus quelle/build.py */
+body{--fh:"Cormorant Garamond",serif;--fb:Jost,sans-serif;--bg:#faf7f1;--bg2:#eef0e8;--card:#fff;--ink:#22302a;--mute:#66736c;--red:#2f5a46;--red2:#244636;--gold:#b8955a;--navc:#22302a;--line:rgba(34,48,42,.14);font-weight:300}
+body h1,body h2,body h3{text-transform:none;font-weight:600;letter-spacing:0;line-height:1}
+body .kicker{color:var(--gold);font-family:Jost;font-weight:500;letter-spacing:.3em}
+.btn{font-family:Jost !important;font-weight:500 !important;font-size:14px !important;letter-spacing:.18em !important;border-radius:999px !important;padding:16px 30px !important}
+.nav .lg-h{display:none}.nav .lg-d{display:block}
+.nav .brand span{font-family:"Cormorant Garamond";font-weight:700}
+.nav ul{font-family:Jost;font-weight:400;font-size:13px}
+.el-hero{padding:130px 0 80px;text-align:center}
+.el-hero h1{font-size:clamp(54px,8vw,112px);margin:18px 0 10px}
+.el-hero h1 i{font-weight:500;color:var(--red)}
+.el-hero p{max-width:600px;margin:0 auto 34px;color:var(--mute);font-size:19px}
+.arch{max-width:980px;margin:60px auto 0;display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:20px;align-items:end}
+.arch img{width:100%;display:block;object-fit:cover}
+.arch .m{aspect-ratio:4/5;border-radius:999px 999px 0 0}
+.arch .s{aspect-ratio:3/4;border-radius:999px 999px 0 0;opacity:.95}
+.el-hero .sig{font-family:var(--fx);font-size:30px;color:var(--gold);margin-top:30px}
+.strip{background:var(--red);font-family:"Cormorant Garamond" !important;font-style:italic;text-transform:none !important;font-weight:600 !important}
+.facts b{font-family:"Cormorant Garamond" !important;font-weight:600;color:var(--red)}
+.offer{border-radius:200px 200px 0 0}
+.offer h3{font-weight:600}
+.phead{background:var(--red)}
+.phead h1{text-transform:none}
+.photo-frame img,.st-content .is-style-rahmen img{border-radius:300px 300px 0 0}
+.photo-frame::before,.st-content .is-style-rahmen::before{border:1px solid var(--gold);border-radius:300px 300px 0 0}
+.cta-band{background:#22302a}
+.member .ph{border-radius:200px 200px 0 0}
+.flow div::before,.st-content .st-flow>div::before{border-top-color:var(--gold);color:var(--gold)}
+.checks li::before,.st-content ul.is-style-haken li::before{background:var(--gold)}
+@media (max-width:760px){.arch{grid-template-columns:1fr 1fr}.arch .m{grid-column:1/-1;order:-1}.el-hero{padding:110px 0 60px}}

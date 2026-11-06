@@ -1,0 +1,9 @@
+/* Damit der Block-Editor die Theme-Schriften und Hervorhebungen zeigt */
+body{font-family:Barlow,sans-serif}
+h1,h2,h3{font-family:"Barlow Condensed",sans-serif;font-weight:800;text-transform:uppercase;line-height:1}
+.is-style-kicker{font:700 13px/1 "Barlow Condensed";letter-spacing:.22em;text-transform:uppercase;color:#e3262b}
+.is-style-gross{font-size:22px}
+.is-style-abschnitt,.is-style-abschnitt-dunkel{border:1px dashed #ccc;padding:20px}
+.is-style-abschnitt-dunkel{background:#f2f0ec}
+.st-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.is-style-rahmen img{outline:2px solid #e3262b;outline-offset:6px}

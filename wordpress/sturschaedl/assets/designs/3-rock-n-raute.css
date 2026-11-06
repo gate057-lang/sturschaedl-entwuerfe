@@ -1,0 +1,25 @@
+/* Entwurf Rock’n’Raute – erzeugt aus quelle/build.py */
+body{--fh:Anton,sans-serif;--fb:Archivo,sans-serif;--bg:#0a0c10;--bg2:#121721;--card:#151b26;--ink:#f5f7fa;--mute:#9aa6b8;--red:#1d7fe0;--red2:#1566b8;--line:rgba(255,255,255,.12)}
+body h1,body h2,body h3{font-weight:400;letter-spacing:.005em}
+.raute{background-color:#fff;background-image:linear-gradient(135deg,#1d7fe0 25%,transparent 25%),linear-gradient(225deg,#1d7fe0 25%,transparent 25%),linear-gradient(45deg,#1d7fe0 25%,transparent 25%),linear-gradient(315deg,#1d7fe0 25%,#fff 25%);background-size:44px 44px;background-position:22px 0,22px 0,0 0,0 0}
+.rr-hero{position:relative;min-height:860px;overflow:hidden;color:#fff;background:#0a0c10}
+.rr-hero .ph{position:absolute;inset:0 0 0 36%;background:url(../img/band-wirtshaus.jpg) 80% 30%/cover;clip-path:polygon(14% 0,100% 0,100% 100%,0 100%);filter:grayscale(1) contrast(1.25) brightness(.9)}
+.rr-hero .ph::before{content:"";position:absolute;inset:0;background:#1d7fe0;mix-blend-mode:multiply;opacity:.55}
+.rr-hero .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0a0c10 0%,rgba(10,12,16,0) 22%)}
+.rr-hero .band{position:absolute;left:-5%;right:-5%;bottom:120px;height:64px;transform:rotate(-4deg);box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.rr-hero .wrap{position:relative;padding-top:200px}
+.rr-hero h1{font-size:clamp(64px,8.6vw,124px);line-height:.88}
+.rr-hero h1 span{display:block;-webkit-text-stroke:2px #fff;color:transparent}
+.rr-hero p{max-width:470px;font-size:19px;color:#c9d2df;margin:26px 0 30px}
+.rr-hero .bull{position:absolute;right:32px;top:130px;width:170px;filter:drop-shadow(0 10px 30px rgba(0,0,0,.6))}
+.strip{background:#fff;color:#0a0c10;font-family:Anton !important;font-weight:400 !important}
+.strip em{color:#1d7fe0;opacity:1 !important}
+.btn{transform:skewX(-8deg)}
+.offer h3{font-size:46px}
+.facts b{color:#1d7fe0}
+.gig .d span{color:#1d7fe0}
+.cta-band{background:#1d7fe0}.cta-band .bg{opacity:.12}
+.cta-band .btn.red{background:#fff;color:#0a0c10}
+.photo-frame::before,.st-content .is-style-rahmen::before{border-color:#1d7fe0}
+.kicker{color:#5aa8f5 !important}
+@media (max-width:760px){.rr-hero{min-height:0;padding-bottom:110px}.rr-hero .ph{inset:0 0 auto 0;aspect-ratio:2048/1678;clip-path:polygon(0 0,100% 0,100% 88%,0 100%);background-position:center;filter:grayscale(1) contrast(1.2)}.rr-hero .ph::after{background:linear-gradient(180deg,rgba(10,12,16,.55) 0%,transparent 30%)}.rr-hero .bull{display:none}.rr-hero .wrap{padding-top:calc(82vw + 10px)}.rr-hero .band{bottom:34px;height:40px}}
