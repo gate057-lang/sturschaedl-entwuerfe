@@ -56,6 +56,22 @@ P = W / "_paket" / "sturschaedl-wix-paket"
 shutil.rmtree(W / "_paket", ignore_errors=True)
 P.mkdir(parents=True)
 shutil.copy(W / "anleitung.html", P / "ANLEITUNG.html")
+shutil.copy(REPO / "anleitungen" / "Sturschaedl-Anleitung-Wix.pdf", P / "Anleitung-Wix.pdf")
+(P / "LIESMICH.txt").write_text("""Sturschädl-Website – Paket für WIX
+==================================
+
+Inhalt:
+  Anleitung-Wix.pdf   Schritt-für-Schritt-Anleitung (bitte zuerst lesen)
+  ANLEITUNG.html      Ausführliche Bauanleitung mit allen Maßen (im Browser öffnen)
+  cms/                Termine, Laufband, Mitglieder zum Importieren ins Wix-CMS
+  velo/               Fertiger Code zum Kopieren in Wix (Dev Mode)
+  schriften/          Schriften, ein Ordner pro Design
+  bilder/             Logos und Fotos
+  vorschau/           Die fünf Designs als Bild
+
+Dieses Paket ist nur für Wix. Für WordPress gibt es ein eigenes Paket
+(sturschaedl-wordpress-paket.zip).
+""", encoding="utf-8")
 shutil.copytree(Q / "cms", P / "cms")
 shutil.copytree(Q / "velo", P / "velo")
 for slug, *_rest in DESIGNS:

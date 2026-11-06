@@ -8,6 +8,13 @@ Fünf klickbare Entwürfe für eine neue Website der Band Sturschädl (bayrisch-
 
 Texte und Bilder stammen von sturschaedlband.de und Instagram @stur.schaedl_band. Reine Entwürfe, keine fertige Website.
 
+## Pakete zum Weitergeben
+
+- **WordPress:** `wordpress/sturschaedl-wordpress-paket.zip` – Theme-ZIP (nicht entpacken), Anleitung-WordPress.pdf, Vorschaubilder.
+- **Wix:** `wix/sturschaedl-wix-paket.zip` – Anleitung-Wix.pdf, CMS-Daten, Code, Schriften, Bilder.
+- Schritt-für-Schritt-PDFs einzeln: `anleitungen/*.pdf` (Quelle `anleitungen/quelle/*.html`, Bau + Prüfung: `python3 -P anleitungen/werkzeuge/pdf-bauen.py`).
+- Reihenfolge beim Neubauen: PDFs → `wordpress/werkzeuge/zip-bauen.sh` → `python3 -P wix/werkzeuge/paket-bauen.py`.
+
 ## WordPress-Theme (`wordpress/`)
 
 - `wordpress/sturschaedl-theme.zip` – in WordPress unter *Design → Themes → Theme hochladen* installieren.

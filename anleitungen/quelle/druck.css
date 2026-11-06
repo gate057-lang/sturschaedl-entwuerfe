@@ -60,7 +60,7 @@ h3{font-size:15pt;text-transform:uppercase;margin:7mm 0 3mm;letter-spacing:.01em
 .achtung{background:#fff6e0;border:1px solid #f0c75a;border-left:5px solid #e0a100}
 .tipp{background:#eef3fb;border:1px solid #bcd0ee;border-left:5px solid #3b73c8}
 .wichtig{background:var(--dark);color:#f4eee2;border-left:5px solid var(--red)}
-.wichtig kbd{background:#2b2622;border-color:#5a5048;color:#fff}
+.wichtig kbd,.wichtig code{background:#2b2622;border-color:#5a5048;color:#fff}
 
 /* Bilder */
 figure{margin:3mm 0 5mm;break-inside:avoid}
