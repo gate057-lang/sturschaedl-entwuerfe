@@ -25,6 +25,6 @@ body .kicker{color:var(--gold);font-family:Jost;font-weight:500;letter-spacing:.
 .photo-frame::before,.st-content .is-style-rahmen::before{border:1px solid var(--gold);border-radius:300px 300px 0 0}
 .cta-band{background:#22302a}
 .member .ph{border-radius:200px 200px 0 0}
-.flow div::before,.st-content .st-flow>div::before{border-top-color:var(--gold);color:var(--gold)}
+.flow div::before,.st-content .st-flow .st-schritt::before{border-top-color:var(--gold);color:var(--gold)}
 .checks li::before,.st-content ul.is-style-haken li::before{background:var(--gold)}
 @media (max-width:760px){.arch{grid-template-columns:1fr 1fr}.arch .m{grid-column:1/-1;order:-1}.el-hero{padding:110px 0 60px}}

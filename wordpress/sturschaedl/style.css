@@ -151,8 +151,8 @@ footer{background:#0b0a09;color:#cfc6b8;padding:64px 0 34px;font-size:15px;borde
 
 /* Hochzeit Ablauf */
 .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
-.flow div,.st-content .st-flow>div{padding:30px 26px 30px 0;border-top:3px solid var(--line);position:relative}
-.flow div::before,.st-content .st-flow>div::before{counter-increment:s;content:"0" counter(s);position:absolute;top:-3px;left:0;width:60px;border-top:3px solid var(--red);padding-top:16px;font:800 16px/1 var(--fh);color:var(--red);letter-spacing:.1em}
+.flow div,.st-content .st-flow .st-schritt{padding:30px 26px 30px 0;border-top:3px solid var(--line);position:relative}
+.flow div::before,.st-content .st-flow .st-schritt::before{counter-increment:s;content:"0" counter(s);position:absolute;top:-3px;left:0;width:60px;border-top:3px solid var(--red);padding-top:16px;font:800 16px/1 var(--fh);color:var(--red);letter-spacing:.1em}
 .flow h3{font-size:30px;margin:38px 0 10px}
 .flow p{color:var(--mute);font-size:15px}
 .checks{display:grid;grid-template-columns:1fr 1fr;gap:14px 30px;margin-top:26px}
@@ -263,8 +263,9 @@ a{color:inherit}
 .st-content .is-style-rahmen::before{content:"";position:absolute;inset:18px -18px -18px 18px;border:2px solid var(--red);z-index:0}
 .st-content .is-style-rahmen img{position:relative;z-index:1}
 .st-content .st-flow{display:grid;grid-template-columns:repeat(4,1fr);counter-reset:s;margin-top:44px}
-.st-content .st-flow>div{padding:30px 26px 30px 0;border-top:3px solid var(--line);position:relative}
-.st-content .st-flow>div::before{counter-increment:s;content:"0" counter(s);position:absolute;top:-3px;left:0;width:60px;border-top:3px solid var(--red);padding-top:16px;font:800 16px/1 var(--fh);color:var(--red);letter-spacing:.1em}
+.st-content .wp-block-group__inner-container{display:contents}
+.st-content .st-flow .st-schritt{padding:30px 26px 30px 0;border-top:3px solid var(--line);position:relative}
+.st-content .st-flow .st-schritt::before{counter-increment:s;content:"0" counter(s);position:absolute;top:-3px;left:0;width:60px;border-top:3px solid var(--red);padding-top:16px;font:800 16px/1 var(--fh);color:var(--red);letter-spacing:.1em}
 .st-content .st-flow h3{margin-top:38px}
 .st-content .st-flow p{font-size:15px}
 .st-content ul.is-style-haken{display:grid;grid-template-columns:1fr 1fr;gap:14px 30px;margin:26px 0 0}

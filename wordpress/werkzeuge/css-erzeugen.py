@@ -24,7 +24,7 @@ def wp(c, img):
     c = c.replace('url(assets/', 'url(' + img)
     return alias(c)
 
-ALIAS = [(".photo-frame", ".st-content .is-style-rahmen"), (".flow div", ".st-content .st-flow>div"),
+ALIAS = [(".photo-frame", ".st-content .is-style-rahmen"), (".flow div", ".st-content .st-flow .st-schritt"),
          (".checks li", ".st-content ul.is-style-haken li")]
 def alias(c):
     """Regeln für Mockup-Elemente auch auf die gleichwertigen Block-Editor-Elemente anwenden."""
