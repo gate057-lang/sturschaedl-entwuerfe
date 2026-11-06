@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sturschädl – Wix-Bauanleitung</title>
+<style>
+{{SCHRIFT_CSS}}
+:root{--bg:#f6f3ee;--card:#fff;--ink:#1b1714;--mute:#655c52;--line:#e2dbd0;--red:#e3262b;--dark:#0f0d0c;--code:#f1ede6}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 'Barlow',system-ui,sans-serif}
+a{color:var(--red)}
+header.top{background:var(--dark);color:#f4eee2;padding:48px 16px 40px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header.top .wrap{display:flex;gap:22px;align-items:center}
+header.top img{width:86px;flex:none}
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;line-height:1;letter-spacing:.01em}
+h1{font-size:clamp(38px,6vw,64px);margin:0}
+h1 small{display:block;font:400 .5em/1.1 'Pirata One',serif;text-transform:none;color:var(--red)}
+header.top p{margin:10px 0 0;color:#cfc6b8;max-width:640px}
+nav.toc{position:sticky;top:0;z-index:5;background:#1a1715;border-bottom:3px solid var(--red)}
+nav.toc .wrap{display:flex;gap:6px 18px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+nav.toc a{color:#e9e1d1;text-decoration:none;font:600 14px/1 'Barlow Condensed';letter-spacing:.1em;text-transform:uppercase;padding:4px 0}
+nav.toc a:hover{color:#fff;box-shadow:0 2px 0 var(--red)}
+main{padding:36px 0 80px}
+section{margin:0 0 56px;scroll-margin-top:60px}
+h2{font-size:clamp(30px,4vw,42px);margin:0 0 16px;display:flex;gap:14px;align-items:baseline}
+h2 .n{color:var(--red);font-size:.7em}
+h3{font-size:24px;margin:28px 0 10px}
+p,li{max-width:820px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:20px 22px;margin:16px 0}
+.box.warn{border-left:4px solid #e6a100}
+.box.ok{border-left:4px solid #2f8f4e}
+.box.info{border-left:4px solid var(--red)}
+ol.steps{counter-reset:s;list-style:none;padding:0}
+ol.steps>li{counter-increment:s;position:relative;padding:0 0 14px 46px}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;font:700 15px/30px 'Barlow Condensed';text-align:center}
+code,kbd{font:500 14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:var(--code);padding:2px 6px;border-radius:4px}
+kbd{border:1px solid var(--line)}
+.tbl{overflow-x:auto;margin:14px 0}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--card);font-size:15px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#ece6dc;font:700 13px/1.2 'Barlow Condensed';letter-spacing:.1em;text-transform:uppercase}
+.designs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.design{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.design img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;object-position:top}
+.design .t{padding:14px 16px 18px}
+.design b{font:800 24px/1 'Barlow Condensed';text-transform:uppercase}
+.design small{display:block;color:var(--red);font:700 12px/1 'Barlow Condensed';letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}
+.sw{display:flex;gap:6px;margin:12px 0 8px;flex-wrap:wrap}
+.sw span{display:inline-flex;flex-direction:column;align-items:center;font:500 11px/1.2 ui-monospace,Menlo,monospace;color:var(--mute)}
+.sw i{display:block;width:42px;height:30px;border-radius:4px;border:1px solid rgba(0,0,0,.15);margin-bottom:3px}
+.fonts{font-size:14px;color:var(--mute)}
+.plan{display:grid;gap:4px;max-width:720px;margin:16px 0}
+.plan div{display:grid;grid-template-columns:150px 1fr;gap:12px;background:var(--card);border:1px solid var(--line);padding:10px 12px;font-size:15px}
+.plan div b{font:700 15px/1.2 'Barlow Condensed';text-transform:uppercase;letter-spacing:.05em}
+.plan .h{background:#1a1715;color:#f4eee2;border-color:#1a1715}
+.plan .r{background:var(--red);color:#fff;border-color:var(--red)}
+.ids code{white-space:nowrap}
+.files li{margin-bottom:4px}
+footer{background:var(--dark);color:#b3aa9c;padding:28px 16px;font-size:14px}
+@media (max-width:640px){header.top .wrap{flex-direction:column;align-items:flex-start}header.top img{width:64px}.plan div{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+	<img src="{{BULLE}}" alt="">
+	<div>
+		<h1><small>Wix-Bauanleitung für die</small>Sturschädl-Website</h1>
+		<p>Paket zum Nachbauen der Website-Entwürfe in Wix. Termine, Laufband und Mitglieder pflegt die Band danach selbst im Wix-Dashboard, ohne Code. Stand {{DATUM}}.</p>
+	</div>
+</div></header>
+<nav class="toc"><div class="wrap">
+	<a href="#ueberblick">Überblick</a><a href="#designs">5 Designs</a><a href="#vorbereitung">Vorbereitung</a><a href="#cms">CMS-Daten</a><a href="#code">Code</a><a href="#startseite">Startseite</a><a href="#unterseiten">Unterseiten</a><a href="#handy">Handy</a><a href="#pflege">Pflege</a><a href="#wechsel">Design wechseln</a>
+</div></nav>
+<main><div class="wrap">
+
+<section id="ueberblick">
+	<h2><span class="n">00</span>Überblick</h2>
+	<p>Wix ist ein geschlossenes System: Fertige Layouts oder Themes lassen sich nicht als Datei hochladen. Die Seiten werden deshalb im Wix-Editor gebaut, und dieses Paket liefert alles, was dafür gebraucht wird:</p>
+	<ul class="files">
+		<li><b>cms/</b> – Termine, Laufband und Mitglieder als CSV zum Importieren ins Wix-CMS</li>
+		<li><b>velo/</b> – fertiger Code: Termine sortieren sich selbst (kommend / Rückblick), „Nächster Auftritt“ füllt sich automatisch, Laufband liest seine Begriffe aus dem CMS</li>
+		<li><b>schriften/</b> – die Schriften aller fünf Designs (WOFF2, zum Hochladen in Wix)</li>
+		<li><b>bilder/</b> – Stierschädel-Logos, Bandfotos, Instagram-Fotos</li>
+		<li><b>vorschau/</b> – die fünf Entwürfe als Bild, zum Nebeneinanderlegen beim Bauen</li>
+	</ul>
+	<div class="box info"><b>Voraussetzungen</b><br>
+		• Wix Premium mit verbundener Domain (für das Laufband als „Custom Element“ nötig) – ist bei sturschaedlband.de vorhanden.<br>
+		• Funktioniert im normalen <b>Wix Editor</b> und in <b>Wix Studio</b>. Für den Code wird der „Dev Mode“ (Velo) eingeschaltet, das ist kostenlos.<br>
+		• Die klickbaren Entwürfe zum Vergleichen: <a href="https://raw.githack.com/gate057-lang/sturschaedl-entwuerfe/main/index.html">Entwürfe ansehen</a>
+	</div>
+	<div class="box warn"><b>Was Wix anders macht als WordPress</b><br>
+		• Ein Design-Umschalter wie im WordPress-Theme ist in Wix nicht vorgesehen. Man legt sich auf ein Design fest; ein späterer Wechsel geht über Farben, Schriften und Startbereich (siehe <a href="#wechsel">Design wechseln</a>).<br>
+		• Die Handy-Ansicht passt man in Wix gesondert an (Handy-Symbol oben im Editor).
+	</div>
+</section>
+
+<section id="designs">
+	<h2><span class="n">01</span>Die fünf Designs</h2>
+	<p>Zuerst ein Design auswählen. Alle Farbwerte und Schriften stehen auf der Karte; die Schriftdateien liegen im Ordner <code>schriften/</code> unter der gleichen Nummer.</p>
+	<div class="designs">{{DESIGN_KARTEN}}</div>
+	<h3>Wo die Farben in Wix eingetragen werden</h3>
+	<p><b>Wix Editor:</b> links <kbd>Website-Design</kbd> → <kbd>Farben</kbd> → <kbd>Farben anpassen</kbd>. <b>Wix Studio:</b> <kbd>Website-Styles</kbd> → <kbd>Farben</kbd>. Die Werte so verteilen:</p>
+	<div class="tbl"><table>
+		<tr><th>Rolle in Wix</th><th>Wert aus der Design-Karte</th></tr>
+		<tr><td>Hintergrund</td><td>Grund</td></tr>
+		<tr><td>Hintergrund, abgesetzt (Abschnitte, Kästen)</td><td>Grund 2 / Kasten</td></tr>
+		<tr><td>Text / Überschriften</td><td>Schrift</td></tr>
+		<tr><td>Text, gedämpft</td><td>Leise</td></tr>
+		<tr><td>Akzent (Knöpfe, kleine Zeilen, Linien)</td><td>Akzent; Knopf beim Überfahren: Akzent dunkel</td></tr>
+	</table></div>
+	<h3>Schrift-Rollen</h3>
+	<div class="tbl"><table>
+		<tr><th>Rolle</th><th>Verwendung</th><th>Tipp</th></tr>
+		<tr><td>Überschrift</td><td>Titel 1–3, Knöpfe, kleine rote Zeilen („Kicker“)</td><td>Kicker: 13 px, Abstand 0,22 em, GROSS, Akzentfarbe</td></tr>
+		<tr><td>Fließtext</td><td>Absätze, Formulare, Menüs</td><td>17 px, Zeilenhöhe 1,6</td></tr>
+		<tr><td>Zierschrift</td><td>„Mia san die“, Schriftzug neben dem Logo, Fußzeile</td><td>Pirata One (Designs 1–3, 5)</td></tr>
+	</table></div>
+</section>
+
+<section id="vorbereitung">
+	<h2><span class="n">02</span>Vorbereitung</h2>
+	<ol class="steps">
+		<li><b>Sichern.</b> Im Wix-Dashboard <kbd>Website-Aktionen</kbd> (…) → <kbd>Website duplizieren</kbd>. Im Duplikat bauen und erst am Ende Premium und Domain umziehen – oder direkt in der echten Seite arbeiten; Wix hebt über <kbd>Website-Verlauf</kbd> alte Stände auf.</li>
+		<li><b>Schriften hochladen.</b> Text anklicken → <kbd>Text bearbeiten</kbd> → Schrift-Auswahl → <kbd>Schriftarten hochladen</kbd> (Studio: Inspektor → Schrift → <kbd>Schriften hochladen</kbd>). Alle Dateien aus <code>schriften/&lt;Design&gt;/</code> auswählen. Danach stehen sie unter „Meine Schriften“.</li>
+		<li><b>Bilder hochladen.</b> <kbd>Medien</kbd> → <kbd>Hochladen</kbd> → Ordner <code>bilder/</code>. Tipp: Die Instagram-Bilder sind kleine Vorschauen – für die echte Seite besser die Originalfotos der Band nehmen.</li>
+		<li><b>Dev Mode einschalten.</b> Oben im Editor <kbd>Dev Mode</kbd> → <kbd>Dev Mode aktivieren</kbd> (Studio: Code-Symbol links → <kbd>Code starten</kbd>). Links erscheinen nun „Seiten“, „Öffentlich & Backend“ und „Datenbanken/CMS“.</li>
+	</ol>
+</section>
+
+<section id="cms">
+	<h2><span class="n">03</span>CMS-Sammlungen anlegen</h2>
+	<p>Im Dashboard <kbd>CMS</kbd> → <kbd>Sammlung erstellen</kbd> → „Neu erstellen“. Drei Sammlungen, die Namen exakt so schreiben (der Code sucht danach):</p>
+	<div class="tbl"><table>
+		<tr><th>Sammlung (ID)</th><th>Felder (Name → Feld-ID → Typ)</th><th>CSV-Datei</th></tr>
+		<tr><td><b>Termine</b></td><td>Titel → <code>title</code> → Text (vorhandenes Titelfeld)<br>Datum → <code>datum</code> → <b>Datum</b><br>Uhrzeit → <code>uhrzeit</code> → Text<br>Ort → <code>ort</code> → Text<br>Zusatz → <code>zusatz</code> → Text<br>Link → <code>link</code> → URL</td><td><code>cms/Termine.csv</code></td></tr>
+		<tr><td><b>Laufband</b></td><td>Titel → <code>title</code> → Text<br>Reihenfolge → <code>reihenfolge</code> → Zahl</td><td><code>cms/Laufband.csv</code></td></tr>
+		<tr><td><b>Mitglieder</b></td><td>Titel → <code>title</code> → Text (Name)<br>Rolle → <code>rolle</code> → Text<br>Reihenfolge → <code>reihenfolge</code> → Zahl<br>Foto → <code>foto</code> → Bild (von Hand anlegen)</td><td><code>cms/Mitglieder.csv</code></td></tr>
+	</table></div>
+	<ol class="steps">
+		<li>Sammlung öffnen → <kbd>Weitere Aktionen</kbd> → <kbd>Elemente in Sammlung importieren</kbd> → CSV-Datei wählen.</li>
+		<li>Spalten zuordnen: <b>„Titel“ auf das vorhandene Feld „Title/Titel“</b>, die anderen als neue Felder mit dem Typ aus der Tabelle. Bei „Datum“ das Format <code>JJJJ-MM-TT</code> angeben.</li>
+		<li>Feld-IDs prüfen: <kbd>Felder verwalten</kbd> → Feld anklicken → „Feld-ID“ muss wie in der Tabelle heißen (klein geschrieben).</li>
+		<li><b>Berechtigungen:</b> Sammlung → <kbd>Berechtigungen</kbd> → „Wer darf Inhalte ansehen?“ = <b>Jeder</b>. Hinzufügen/Ändern nur für Admins.</li>
+		<li>Ist „Sandbox“ eingeschaltet: nach dem Import <kbd>Mit Live synchronisieren</kbd>.</li>
+	</ol>
+	<div class="box ok">Ab jetzt pflegt die Band Termine und Laufband-Begriffe nur noch hier: <kbd>CMS</kbd> → <kbd>Termine</kbd> → <kbd>+ Element hinzufügen</kbd>. Vergangene Termine wandern von selbst in den Rückblick.</div>
+</section>
+
+<section id="code">
+	<h2><span class="n">04</span>Code einfügen (Velo)</h2>
+	<p>Alle Dateien liegen im Ordner <code>velo/</code>. Im Editor links im Code-Bereich anlegen und den Inhalt 1:1 hineinkopieren:</p>
+	<div class="tbl"><table>
+		<tr><th>Datei im Paket</th><th>Wohin in Wix</th></tr>
+		<tr><td><code>velo/public/termine.js</code></td><td>„Öffentlich“ → <kbd>+</kbd> Datei <code>termine.js</code></td></tr>
+		<tr><td><code>velo/public/laufband.js</code></td><td>„Öffentlich“ → <kbd>+</kbd> Datei <code>laufband.js</code></td></tr>
+		<tr><td><code>velo/public/custom-elements/sturschaedl-laufband.js</code></td><td>„Öffentlich“ → Ordner <code>custom-elements</code> anlegen → Datei <code>sturschaedl-laufband.js</code></td></tr>
+		<tr><td><code>velo/seiten/Startseite.js</code></td><td>Startseite öffnen → Code-Leiste unten → vorhandenen Code ersetzen</td></tr>
+		<tr><td><code>velo/seiten/Termine.js</code></td><td>Seite „Termine“ öffnen → Code-Leiste → ersetzen</td></tr>
+	</table></div>
+	<p>Ganz oben in <code>Startseite.js</code> steht <code>const DESIGN = '1';</code> – hier die Nummer des gewählten Designs eintragen. Das steuert Farbe und Schrift des Laufbands.</p>
+	<h3>Laufband einsetzen</h3>
+	<ol class="steps">
+		<li><kbd>Hinzufügen</kbd> → <kbd>Einbetten &amp; Social</kbd> → <kbd>Custom Element</kbd> (Studio: <kbd>Einbetten</kbd> → <kbd>Custom Element</kbd>).</li>
+		<li>Element anklicken → <kbd>Quelle wählen</kbd> → <b>Velo-Datei</b> → <code>sturschaedl-laufband.js</code>. Tag-Name: <code>sturschaedl-laufband</code>.</li>
+		<li>Volle Breite, Höhe 58 px. Im Eigenschaften-Feld die ID <code>laufband</code> vergeben.</li>
+		<li>Hinweis: Im Editor wird das Element in einem Rahmen angezeigt und kann dort abweichen – maßgeblich ist die Vorschau bzw. die veröffentlichte Seite.</li>
+	</ol>
+</section>
+
+<section id="startseite">
+	<h2><span class="n">05</span>Startseite bauen</h2>
+	<p>Von oben nach unten, jeweils als eigener Abschnitt (Wix: <kbd>Abschnitt hinzufügen</kbd> → leer). Die Maße gelten für Desktop (Inhaltsbreite 1180 px).</p>
+	<div class="plan">
+		<div class="h"><b>Kopfzeile</b><span>Stierschädel-Logo (46 px hoch) + „Sturschädl“ in Zierschrift 30 px · Menü: Termine, Hochzeiten, Medien, Über uns, Kontakt (Überschriftschrift 15 px, GROSS, Abstand 0,12 em) · Knopf „Jetzt anfragen“ in Akzentfarbe. Bei Design 1 und 3 transparent über dem Titelbild.</span></div>
+		<div class="h"><b>Titelbereich</b><span>Je nach Design – siehe Tabelle unten. Gesichter im Foto immer frei lassen, Schrift im unteren Drittel.</span></div>
+		<div class="r"><b>Laufband</b><span>Custom Element <code>#laufband</code>, volle Breite, 58 px.</span></div>
+		<div><b>Fakten</b><span>4 Spalten mit dünnen Trennlinien: Zahl 58 px Überschriftschrift, darunter 15 px leise. 2015 · 5 · 10+ · ~970.</span></div>
+		<div><b>Angebote</b><span>Kicker „Was mia spuin“, Titel „Für jedes Fest die richtige Gaudi“, rechts Text. Darunter 3 Bildkacheln (440 px hoch, Bild abgedunkelt, Text unten): Hochzeit · Kirwa &amp; Bierzelt · Party &amp; Firma, je mit Link.</span></div>
+		<div><b>Vorstellung</b><span>Abgesetzter Hintergrund. Links Foto <code>band-wald.jpg</code> mit rotem Versatz-Rahmen (Box 18 px versetzt, 2 px Rand Akzent), rechts Kicker, Titel „Ned bloß a Band – a Versprechen.“, großer Satz 22 px, Text, Knopf „Lernt uns kennen“.</span></div>
+		<div><b>Termine</b><span>Titel „Do san mia“, Knopf „Alle Termine“. Darunter Kasten <code>#freiBox</code> („Euer Fest?“) und das Wiederholungsfeld <code>#termineRepeater</code> (Aufbau siehe unten).</span></div>
+		<div><b>Instagram</b><span>Wix-App „Instagram Feed“ (kostenlos, mit dem Band-Konto verbinden) – 6 quadratische Bilder in einer Reihe. Alternativ eine Pro-Galerie mit 6 Fotos.</span></div>
+		<div class="h"><b>Aufruf-Band</b><span>Dunkel, mittig: Stierschädel 120 px, Kicker „Euer Fest – unser Auftritt“, Titel „Lasst’s scheppern!“ (bis 92 px), Text, Knopf „Termin anfragen“.</span></div>
+		<div class="h"><b>Fußzeile</b><span>4 Spalten: Schriftzug + Kurztext · Band-Links · Kontakt (Bensch Seitz, Telefon, E-Mail) · Instagram/Facebook. Unten Linie, © Sturschädl GbR · Kugelgasse 7 · 92364 Deining, rechts Impressum · Datenschutz.</span></div>
+	</div>
+	<h3>Titelbereich je Design</h3>
+	<div class="tbl"><table>
+		<tr><th>Design</th><th>Aufbau</th></tr>
+		<tr><td>1 Bierzelt-Nacht</td><td>Abschnitt 960 px hoch, Hintergrundbild <code>band-wirtshaus.jpg</code> (Ausrichtung oben), Verlauf nach unten zu Grund. Unten links: Stierschädel 168 px + senkrechter roter Strich 3 px + Kicker / „Mia san die“ (Zierschrift, Akzent) / „STURSCHÄDL“ 96 px. Rechts daneben Text + zwei Knöpfe. Oben rechts Kasten „Nächster Auftritt“ mit <code>#naechsterTitel</code> und <code>#naechsterDatum</code> (halbtransparent dunkel, links 3 px Akzentstrich).</td></tr>
+		<tr><td>2 Wirtshaus</td><td>Hell, zweispaltig: links Kicker, „Mia san die“ (Zierschrift) / „Sturschädl“ 104 px, Text, Knöpfe (rund), drei Zahlen. Rechts Foto mit 12 px weißem Rand, leicht gedreht (1,5°), Schatten; roter runder Stempel „Bayrisch &amp; Rockig seit 2015“ unten links.</td></tr>
+		<tr><td>3 Rock’n’Raute</td><td>Fast schwarz, 860 px. Rechts Foto schräg angeschnitten, schwarz-weiß mit blauer Färbung (Wix: Bildfilter „Schwarzweiß“ + blaue Farbfläche mit Mischmodus „Multiplizieren“, 55 %). Quer darüber ein Rautenband (Bild/Muster blau-weiß, −4° gedreht). Links „MIA SAN DIE“ als Umriss-Schrift, „STURSCHÄDL“ 124 px. Knöpfe leicht schräg.</td></tr>
+		<tr><td>4 Festplakat</td><td>Packpapier-Hintergrund. Mittig ein „Plakat“: Kasten mit 6 px Rahmen + zweiter Linie, oben „Mia san die“, ★★★★★, „STURSCHÄDL“ in Alfa Slab One rot mit dunklem Schatten, Unterzeile zwischen zwei Linien, Foto in Sepia, unten drei Zahlen. Stierschädel schräg oben rechts über dem Rand.</td></tr>
+		<tr><td>5 Hochzeit Elegant</td><td>Hell, zentriert: Kicker in Gold, „Mia san die“ / <i>Sturschädl</i> (kursiv, Grün), Text, runde Knöpfe. Darunter drei Fotos mit Rundbogen oben (mittleres größer), darunter „Eure Sturschädl“ in Zierschrift Gold.</td></tr>
+	</table></div>
+	<h3>Wiederholungsfeld für Termine (gilt auch für die Seite „Termine“)</h3>
+	<ol class="steps">
+		<li><kbd>Hinzufügen</kbd> → <kbd>Liste</kbd> → <kbd>Wiederholungsfeld</kbd> (Repeater) → eine Variante mit einer Spalte. Überzählige Beispiel-Elemente löschen, bis nur <b>ein</b> Eintrag übrig ist.</li>
+		<li>In den Eintrag legen: kleine Box 110 × 84 px mit 1 px Rahmen; darin Text <code>tMonat</code> (13 px, GROSS, Akzent) und Text <code>tTag</code> (44 px, Überschriftschrift). Rechts daneben Text <code>tTitel</code> (30 px Überschrift) und darunter <code>tInfo</code> (15 px, leise). Ganz rechts Text <code>tStatus</code> (13 px, GROSS, mit Rahmen) und optional ein Knopf <code>tLink</code> „Infos →“.</li>
+		<li>Unter jedem Eintrag eine dünne Linie. <b>Nicht</b> mit einem Datensatz verbinden – das übernimmt der Code.</li>
+		<li>IDs vergeben: Repeater <code>termineRepeater</code> (Startseite) bzw. <code>kommendRepeater</code> und <code>rueckblickRepeater</code> (Seite Termine).</li>
+	</ol>
+	<div class="ids tbl"><table>
+		<tr><th>ID</th><th>Element</th><th>Seite</th></tr>
+		<tr><td><code>laufband</code></td><td>Custom Element</td><td>Startseite</td></tr>
+		<tr><td><code>naechsterTitel</code>, <code>naechsterDatum</code></td><td>Texte im Kasten „Nächster Auftritt“ (Design 1)</td><td>Startseite</td></tr>
+		<tr><td><code>freiBox</code></td><td>Kasten „Euer Fest? – Saison 2027 wird grad geplant“ mit Knopf „Anfragen“</td><td>Startseite, Termine</td></tr>
+		<tr><td><code>termineRepeater</code></td><td>Wiederholungsfeld</td><td>Startseite</td></tr>
+		<tr><td><code>kommendRepeater</code>, <code>rueckblickRepeater</code></td><td>Wiederholungsfelder</td><td>Termine</td></tr>
+		<tr><td><code>rueckblickBereich</code></td><td>Box/Abschnitt um den Rückblick</td><td>Termine</td></tr>
+		<tr><td><code>tMonat</code> <code>tTag</code> <code>tTitel</code> <code>tInfo</code> <code>tStatus</code> <code>tLink</code></td><td>Elemente in jedem Repeater-Eintrag</td><td>beide</td></tr>
+	</table></div>
+	<p>Die ID setzt man, indem man das Element anklickt und im Eigenschaften-Feld (Dev Mode, unten rechts bzw. Code-Leiste) den Namen nach dem <code>#</code> ändert.</p>
+</section>
+
+<section id="unterseiten">
+	<h2><span class="n">06</span>Unterseiten</h2>
+	<p>Jede Unterseite beginnt mit einem dunklen Kopf (190 px oben Abstand für das Menü): Hintergrundfoto mit 45 % Deckkraft, Kicker, großer Titel (bis 128 px), Untertitel. Danach:</p>
+	<div class="tbl"><table>
+		<tr><th>Seite</th><th>Inhalt</th><th>Wix-Werkzeug</th></tr>
+		<tr><td><b>Termine</b></td><td>Kopf (Foto <code>ig-3.jpg</code>) · „Demnächst“ + <code>#kommendRepeater</code> + <code>#freiBox</code> · „Rückblick“ in <code>#rueckblickBereich</code> mit <code>#rueckblickRepeater</code> · Aufruf-Band</td><td>Repeater + Code <code>Termine.js</code></td></tr>
+		<tr><td><b>Hochzeiten</b></td><td>Kopf (Foto <code>ig-7.jpg</code>, „Euer Tag, / unsere Musi“) · „Vom Sekt bis zum Schluss“ mit 4 Schritten nebeneinander (01 Sektempfang, 02 Essen &amp; Reden, 03 Brautentführung, 04 Tanzfläche – oben je 3 px Linie, Nummer in Akzent) · „Alles aus oaner Hand“ mit Haken-Liste + Foto · Aufruf-Band</td><td>normale Text-/Bildelemente</td></tr>
+		<tr><td><b>Medien</b></td><td>Kopf (Foto <code>ig-8.jpg</code>) · Video · Fotogalerie im Raster (4 Spalten, einzelne Bilder doppelt breit/hoch) · Aufruf-Band</td><td>Wix Video oder YouTube-Element · <b>Pro Gallery</b> (Layout „Collage“) – Fotos pflegt die Band direkt in der Galerie</td></tr>
+		<tr><td><b>Über uns</b></td><td>Kopf (Foto <code>band-wald.jpg</code>, „Servus bei die / Sturschädl“) · Text + Foto · Besetzung: 5 Karten (Foto 3:4, Name, Instrument) · zweiter Text-/Fotoblock</td><td>Besetzung: Repeater mit <b>Datensatz</b> „Mitglieder“ verbinden (sortiert nach Reihenfolge): Bild → <code>foto</code>, Text → <code>title</code>, Text → <code>rolle</code></td></tr>
+		<tr><td><b>Kontakt</b></td><td>Kopf (Foto <code>ig-6.jpg</code>) · links Formular (Anlass als Auswahl, Datum, Ort, Name*, Gäste, E-Mail*, Telefon, Nachricht, Datenschutz-Haken*) · rechts drei Kästen: Direkt anrufen, Sturschädl GbR, Folgt uns</td><td><b>Wix Forms</b> – Empfänger-Mail in den Formular-Einstellungen eintragen</td></tr>
+		<tr><td><b>Impressum, Datenschutz</b></td><td>schlichte Textseiten</td><td>Wix-Rechtstexte bzw. Generator</td></tr>
+	</table></div>
+</section>
+
+<section id="handy">
+	<h2><span class="n">07</span>Handy-Ansicht</h2>
+	<p>Wix erzeugt die Handy-Ansicht automatisch, sie muss aber nachgearbeitet werden (Editor oben: Handy-Symbol; Studio: Haltepunkte). Vorgaben aus den Entwürfen:</p>
+	<ul>
+		<li>Seitenrand 18 px, Abschnitte 64 px Abstand oben/unten.</li>
+		<li>Menü als „Hamburger“, Knopf „Jetzt anfragen“ ins Menü.</li>
+		<li>Titelbereich: Foto als eigener Block oben (Gesichter vollständig), Schriftzug darunter, Stierschädel 78 px.</li>
+		<li>Fakten 2 × 2, Angebote untereinander (320 px hoch), Text-/Foto-Blöcke untereinander.</li>
+		<li>Termine: Datumsbox 76 px, Status unter den Titel.</li>
+		<li>Instagram 3 Spalten, Galerie 2 Spalten, Besetzung 2 Spalten, Fußzeile 2 Spalten.</li>
+	</ul>
+</section>
+
+<section id="pflege">
+	<h2><span class="n">08</span>Pflege im Alltag (für die Band)</h2>
+	<div class="tbl"><table>
+		<tr><th>Was</th><th>Wo</th></tr>
+		<tr><td>Neuer Auftritt</td><td>Dashboard → <kbd>CMS</kbd> → <kbd>Termine</kbd> → <kbd>+ Element hinzufügen</kbd>: Titel, Datum, Uhrzeit, Ort, ggf. Zusatz/Link. Fertig – Startseite, „Nächster Auftritt“ und Terminseite aktualisieren sich selbst.</td></tr>
+		<tr><td>Laufband ändern</td><td><kbd>CMS</kbd> → <kbd>Laufband</kbd>: Begriffe hinzufügen, löschen, Reihenfolge-Zahl ändern.</td></tr>
+		<tr><td>Fotos</td><td>Medien-Seite: Galerie anklicken → <kbd>Medien verwalten</kbd>. Instagram-Kacheln laufen automatisch über die App.</td></tr>
+		<tr><td>Mitglieder</td><td><kbd>CMS</kbd> → <kbd>Mitglieder</kbd>: Name, Rolle, Foto.</td></tr>
+		<tr><td>Texte</td><td>Im Editor direkt anklicken und tippen, danach <kbd>Veröffentlichen</kbd>.</td></tr>
+		<tr><td>Anfragen</td><td>Kommen per E-Mail und stehen zusätzlich im Dashboard unter <kbd>Formulare &amp; Einsendungen</kbd>.</td></tr>
+	</table></div>
+</section>
+
+<section id="wechsel">
+	<h2><span class="n">09</span>Design später wechseln</h2>
+	<ol class="steps">
+		<li>Farben und Schriften laut Design-Karte in den Website-Design-Einstellungen austauschen – fast alle Elemente ziehen automatisch nach, wenn sie die Theme-Farben/-Schriften nutzen (beim Bauen darauf achten!).</li>
+		<li>Titelbereich der Startseite nach der Tabelle „Titelbereich je Design“ umbauen.</li>
+		<li>In <code>Startseite.js</code> die Zeile <code>const DESIGN = '…';</code> auf die neue Nummer setzen (Laufband).</li>
+		<li>Veröffentlichen.</li>
+	</ol>
+	<div class="box info"><b>Tipp:</b> Wix-Seiten lassen sich zwischen Konten übertragen. Man kann die Seite also in einem eigenen Wix-Konto fertig bauen und danach an das Konto der Band übergeben (Dashboard → Website-Aktionen → <kbd>Website übertragen</kbd>).</div>
+</section>
+
+</div></main>
+<footer><div class="wrap">Sturschädl-Website · Wix-Paket {{DATUM}} · Inhalte von sturschaedlband.de und Instagram @stur.schaedl_band. Die Bandfotos und das Logo gehören der Band.</div></footer>
+</body>
+</html>
