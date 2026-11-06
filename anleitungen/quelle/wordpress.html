@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Sturschädl-Website mit WordPress – Schritt-für-Schritt-Anleitung</title>
+<link rel="stylesheet" href="druck.css">
+<style>@page{@bottom-left{content:"Sturschädl-Website · Anleitung WordPress"}}</style>
+</head>
+<body>
+
+<!-- ============ TITELSEITE ============ -->
+<section class="titel">
+	<div class="streifen"></div>
+	<img class="stier" src="../../wordpress/sturschaedl/assets/img/bulle-hell.png" alt="">
+	<div class="art">Schritt-für-Schritt-Anleitung</div>
+	<h1><small>Die Sturschädl-Website</small>mit WordPress</h1>
+	<p class="unter">Theme installieren, Design auswählen, Termine, Laufband, Fotos und Kontaktdaten pflegen – jeder Klick einzeln erklärt.</p>
+	<div class="bild"><img src="../../vorschau/1-bierzelt-nacht.jpg" alt=""></div>
+	<div class="stand"><span>Theme „Sturschädl“ · Version 1.0</span><span>Stand: 06.11.2026</span></div>
+</section>
+
+<!-- ============ VORWEG ============ -->
+<section>
+	<div class="teil-kopf"><span class="nr">0</span><h2>Bevor es losgeht</h2></div>
+	<h3>So ist diese Anleitung aufgebaut</h3>
+	<p>Die Anleitung ist in nummerierte Teile gegliedert (siehe Inhalt unten). Innerhalb eines Teils sind die Schritte nummeriert und werden der Reihe nach erledigt. Unter vielen Schritten steht in einem grünen Kasten, was Sie danach auf dem Bildschirm sehen – so können Sie jederzeit prüfen, ob alles stimmt.</p>
+	<p>Wörter in einem Rahmen wie <kbd>Speichern</kbd> sind Knöpfe oder Menüpunkte, die Sie anklicken. Text in grauer Schrift wie <code>sturschaedlband.de</code> tippen Sie genau so ab.</p>
+
+	<h3>Was Sie brauchen</h3>
+	<ul class="check">
+		<li>Einen Computer oder Laptop mit Internet (ein Handy reicht für die Einrichtung nicht).</li>
+		<li>Das Paket <code>sturschaedl-wordpress-paket.zip</code>. Darin liegen das Theme <code>sturschaedl-theme.zip</code>, diese Anleitung und Vorschaubilder (siehe Teil 4).</li>
+		<li>Eine WordPress-Website mit Zugangsdaten: Internetadresse, Benutzername, Passwort. Noch keine vorhanden? Dann zuerst Teil 2.</li>
+		<li>Etwa eine Stunde Zeit für die Einrichtung. Die spätere Pflege (z. B. ein neuer Termin) dauert nur wenige Minuten.</li>
+	</ul>
+
+	<h3>Inhalt</h3>
+	<ul class="inhalt">
+		<li><b>1</b>Begriffe kurz erklärt</li>
+		<li><b>2</b>WordPress beim Anbieter einrichten</li>
+		<li><b>3</b>Im WordPress-Bereich anmelden</li>
+		<li><b>4</b>Das Theme installieren</li>
+		<li><b>5</b>Design auswählen und wechseln</li>
+		<li><b>6</b>Die Website ansehen</li>
+		<li><b>7</b>Termine eintragen und ändern</li>
+		<li><b>8</b>Startseite und Laufband ändern</li>
+		<li><b>9</b>Fotos, Video und Besetzung</li>
+		<li><b>10</b>Kontaktdaten und Anfrageformular</li>
+		<li><b>11</b>Seiten, Impressum, Datenschutz</li>
+		<li><b>12</b>Das Menü ändern</li>
+		<li><b>13</b>Wenn etwas nicht klappt</li>
+		<li><b>14</b>Checkliste vor dem Freischalten</li>
+	</ul>
+</section>
+
+<!-- ============ 1 BEGRIFFE ============ -->
+<section class="teil neu">
+	<div class="teil-kopf"><span class="nr">1</span><h2>Begriffe kurz erklärt</h2></div>
+	<p class="intro">Diese Wörter kommen in der Anleitung immer wieder vor.</p>
+	<table>
+		<tr><th style="width:32%">Begriff</th><th>Bedeutung</th></tr>
+		<tr><td><b>WordPress</b></td><td>Ein kostenloses Programm, mit dem man Websites erstellt und pflegt. Es läuft beim Anbieter (siehe „Hosting“), man bedient es im Internet-Browser.</td></tr>
+		<tr><td><b>Hosting / Anbieter</b></td><td>Die Firma, auf deren Computern die Website liegt, z. B. IONOS, Strato oder All-Inkl. Kostet meist 3–10 € im Monat.</td></tr>
+		<tr><td><b>Domain</b></td><td>Die Internetadresse, z. B. <code>sturschaedlband.de</code>.</td></tr>
+		<tr><td><b>Backend</b> (Verwaltungsbereich)</td><td>Der nicht öffentliche Bereich von WordPress, in dem man alles einstellt. Erreichbar über die Adresse der Website plus <code>/wp-admin</code>. Links ist ein dunkles Menü.</td></tr>
+		<tr><td><b>Website / Frontend</b></td><td>Das, was Besucher sehen.</td></tr>
+		<tr><td><b>Theme</b></td><td>Das „Kleid“ der Website: Aussehen und Aufbau. Das Theme „Sturschädl“ enthält alle fünf Entwürfe.</td></tr>
+		<tr><td><b>Design</b></td><td>Einer der fünf Entwürfe innerhalb des Themes (Bierzelt-Nacht, Wirtshaus, Rock’n’Raute, Festplakat, Hochzeit Elegant).</td></tr>
+		<tr><td><b>Mediathek</b></td><td>Der Bilder-Speicher von WordPress. Jedes Foto wird einmal hochgeladen und kann dann überall ausgewählt werden.</td></tr>
+		<tr><td><b>Plugin</b></td><td>Eine Zusatzfunktion zum Nachrüsten, z. B. für den sicheren E-Mail-Versand.</td></tr>
+		<tr><td><b>Reiter</b></td><td>Die Karteikarten-Überschriften oben auf einer Seite (z. B. „Design“, „Startseite“, „Kontakt“). Ein Klick darauf zeigt den jeweiligen Bereich.</td></tr>
+		<tr><td><b>Speichern / Veröffentlichen</b></td><td>Änderungen werden erst wirksam, wenn man auf <kbd>Änderungen speichern</kbd>, <kbd>Veröffentlichen</kbd> oder <kbd>Aktualisieren</kbd> klickt.</td></tr>
+	</table>
+</section>
+
+<!-- ============ 2 HOSTING ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">2</span><h2>WordPress beim Anbieter einrichten</h2><span class="ziel">Nur nötig, wenn es noch keine WordPress-Website gibt.</span></div>
+	<p class="intro">Die bisherige Seite läuft bei Wix. WordPress braucht einen eigenen Anbieter. Die meisten Anbieter installieren WordPress mit wenigen Klicks; die Menüs sehen je nach Anbieter etwas anders aus.</p>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Paket auswählen</b>Auf der Seite des Anbieters (z. B. IONOS, Strato, All-Inkl) ein Paket mit dem Namen <b>„WordPress-Hosting“</b> wählen. Das kleinste Paket genügt.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Bestellen</b>Paket bestellen. Bei der Frage nach einer Domain zunächst die vorgeschlagene Gratis- oder Test-Adresse nehmen – die echte Adresse <code>sturschaedlband.de</code> wird erst am Ende umgezogen (siehe Kasten unten).</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>WordPress installieren</b>Im Kundenbereich des Anbieters den Punkt <kbd>WordPress installieren</kbd> (oder „Neue WordPress-Website“) anklicken und dem Assistenten folgen. Sprache: <b>Deutsch</b>.</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Zugangsdaten notieren</b>Am Ende zeigt der Anbieter drei Angaben an. Schreiben Sie diese auf und bewahren Sie sie sicher auf:<br>• Adresse des Verwaltungsbereichs (endet auf <code>/wp-admin</code>)<br>• Benutzername<br>• Passwort</div></div>
+	<div class="kasten achtung"><b>Domain erst ganz am Ende umziehen</b>Solange die neue Seite nicht fertig ist, bleibt <code>sturschaedlband.de</code> bei Wix – so ist die alte Seite weiter erreichbar. Wenn alles fertig ist: bei Wix im Bereich <kbd>Domains</kbd> die Domain zum Übertragen freigeben und den <b>Auth-Code</b> (Übertragungscode) anzeigen lassen; beim neuen Anbieter „Domain umziehen“ wählen und den Code eingeben. Das dauert meist einige Stunden bis wenige Tage. Das Wix-Abo erst kündigen, wenn der Umzug abgeschlossen ist. Der Support des neuen Anbieters hilft dabei gerne.</div>
+</section>
+
+<!-- ============ 3 ANMELDEN ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">3</span><h2>Im WordPress-Bereich anmelden</h2></div>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Browser öffnen</b>Chrome, Firefox, Edge oder Safari öffnen.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Adresse eintippen</b>Oben in die Adresszeile die Adresse der Website eintippen und <code>/wp-admin</code> anhängen, z. B. <code>sturschaedlband.de/wp-admin</code>. Taste <kbd>Enter</kbd> drücken.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Anmelden</b>Benutzername und Passwort eintragen und auf <kbd>Anmelden</kbd> klicken.
+		<div class="ergebnis">Links ist ein dunkles Menü mit Punkten wie „Dashboard“, „Beiträge“, „Medien“, „Seiten“, „Design“. Das ist das Backend.</div></div></div>
+	<div class="kasten tipp"><b>Tipp</b>Legen Sie sich die Adresse <code>…/wp-admin</code> als Lesezeichen an. Dann reicht künftig ein Klick.</div>
+</section>
+
+<!-- ============ 4 THEME INSTALLIEREN ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">4</span><h2>Das Theme installieren</h2><span class="ziel">Wird nur einmal gemacht.</span></div>
+	<div class="kasten wichtig"><b>Vorher: das Paket auspacken</b>Das Paket <code>sturschaedl-wordpress-paket.zip</code> einmal entpacken – <b>Windows:</b> rechte Maustaste → <kbd>Alle extrahieren…</kbd> → <kbd>Extrahieren</kbd>; <b>Mac:</b> Doppelklick. Im entstandenen Ordner liegt die Datei <code>sturschaedl-theme.zip</code>. <b>Diese Datei NICHT entpacken</b> – WordPress braucht sie genau so als ZIP.</div>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Themes öffnen</b>Im linken Menü mit der Maus auf <kbd>Design</kbd> zeigen und dann auf <kbd>Themes</kbd> klicken.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Neues Theme hinzufügen</b>Oben neben der Überschrift „Themes“ auf <kbd>Theme hinzufügen</kbd> klicken.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Hochladen wählen</b>Oben neben „Themes hinzufügen“ auf <kbd>Theme hochladen</kbd> klicken.
+		<div class="ergebnis">In der Mitte erscheint ein Kasten mit dem Knopf „Datei auswählen“.</div></div></div>
+	<figure><img src="bilder/wp-hochladen.jpg" alt=""><figcaption>Design → Themes → Theme hinzufügen → Theme hochladen</figcaption></figure>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Datei auswählen</b>Auf <kbd>Datei auswählen</kbd> klicken, die Datei <code>sturschaedl-theme.zip</code> suchen (meist im Ordner „Downloads“) und auf <kbd>Öffnen</kbd> klicken.</div></div>
+	<div class="schritt"><span class="n">5</span><div class="t"><b>Installieren</b>Auf <kbd>Jetzt installieren</kbd> klicken und kurz warten.
+		<div class="ergebnis">Die Meldung „Das Theme wurde erfolgreich installiert.“</div></div></div>
+	<div class="kasten achtung"><b>Meldung „Das Hochladen ist fehlgeschlagen“ oder „Datei zu groß“?</b>Manche Anbieter erlauben nur kleine Dateien. Dann im Kundenbereich des Anbieters die „maximale Upload-Größe“ erhöhen (Suchbegriff: <i>upload_max_filesize</i>) oder den Support bitten. Die Datei ist etwa 4 MB groß.</div>
+	<div class="schritt"><span class="n">6</span><div class="t"><b>Aktivieren</b>Auf <kbd>Aktivieren</kbd> klicken. Das Theme richtet sich jetzt selbst ein: Es legt alle Seiten, das Menü, die Fotos und die Termine von 2026 an. Das kann einige Sekunden dauern.</div></div>
+	<figure><img src="bilder/wp-themes.jpg" alt="" style="max-height:46mm"><figcaption>Fertig: „Aktiv: Sturschädl“. Links im Menü gibt es jetzt die Punkte „Sturschädl“ und „Termine“.</figcaption></figure>
+</section>
+
+<!-- ============ 5 DESIGN ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">5</span><h2>Design auswählen und wechseln</h2><span class="ziel">Jederzeit möglich. Texte, Termine und Bilder bleiben erhalten.</span></div>
+	<div class="kasten wichtig"><b>Kurzfassung</b><kbd>Sturschädl</kbd> → Reiter <kbd>Design</kbd> → Bild anklicken → ganz unten <kbd>Änderungen speichern</kbd></div>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Einstellungen öffnen</b>Im linken Menü auf <kbd>Sturschädl</kbd> klicken (direkt unter „Dashboard“, mit einem Noten-Symbol).
+		<div class="ergebnis">Die Seite „Sturschädl – Inhalte pflegen“ mit den Reitern Design, Startseite, Termine &amp; Aufruf, Medien &amp; Band, Kontakt.</div></div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Reiter „Design“</b>Der Reiter <kbd>Design</kbd> ist bereits geöffnet. Sie sehen fünf Bilder nebeneinander – das sind die fünf Designs. Das aktuelle Design hat einen <b>roten Rahmen</b>.</div></div>
+	<figure><img src="bilder/wp-design.jpg" alt=""><figcaption>Sturschädl → Design. Oben rechts neben der Überschrift öffnet „Anleitung öffnen (PDF)“ diese Anleitung.</figcaption></figure>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Design anklicken</b>Auf das Bild des gewünschten Designs klicken. Der rote Rahmen springt auf dieses Bild.</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Speichern</b>Mit dem Mausrad ganz nach unten scrollen und auf den blauen Knopf <kbd>Änderungen speichern</kbd> klicken.
+		<div class="ergebnis">Oben erscheint der grüne Hinweis „Die Einstellungen wurden gespeichert.“</div></div></div>
+	<figure class="klein"><img src="bilder/wp-speichern.jpg" alt=""><figcaption>Ganz unten auf der Seite: „Änderungen speichern“. Den Knopf „Fehlende Inhalte einspielen“ brauchen Sie normalerweise nicht.</figcaption></figure>
+	<div class="schritt"><span class="n">5</span><div class="t"><b>Ergebnis ansehen</b>Wie Sie die Website ansehen, steht in Teil 6.</div></div>
+	<div class="kasten achtung"><b>Häufiger Fehler</b>Nur das Bild anzuklicken reicht nicht – ohne <kbd>Änderungen speichern</kbd> bleibt das alte Design. Außerdem: Den Menüpunkt <kbd>Design</kbd> → <kbd>Themes</kbd> im linken Menü <b>nicht</b> zum Wechseln benutzen. Dort muss „Sturschädl“ aktiv bleiben.</div>
+	<h3>Die fünf Designs</h3>
+	<div class="designs">
+		<div><img src="../../vorschau/1-bierzelt-nacht.jpg" alt=""><span><b>Bierzelt-Nacht</b><br>Dunkel, Rot, Bühnenlicht. Mit Kasten „Nächster Auftritt“.</span></div>
+		<div><img src="../../vorschau/2-wirtshaus.jpg" alt=""><span><b>Wirtshaus</b><br>Hell und warm, Serifenschrift, runde Knöpfe.</span></div>
+		<div><img src="../../vorschau/3-rock-n-raute.jpg" alt=""><span><b>Rock’n’Raute</b><br>Schwarz mit blau-weißer Raute. Die rockigste Variante.</span></div>
+		<div><img src="../../vorschau/4-festplakat.jpg" alt=""><span><b>Festplakat</b><br>Wie ein altes Veranstaltungsplakat: Packpapier, Stempel-Rot.</span></div>
+		<div><img src="../../vorschau/5-hochzeit-elegant.jpg" alt=""><span><b>Hochzeit Elegant</b><br>Ruhig, Grün und Gold. Spricht Brautpaare an. Nutzt zwei Zusatzbilder (Reiter „Design“ → „Zusatzbilder“).</span></div>
+	</div>
+</section>
+
+<!-- ============ 6 WEBSITE ANSEHEN ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">6</span><h2>Die Website ansehen</h2></div>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Zur Website</b>Ganz oben links in der schwarzen Leiste mit der Maus auf das Haus-Symbol mit dem Namen <b>„Sturschädl“</b> zeigen und <kbd>Zur Website</kbd> anklicken. Tipp: Mit gedrückter <kbd>Strg</kbd>-Taste (Mac: <kbd>⌘</kbd>) öffnet sich die Website in einem neuen Tab, und das Backend bleibt offen.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Neu laden, falls nötig</b>Zeigt die Website noch das alte Aussehen: Seite neu laden mit <kbd>Strg</kbd> + <kbd>F5</kbd> (Mac: <kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>R</kbd>).</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Zurück ins Backend</b>Oben links auf den Namen „Sturschädl“ zeigen und <kbd>Dashboard</kbd> anklicken – oder wieder die Adresse mit <code>/wp-admin</code> aufrufen.</div></div>
+	<div class="kasten tipp"><b>Gut zu wissen</b>Solange Sie angemeldet sind, sehen Sie auf der Website oben eine schwarze Leiste. Besucher sehen diese Leiste nicht.</div>
+</section>
+
+<!-- ============ 7 TERMINE ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">7</span><h2>Termine eintragen und ändern</h2><span class="ziel">Die häufigste Aufgabe – dauert zwei Minuten.</span></div>
+	<h3>Neuen Termin eintragen</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Termine öffnen</b>Im linken Menü auf <kbd>Termine</kbd> klicken.
+		<div class="ergebnis">Eine Liste aller Termine mit Fest, Datum, Ort und Status („kommend“ oder „vorbei“).</div></div></div>
+	<figure><img src="bilder/wp-termine.jpg" alt=""><figcaption>Termine → Liste. Ein Klick auf „Datum“ sortiert nach Datum.</figcaption></figure>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Neuer Termin</b>Oben auf <kbd>Neuen Termin anlegen</kbd> klicken.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Name des Fests</b>In das große Feld oben den Namen eintragen, z. B. <code>Kirwa Stöckelsberg</code>.</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Termin-Daten ausfüllen</b><b style="display:inline">Datum</b> (Pflicht): ins Feld klicken und Tag, Monat, Jahr eintippen oder im Kalender wählen. <b style="display:inline">Beginn</b>: Uhrzeit, z. B. 20:00. <b style="display:inline">Ort</b>: z. B. <code>92348 Berg bei Neumarkt</code>. <b style="display:inline">Zusatz</b> und <b style="display:inline">Link</b> sind freiwillig.</div></div>
+	<figure><img src="bilder/wp-neuer-termin.jpg" alt=""><figcaption>Neuen Termin anlegen: Name oben, Daten darunter, rechts „Veröffentlichen“.</figcaption></figure>
+	<div class="schritt"><span class="n">5</span><div class="t"><b>Veröffentlichen</b>Rechts auf den blauen Knopf <kbd>Veröffentlichen</kbd> klicken.
+		<div class="ergebnis">Der Termin steht sofort auf der Website: auf der Startseite, auf der Seite „Termine“ und – beim Design Bierzelt-Nacht – im Kasten „Nächster Auftritt“.</div></div></div>
+	<div class="kasten tipp"><b>Automatisch</b>Nach dem Datum rutscht ein Termin von selbst in den „Rückblick“. Er muss nicht gelöscht werden.</div>
+	<h3>Termin ändern oder löschen</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Termin öffnen</b><kbd>Termine</kbd> → auf den Namen des Fests klicken.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Ändern</b>Angaben ändern und rechts auf <kbd>Aktualisieren</kbd> klicken.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Löschen</b>Rechts auf <kbd>In den Papierkorb verschieben</kbd> klicken.</div></div>
+	<h3>Die Zeile „Euer Fest?“</h3>
+	<p>Über den Terminen steht eine Einladung „Euer Fest? – Saison 2027 wird grad geplant“. Ein- und ausschalten und den Text ändern: <kbd>Sturschädl</kbd> → Reiter <kbd>Termine &amp; Aufruf</kbd>, danach <kbd>Änderungen speichern</kbd>. Im selben Reiter steht auch der Text des dunklen Aufruf-Bands „Lasst’s scheppern!“.</p>
+</section>
+
+<!-- ============ 8 STARTSEITE ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">8</span><h2>Startseite und Laufband ändern</h2></div>
+	<p class="intro">Alle Texte und Bilder der Startseite stehen unter <kbd>Sturschädl</kbd> → Reiter <kbd>Startseite</kbd>, von oben nach unten in der gleichen Reihenfolge wie auf der Website.</p>
+	<h3>Ein Bild austauschen</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Bild wählen</b>Unter dem Bild auf <kbd>Bild wählen</kbd> klicken. Es öffnet sich die Mediathek.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Neues Foto hochladen (falls nötig)</b>Oben auf <kbd>Dateien hochladen</kbd> klicken und das Foto vom Computer in das Fenster ziehen – oder auf <kbd>Dateien auswählen</kbd> klicken.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Übernehmen</b>Das Foto anklicken (es bekommt einen blauen Haken) und unten rechts auf <kbd>Übernehmen</kbd> klicken.</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Speichern</b>Ganz unten <kbd>Änderungen speichern</kbd>.</div></div>
+	<figure><img src="bilder/wp-startseite.jpg" alt=""><figcaption>Reiter „Startseite“: Titelfoto und die Texte oben auf der Startseite.</figcaption></figure>
+	<div class="kasten tipp"><b>Tipp für das Titelfoto</b>Ein Bandfoto im Querformat, auf dem die Gesichter in der <b>oberen</b> Bildhälfte sind – unten steht der Schriftzug darüber.</div>
+	<h3>Laufband (rotes Band mit den Begriffen)</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Feld „Begriffe“ suchen</b>Im Reiter <kbd>Startseite</kbd> nach unten zum Abschnitt „Laufband (rotes Band)“ scrollen.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Begriffe ändern</b>Ein Begriff pro Zeile. Neuer Begriff: ans Ende klicken, <kbd>Enter</kbd> drücken, Wort tippen. Begriff entfernen: Zeile markieren und löschen.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Speichern</b>Ganz unten <kbd>Änderungen speichern</kbd>.</div></div>
+	<figure><img src="bilder/wp-laufband.jpg" alt=""><figcaption>Laufband und „Zahlen &amp; Fakten“. Mit „+ Zeile hinzufügen“ kommt eine Zeile dazu; am Griff ≡ links lässt sich die Reihenfolge ziehen.</figcaption></figure>
+	<h3>Zahlen, Angebote, Instagram-Bilder</h3>
+	<ul>
+		<li><b>Zahlen &amp; Fakten:</b> Zahl und Beschreibung ändern. <kbd>+ Zeile hinzufügen</kbd> oder <kbd>Zeile entfernen</kbd>.</li>
+		<li><b>Angebote:</b> drei Bildkacheln mit Bild, Titel, Text und Zielseite.</li>
+		<li><b>Instagram-Kacheln:</b> sechs Fotos. <kbd>Bilder hinzufügen</kbd> zum Ergänzen, rotes × zum Entfernen, Bilder mit der Maus verschieben, um die Reihenfolge zu ändern.</li>
+	</ul>
+	<p>Nach jeder Änderung: <kbd>Änderungen speichern</kbd>. Jeder Reiter wird einzeln gespeichert – erst speichern, dann den Reiter wechseln.</p>
+</section>
+
+<!-- ============ 9 MEDIEN ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">9</span><h2>Fotos, Video und Besetzung</h2></div>
+	<p class="intro"><kbd>Sturschädl</kbd> → Reiter <kbd>Medien &amp; Band</kbd>.</p>
+	<figure><img src="bilder/wp-medien.jpg" alt="" style="max-height:66mm"><figcaption>Reiter „Medien &amp; Band“: Fotogalerie und Besetzung</figcaption></figure>
+	<h3>Fotos für die Galerie</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Hinzufügen</b><kbd>Bilder hinzufügen</kbd> klicken, in der Mediathek ein oder mehrere Fotos anklicken (oder neu hochladen) und <kbd>Übernehmen</kbd>.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Sortieren oder entfernen</b>Fotos mit der Maus an eine andere Stelle ziehen. Das rote × entfernt ein Foto aus der Galerie (es bleibt in der Mediathek).</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Speichern</b><kbd>Änderungen speichern</kbd>.</div></div>
+	<h3>Besetzung (Seite „Über uns“)</h3>
+	<p>Je Mitglied: <kbd>Bild wählen</kbd> für das Foto, Name und Instrument eintragen. Ohne Foto erscheint der Stierschädel. Danach <kbd>Änderungen speichern</kbd>.</p>
+	<h3>Video</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Adresse kopieren</b>Das Video bei YouTube öffnen, oben die Adresse in der Adresszeile markieren und kopieren (<kbd>Strg</kbd> + <kbd>C</kbd>, Mac: <kbd>⌘</kbd> + <kbd>C</kbd>).</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Einfügen</b>Ins Feld „YouTube- oder Vimeo-Adresse“ klicken und einfügen (<kbd>Strg</kbd> + <kbd>V</kbd>, Mac: <kbd>⌘</kbd> + <kbd>V</kbd>). <kbd>Änderungen speichern</kbd>.</div></div>
+</section>
+
+<!-- ============ 10 KONTAKT ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">10</span><h2>Kontaktdaten und Anfrageformular</h2></div>
+	<p class="intro"><kbd>Sturschädl</kbd> → Reiter <kbd>Kontakt</kbd>. Diese Angaben erscheinen in der Fußzeile und auf der Seite „Kontakt“.</p>
+	<figure><img src="bilder/wp-kontakt.jpg" alt="" style="max-height:70mm"><figcaption>Reiter „Kontakt“. Wichtig: „Anfragen gehen an“ – an diese Adresse schickt das Formular.</figcaption></figure>
+	<h3>Damit Anfragen sicher ankommen</h3>
+	<p>WordPress verschickt E-Mails ohne Zusatz oft unzuverlässig. Deshalb einmalig das kostenlose Plugin „WP Mail SMTP“ einrichten:</p>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Plugin suchen</b>Linkes Menü <kbd>Plugins</kbd> → <kbd>Neues Plugin hinzufügen</kbd>. Rechts ins Suchfeld <code>WP Mail SMTP</code> tippen.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Installieren</b>Beim Eintrag „WP Mail SMTP by WPForms“ auf <kbd>Jetzt installieren</kbd> und danach auf <kbd>Aktivieren</kbd> klicken.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Assistent</b>Der Einrichtungs-Assistent startet. Den E-Mail-Anbieter der Band auswählen (z. B. „Other SMTP“ für web.de) und die Daten eintragen, die der E-Mail-Anbieter dafür nennt (Postausgangsserver, Benutzername, Passwort des E-Mail-Kontos).</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Testen</b>Auf der Website die Seite „Kontakt“ öffnen, das Formular mit eigener E-Mail-Adresse ausfüllen und absenden.
+		<div class="ergebnis">Auf der Website steht „Vergelt’s Gott! Eure Anfrage ist bei uns angekommen.“ und die Anfrage liegt kurz danach im Postfach.</div>Keine Mail erhalten? Spam-Ordner prüfen, die Adresse unter „Anfragen gehen an“ prüfen und im Plugin „WP Mail SMTP“ den Punkt „E-Mail-Test“ ausführen.</div></div>
+</section>
+
+<!-- ============ 11 SEITEN ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">11</span><h2>Seiten, Impressum, Datenschutz</h2></div>
+	<p class="intro">Die Seiten „Hochzeiten“ und „Über uns“ enthalten freien Text, der direkt bearbeitet wird.</p>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Seiten öffnen</b>Linkes Menü <kbd>Seiten</kbd> → auf den Namen der Seite klicken.
+		<div class="ergebnis">Der Seiten-Editor: in der Mitte der Inhalt, rechts eine Seitenleiste mit Einstellungen.</div></div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Text ändern</b>In den Text klicken und wie in einem Schreibprogramm tippen.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Kopf der Seite</b>Rechts in der Seitenleiste: <b>Beitragsbild</b> = Hintergrundfoto oben, <b>Textauszug</b> = Untertitel, Kasten <b>„Seitenkopf (Sturschädl)“</b> = kleine rote Zeile und Zierschrift über dem Titel.</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Speichern</b>Oben rechts auf <kbd>Speichern</kbd> (bzw. <kbd>Aktualisieren</kbd>) klicken.</div></div>
+	<div class="kasten achtung"><b>Pflicht vor dem Freischalten: Impressum und Datenschutz</b>Die Seiten „Impressum“ und „Datenschutzerklärung“ enthalten nur Platzhalter in eckigen Klammern. Diese müssen mit echten Angaben gefüllt werden – z. B. mit einem kostenlosen Generator für Impressum und Datenschutzerklärung. Ohne vollständiges Impressum darf die Seite in Deutschland nicht online gehen.</div>
+	<div class="kasten tipp"><b>Die Seiten „Termine“, „Medien“, „Über uns“ und „Kontakt“</b>holen ihre Listen (Termine, Fotos, Besetzung, Formular) automatisch. Dort nur Kopf und ggf. Zusatztext ändern.</div>
+</section>
+
+<!-- ============ 12 MENÜ ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">12</span><h2>Das Menü ändern</h2><span class="ziel">Nur nötig, wenn Menüpunkte umbenannt oder ergänzt werden sollen.</span></div>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Menüs öffnen</b>Linkes Menü <kbd>Design</kbd> → <kbd>Menüs</kbd>.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Menü wählen</b>Oben bei „Wähle ein Menü zum Bearbeiten“ das gewünschte Menü auswählen (Hauptmenü, Fußzeile oder Rechtliches) und auf <kbd>Auswählen</kbd> klicken.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Ändern</b>Neue Seite: links Haken setzen → <kbd>Zum Menü hinzufügen</kbd>. Reihenfolge: Einträge mit der Maus ziehen. Umbenennen: auf den kleinen Pfeil am Eintrag klicken und „Angezeigter Name“ ändern.</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Speichern</b><kbd>Menü speichern</kbd>.</div></div>
+</section>
+
+<!-- ============ 13 PROBLEME ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">13</span><h2>Wenn etwas nicht klappt</h2></div>
+	<table>
+		<tr><th style="width:36%">Problem</th><th>Lösung</th></tr>
+		<tr><td>Das Design ändert sich nicht.</td><td>Unten auf <kbd>Änderungen speichern</kbd> geklickt? Danach die Website mit <kbd>Strg</kbd> + <kbd>F5</kbd> neu laden. Hat der Anbieter einen Zwischenspeicher („Cache“), diesen leeren.</td></tr>
+		<tr><td>Der Menüpunkt „Sturschädl“ fehlt links.</td><td>Das Theme ist nicht aktiv: <kbd>Design</kbd> → <kbd>Themes</kbd> → beim Theme „Sturschädl“ auf <kbd>Aktivieren</kbd>.</td></tr>
+		<tr><td>Seiten, Fotos oder Menü fehlen.</td><td><kbd>Sturschädl</kbd> → <kbd>Design</kbd> → ganz unten <kbd>Fehlende Inhalte einspielen</kbd>. Vorhandenes wird dabei nicht verändert.</td></tr>
+		<tr><td>Ein neuer Termin erscheint nicht.</td><td>Ist ein Datum eingetragen? Wurde auf <kbd>Veröffentlichen</kbd> geklickt (nicht nur „Entwurf speichern“)?</td></tr>
+		<tr><td>Anfragen kommen nicht an.</td><td>Teil 10: Adresse prüfen, Plugin „WP Mail SMTP“ einrichten, Spam-Ordner prüfen.</td></tr>
+		<tr><td>Beim Klick auf eine Seite erscheint „Seite nicht gefunden“.</td><td><kbd>Einstellungen</kbd> → <kbd>Permalinks</kbd> → „Beitragsname“ auswählen → <kbd>Änderungen speichern</kbd>.</td></tr>
+		<tr><td>Ein Foto ist zu groß oder lädt nicht hoch.</td><td>Foto vorher verkleinern (z. B. auf 2000 Pixel Breite). Fotos vom Handy sind oft sehr groß.</td></tr>
+		<tr><td>Etwas ist kaputt gegangen.</td><td>Ruhe bewahren: Viele Anbieter bieten im Kundenbereich eine „Sicherung“ bzw. „Wiederherstellung“ an. Sonst den Support des Anbieters anrufen.</td></tr>
+	</table>
+</section>
+
+<!-- ============ 14 CHECKLISTE ============ -->
+<section class="teil neu">
+	<div class="teil-kopf"><span class="nr">14</span><h2>Checkliste vor dem Freischalten</h2></div>
+	<p class="intro">Zum Abhaken, bevor die Domain umgezogen wird und die neue Seite für alle sichtbar ist.</p>
+	<ul class="check">
+		<li>Theme „Sturschädl“ ist aktiv, das gewünschte Design ist gespeichert.</li>
+		<li>Alle aktuellen Termine sind eingetragen.</li>
+		<li>Titelfoto, Laufband, Zahlen und Angebote stimmen.</li>
+		<li>Namen, Instrumente und Fotos der Besetzung sind eingetragen.</li>
+		<li>Galerie enthält eigene, gute Fotos (keine verpixelten Vorschaubilder).</li>
+		<li>Kontaktdaten stimmen (Telefon, E-Mail, Anschrift).</li>
+		<li>Test-Anfrage über das Formular ist im Postfach angekommen.</li>
+		<li><b>Impressum</b> ist vollständig ausgefüllt.</li>
+		<li><b>Datenschutzerklärung</b> ist vollständig ausgefüllt.</li>
+		<li>Alle Seiten auf dem Handy angesehen.</li>
+		<li>Die Zugangsdaten (Adresse, Benutzername, Passwort) sind sicher aufgeschrieben.</li>
+		<li>Domain-Umzug von Wix (Teil 2) ist erledigt, danach Wix-Abo gekündigt.</li>
+	</ul>
+	<div class="kasten tipp" style="margin-top:10mm"><b>Diese Anleitung wiederfinden</b>Im Backend unter <kbd>Sturschädl</kbd> oben rechts neben der Überschrift: <kbd>Anleitung öffnen (PDF)</kbd>.</div>
+</section>
+
+</body>
+</html>

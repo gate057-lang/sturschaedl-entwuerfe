@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Sturschädl-Website mit Wix – Schritt-für-Schritt-Anleitung</title>
+<link rel="stylesheet" href="druck.css">
+<style>@page{@bottom-left{content:"Sturschädl-Website · Anleitung Wix"}}</style>
+</head>
+<body>
+
+<!-- ============ TITELSEITE ============ -->
+<section class="titel">
+	<div class="streifen"></div>
+	<img class="stier" src="../../wordpress/sturschaedl/assets/img/bulle-hell.png" alt="">
+	<div class="art">Schritt-für-Schritt-Anleitung</div>
+	<h1><small>Die Sturschädl-Website</small>mit Wix</h1>
+	<p class="unter">Die neue Website im Wix-Editor aufbauen und danach Termine, Laufband und Fotos selbst pflegen – jeder Klick einzeln erklärt.</p>
+	<div class="bild"><img src="../../vorschau/1-bierzelt-nacht.jpg" alt=""></div>
+	<div class="stand"><span>Wix-Paket „Sturschädl“</span><span>Stand: 06.11.2026</span></div>
+</section>
+
+<!-- ============ 0 VORWEG ============ -->
+<section>
+	<div class="teil-kopf"><span class="nr">0</span><h2>Bevor es losgeht</h2></div>
+	<h3>So ist diese Anleitung aufgebaut</h3>
+	<p>Die Anleitung ist in nummerierte Teile gegliedert. Innerhalb eines Teils sind die Schritte nummeriert und werden der Reihe nach erledigt. Unter vielen Schritten steht in einem grünen Kasten, was Sie danach auf dem Bildschirm sehen.</p>
+	<p>Wörter in einem Rahmen wie <kbd>Speichern</kbd> sind Knöpfe oder Menüpunkte, die Sie anklicken. Text in grauer Schrift wie <code>Termine</code> tippen Sie genau so ab – auf Groß- und Kleinschreibung achten.</p>
+	<div class="kasten achtung"><b>Wichtig zu wissen</b>Wix nimmt keine fertigen Website-Dateien an. Die Seiten werden deshalb im Wix-Editor aufgebaut – das ist Handarbeit und dauert beim ersten Mal einige Stunden. Dafür kann die Band danach Termine, Laufband und Fotos selbst pflegen. Die Bezeichnungen der Wix-Menüs können je nach Wix-Version leicht abweichen; die Wege bleiben gleich.</div>
+
+	<h3>Was Sie brauchen</h3>
+	<ul class="check">
+		<li>Einen Computer oder Laptop mit Maus (der Wix-Editor funktioniert nicht auf Handy oder Tablet).</li>
+		<li>Die Anmeldedaten des Wix-Kontos der Band (E-Mail und Passwort). Melden Sie sich selbst an.</li>
+		<li>Die Datei <code>sturschaedl-wix-paket.zip</code>.</li>
+		<li>Wix Premium mit der eigenen Domain – ist bei sturschaedlband.de vorhanden.</li>
+		<li>Zeit: etwa 4–6 Stunden für den Aufbau, gern auf mehrere Tage verteilt. Wix speichert zwischendurch.</li>
+	</ul>
+
+	<h3>Inhalt</h3>
+	<ul class="inhalt">
+		<li><b>1</b>Begriffe kurz erklärt</li>
+		<li><b>2</b>Das Paket entpacken</li>
+		<li><b>3</b>Ein Design aussuchen</li>
+		<li><b>4</b>Sicherheitskopie anlegen</li>
+		<li><b>5</b>Schriften und Bilder hochladen</li>
+		<li><b>6</b>Farben einstellen</li>
+		<li><b>7</b>Datensammlungen anlegen</li>
+		<li><b>8</b>Entwicklermodus und Code</li>
+		<li><b>9</b>Die Startseite aufbauen</li>
+		<li><b>10</b>Die Terminliste einbauen</li>
+		<li><b>11</b>Die weiteren Seiten</li>
+		<li><b>12</b>Handy-Ansicht anpassen</li>
+		<li><b>13</b>Prüfen und veröffentlichen</li>
+		<li><b>14</b>Pflege im Alltag</li>
+		<li><b>15</b>Wenn etwas nicht klappt</li>
+	</ul>
+</section>
+
+<!-- ============ 1 BEGRIFFE ============ -->
+<section class="teil neu">
+	<div class="teil-kopf"><span class="nr">1</span><h2>Begriffe kurz erklärt</h2></div>
+	<table>
+		<tr><th style="width:30%">Begriff</th><th>Bedeutung</th></tr>
+		<tr><td><b>Dashboard</b></td><td>Die Verwaltung des Wix-Kontos. Hier liegen u. a. die Datensammlungen (CMS), Formular-Einsendungen und Einstellungen.</td></tr>
+		<tr><td><b>Editor</b></td><td>Die Bearbeitungsansicht der Website. Man klickt Elemente direkt an und verschiebt sie mit der Maus. Geöffnet wird er im Dashboard mit <kbd>Website bearbeiten</kbd>.</td></tr>
+		<tr><td><b>Abschnitt</b></td><td>Ein waagerechter Streifen der Seite über die volle Breite, z. B. der Titelbereich oder die Fußzeile.</td></tr>
+		<tr><td><b>Element</b></td><td>Alles, was auf der Seite steht: Text, Bild, Knopf, Kasten, Linie.</td></tr>
+		<tr><td><b>CMS / Datensammlung</b></td><td>Eine Tabelle im Dashboard, z. B. „Termine“. Jede Zeile ist ein Eintrag. Die Website liest diese Tabelle aus.</td></tr>
+		<tr><td><b>CSV-Datei</b></td><td>Eine einfache Tabellendatei. Im Paket liegen die Termine, Laufband-Begriffe und Mitglieder als CSV zum Einlesen.</td></tr>
+		<tr><td><b>Dev Mode / Entwicklermodus</b></td><td>Ein Schalter im Editor, mit dem man fertigen Programmcode einfügen kann. Kostenlos. Sie müssen nichts programmieren, nur kopieren und einfügen.</td></tr>
+		<tr><td><b>ID</b></td><td>Ein Name, den man einem Element gibt, damit der Code es findet, z. B. <code>laufband</code>. Muss genau so geschrieben werden.</td></tr>
+		<tr><td><b>Wiederholungsfeld (Repeater)</b></td><td>Eine Liste, in der sich ein Muster für jeden Eintrag wiederholt – hier für jeden Termin eine Zeile.</td></tr>
+		<tr><td><b>Custom Element</b></td><td>Ein selbstgebauter Baustein. Hier: das laufende Band mit den Begriffen.</td></tr>
+		<tr><td><b>Veröffentlichen</b></td><td>Erst nach <kbd>Veröffentlichen</kbd> (oben rechts im Editor) sehen Besucher die Änderungen.</td></tr>
+	</table>
+</section>
+
+<!-- ============ 2 ENTPACKEN ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">2</span><h2>Das Paket entpacken</h2></div>
+	<p class="intro">Die ZIP-Datei ist ein gepackter Ordner. Er muss zuerst ausgepackt werden.</p>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Datei finden</b>Die Datei <code>sturschaedl-wix-paket.zip</code> liegt meist im Ordner „Downloads“.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Entpacken</b><b style="display:inline">Windows:</b> mit der rechten Maustaste auf die Datei klicken → <kbd>Alle extrahieren…</kbd> → <kbd>Extrahieren</kbd>.<br><b style="display:inline">Mac:</b> die Datei doppelt anklicken.
+		<div class="ergebnis">Ein Ordner „sturschaedl-wix-paket“ mit den Unterordnern bilder, cms, schriften, velo, vorschau und der Datei ANLEITUNG.html.</div></div></div>
+	<table>
+		<tr><th style="width:26%">Ordner</th><th>Inhalt</th><th style="width:18%">Gebraucht in</th></tr>
+		<tr><td><code>bilder</code></td><td>Stierschädel-Logos, Bandfotos, Fotos von Instagram</td><td>Teil 5</td></tr>
+		<tr><td><code>schriften</code></td><td>Schriftdateien, ein Unterordner pro Design</td><td>Teil 5</td></tr>
+		<tr><td><code>cms</code></td><td>Termine, Laufband, Mitglieder als Tabellen (CSV)</td><td>Teil 7</td></tr>
+		<tr><td><code>velo</code></td><td>Der fertige Code zum Kopieren</td><td>Teil 8</td></tr>
+		<tr><td><code>vorschau</code></td><td>Die fünf Entwürfe als Bild – zum Nachbauen daneben legen</td><td>Teil 3, 9</td></tr>
+		<tr><td><code>ANLEITUNG.html</code></td><td>Ausführliche Bauanleitung mit allen Maßen (im Browser öffnen)</td><td>Teil 9–11</td></tr>
+	</table>
+</section>
+
+<!-- ============ 3 DESIGN ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">3</span><h2>Ein Design aussuchen</h2></div>
+	<p class="intro">Bei Wix wird ein Design ausgewählt und nachgebaut. Ein späterer Wechsel ist möglich (Farben, Schriften und Startbereich tauschen), aber Handarbeit. Merken Sie sich die Nummer des Designs – sie wird mehrmals gebraucht.</p>
+	<div class="designs">
+		<div><img src="../../vorschau/1-bierzelt-nacht.jpg" alt=""><span><b>1 · Bierzelt-Nacht</b><br>Dunkel, Rot, Bühnenlicht.<span class="farben" style="padding:0"><i style="--c:#0f0d0c">0f0d0c</i><i style="--c:#e3262b">e3262b</i><i style="--c:#f4eee2">f4eee2</i></span></span></div>
+		<div><img src="../../vorschau/2-wirtshaus.jpg" alt=""><span><b>2 · Wirtshaus</b><br>Hell, warm, Serifenschrift.<span class="farben" style="padding:0"><i style="--c:#f4ecdc">f4ecdc</i><i style="--c:#b3261e">b3261e</i><i style="--c:#2b1d14">2b1d14</i></span></span></div>
+		<div><img src="../../vorschau/3-rock-n-raute.jpg" alt=""><span><b>3 · Rock’n’Raute</b><br>Schwarz, Blau-Weiß, rockig.<span class="farben" style="padding:0"><i style="--c:#0a0c10">0a0c10</i><i style="--c:#1d7fe0">1d7fe0</i><i style="--c:#f5f7fa">f5f7fa</i></span></span></div>
+		<div><img src="../../vorschau/4-festplakat.jpg" alt=""><span><b>4 · Festplakat</b><br>Packpapier, Stempel-Rot.<span class="farben" style="padding:0"><i style="--c:#e6d3ac">e6d3ac</i><i style="--c:#c4271f">c4271f</i><i style="--c:#1b1410">1b1410</i></span></span></div>
+		<div><img src="../../vorschau/5-hochzeit-elegant.jpg" alt=""><span><b>5 · Hochzeit Elegant</b><br>Ruhig, Grün und Gold.<span class="farben" style="padding:0"><i style="--c:#faf7f1">faf7f1</i><i style="--c:#2f5a46">2f5a46</i><i style="--c:#b8955a">b8955a</i></span></span></div>
+	</div>
+	<div class="kasten tipp"><b>Klickbare Entwürfe</b>Alle Entwürfe lassen sich im Browser durchklicken: <code>raw.githack.com/gate057-lang/sturschaedl-entwuerfe/main/index.html</code>. Alle Farbwerte und Schriften jedes Designs stehen in der Datei <code>ANLEITUNG.html</code> im Paket.</div>
+</section>
+
+<!-- ============ 4 SICHERUNG ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">4</span><h2>Sicherheitskopie anlegen</h2><span class="ziel">Damit die alte Seite jederzeit zurückgeholt werden kann.</span></div>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Bei Wix anmelden</b>Im Browser <code>wix.com</code> öffnen, oben rechts <kbd>Anmelden</kbd>, mit dem Konto der Band anmelden.
+		<div class="ergebnis">Die Übersicht „Meine Websites“ bzw. das Dashboard der Website.</div></div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Website duplizieren</b>Bei der Website auf die drei Punkte <kbd>…</kbd> (Website-Aktionen) klicken → <kbd>Website duplizieren</kbd>. Als Namen z. B. <code>Sturschädl alt</code> eingeben.
+		<div class="ergebnis">Eine zweite Website „Sturschädl alt“ in der Liste. Sie bleibt unverändert als Sicherung liegen.</div></div></div>
+	<div class="kasten tipp"><b>Zusätzliches Netz</b>Wix hebt frühere Stände automatisch auf: im Editor oben <kbd>Website</kbd> → <kbd>Website-Verlauf</kbd>.</div>
+</section>
+
+<!-- ============ 5 SCHRIFTEN & BILDER ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">5</span><h2>Schriften und Bilder hochladen</h2></div>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Editor öffnen</b>Im Dashboard der echten Website (nicht der Kopie) oben auf <kbd>Website bearbeiten</kbd> klicken.
+		<div class="ergebnis">Der Editor: in der Mitte die Website, links eine schmale Leiste mit Symbolen.</div></div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Einen Text anklicken</b>Irgendeinen Text auf der Seite einmal anklicken → <kbd>Text bearbeiten</kbd>.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Schriften hochladen</b>Im Textfenster die Schriftauswahl (Name der aktuellen Schrift) öffnen → ganz unten <kbd>Schriftarten hochladen</kbd> → <kbd>Hochladen</kbd>.</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Dateien auswählen</b>Im Paket den Ordner <code>schriften</code> → Unterordner Ihres Designs öffnen (z. B. <code>1-bierzelt-nacht</code>). Alle Dateien darin markieren (<kbd>Strg</kbd> + <kbd>A</kbd>, Mac: <kbd>⌘</kbd> + <kbd>A</kbd>) und <kbd>Öffnen</kbd>.
+		<div class="ergebnis">Die Schriften erscheinen in der Schriftauswahl unter „Meine Schriften“. Das Textfeld selbst nicht ändern – Fenster schließen.</div></div></div>
+	<div class="schritt"><span class="n">5</span><div class="t"><b>Bilder hochladen</b>Links in der Leiste auf <kbd>Meine Uploads</kbd> (bzw. <kbd>Medien</kbd>) klicken → <kbd>Medien hochladen</kbd>. Den Ordner <code>bilder</code> öffnen, alle Dateien markieren und <kbd>Öffnen</kbd>.
+		<div class="ergebnis">Die Fotos und Logos stehen im Medienbereich und können später überall eingesetzt werden.</div></div></div>
+	<div class="kasten tipp"><b>Bessere Fotos</b>Die Instagram-Bilder (ig-1 bis ig-11) sind kleine Vorschaubilder. Für die fertige Seite besser die Originalfotos der Band hochladen.</div>
+</section>
+
+<!-- ============ 6 FARBEN ============ -->
+<section class="teil neu">
+	<div class="teil-kopf"><span class="nr">6</span><h2>Farben einstellen</h2></div>
+	<p class="intro">Die Farben werden einmal zentral festgelegt. Alle Elemente, die diese Farben nutzen, passen sich automatisch an.</p>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Website-Design öffnen</b>Links in der Leiste auf <kbd>Website-Design</kbd> (Pinsel-Symbol) klicken → <kbd>Farben</kbd> → <kbd>Farben anpassen</kbd>.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Farbwerte eintragen</b>Ein Farbfeld anklicken. Im Farbfenster gibt es ein Feld für den Farbcode (beginnt mit #). Den Code aus der Tabelle eintippen und mit <kbd>Enter</kbd> bestätigen.</div></div>
+	<table>
+		<tr><th>Rolle</th><th>1 Bierzelt</th><th>2 Wirtshaus</th><th>3 Raute</th><th>4 Plakat</th><th>5 Elegant</th></tr>
+		<tr><td>Hintergrund</td><td>#0f0d0c</td><td>#f4ecdc</td><td>#0a0c10</td><td>#e6d3ac</td><td>#faf7f1</td></tr>
+		<tr><td>Hintergrund abgesetzt</td><td>#1a1715</td><td>#eadcc2</td><td>#121721</td><td>#dcc597</td><td>#eef0e8</td></tr>
+		<tr><td>Schrift</td><td>#f4eee2</td><td>#2b1d14</td><td>#f5f7fa</td><td>#1b1410</td><td>#22302a</td></tr>
+		<tr><td>Schrift leise</td><td>#b3aa9c</td><td>#6e5a48</td><td>#9aa6b8</td><td>#5a4630</td><td>#66736c</td></tr>
+		<tr><td>Akzent (Knöpfe)</td><td>#e3262b</td><td>#b3261e</td><td>#1d7fe0</td><td>#c4271f</td><td>#2f5a46</td></tr>
+		<tr><td>Akzent dunkel</td><td>#b81c20</td><td>#8e1c16</td><td>#1566b8</td><td>#9e1e18</td><td>#244636</td></tr>
+	</table>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Übernehmen</b>Fenster mit <kbd>Fertig</kbd> bzw. <kbd>Übernehmen</kbd> schließen. Oben rechts <kbd>Speichern</kbd>.</div></div>
+</section>
+
+<!-- ============ 7 CMS ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">7</span><h2>Datensammlungen anlegen</h2><span class="ziel">Hier werden später Termine, Laufband und Mitglieder gepflegt.</span></div>
+	<p class="intro">Es werden drei Sammlungen angelegt: <b>Termine</b>, <b>Laufband</b> und <b>Mitglieder</b>. Die Namen müssen genau so geschrieben werden.</p>
+	<h3>Sammlung „Termine“</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>CMS öffnen</b>Im Dashboard links auf <kbd>CMS</kbd> klicken (ggf. unter „Inhalte“ bzw. „Website &amp; Mobile App“). Beim ersten Mal ggf. <kbd>CMS hinzufügen</kbd>.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Sammlung erstellen</b><kbd>Sammlung erstellen</kbd> → <kbd>Neu erstellen</kbd> (ohne Vorlage). Name: <code>Termine</code> → <kbd>Erstellen</kbd>.
+		<div class="ergebnis">Eine leere Tabelle mit der Spalte „Titel“.</div></div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Import starten</b>Oben rechts <kbd>Weitere Aktionen</kbd> (bzw. <kbd>…</kbd>) → <kbd>Importieren</kbd> → Datei <code>cms/Termine.csv</code> auswählen.</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Spalten zuordnen</b>Wix zeigt jede Spalte der Datei. Ordnen Sie so zu:
+		<table style="margin-top:2mm">
+			<tr><th>Spalte in der Datei</th><th>Zuordnen zu</th><th>Feldtyp</th></tr>
+			<tr><td>Titel</td><td>vorhandenes Feld <b>Titel</b></td><td>Text</td></tr>
+			<tr><td>Datum</td><td>neues Feld <code>Datum</code></td><td><b>Datum</b> (Format: JJJJ-MM-TT)</td></tr>
+			<tr><td>Uhrzeit</td><td>neues Feld <code>Uhrzeit</code></td><td>Text</td></tr>
+			<tr><td>Ort</td><td>neues Feld <code>Ort</code></td><td>Text</td></tr>
+			<tr><td>Zusatz</td><td>neues Feld <code>Zusatz</code></td><td>Text</td></tr>
+			<tr><td>Link</td><td>neues Feld <code>Link</code></td><td>URL</td></tr>
+		</table>
+		Dann <kbd>Importieren</kbd>.
+		<div class="ergebnis">Die Tabelle enthält sieben Termine aus 2026.</div></div></div>
+	<div class="schritt"><span class="n">5</span><div class="t"><b>Feld-IDs prüfen</b><kbd>Felder verwalten</kbd> (bzw. das Zahnrad an einer Spalte) → bei jedem Feld steht eine <b>Feld-ID</b>. Sie muss <b>klein</b> geschrieben sein: <code>datum</code>, <code>uhrzeit</code>, <code>ort</code>, <code>zusatz</code>, <code>link</code>. Das Titelfeld heißt <code>title</code>.</div></div>
+	<div class="schritt"><span class="n">6</span><div class="t"><b>Berechtigungen</b><kbd>Weitere Aktionen</kbd> → <kbd>Berechtigungen</kbd> (bzw. „Berechtigungen &amp; Privatsphäre“) → „Wer kann Inhalte ansehen?“ = <b>Jeder</b>. Hinzufügen, Ändern, Löschen: nur Admin. Speichern.</div></div>
+	<h3>Sammlungen „Laufband“ und „Mitglieder“</h3>
+	<p>Genauso anlegen wie „Termine“ (Schritte 2–6), mit diesen Angaben:</p>
+	<table>
+		<tr><th style="width:20%">Name</th><th style="width:28%">Datei</th><th>Felder (Feld-ID → Feldtyp)</th></tr>
+		<tr><td><code>Laufband</code></td><td><code>cms/Laufband.csv</code></td><td>Titel → vorhandenes Feld Titel · <code>reihenfolge</code> → Zahl</td></tr>
+		<tr><td><code>Mitglieder</code></td><td><code>cms/Mitglieder.csv</code></td><td>Titel → vorhandenes Feld Titel (Name) · <code>rolle</code> → Text · <code>reihenfolge</code> → Zahl · zusätzlich von Hand ein Feld <code>foto</code> vom Typ <b>Bild</b> anlegen</td></tr>
+	</table>
+	<div class="kasten achtung"><b>Hinweis „Sandbox“</b>Zeigt Wix oben einen Schalter „Sandbox“ bzw. „Live/Sandbox“: Nach dem Import <kbd>Mit Live synchronisieren</kbd> klicken, sonst sind die Daten auf der Website nicht sichtbar.</div>
+</section>
+
+<!-- ============ 8 CODE ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">8</span><h2>Entwicklermodus und Code</h2><span class="ziel">Nur kopieren und einfügen – nichts programmieren.</span></div>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Dev Mode einschalten</b>Im Editor oben in der Leiste auf <kbd>Dev Mode</kbd> → <kbd>Dev Mode aktivieren</kbd> klicken.
+		<div class="ergebnis">Links erscheint ein neuer Bereich mit geschweiften Klammern { } und unten am Bildschirm ein Code-Feld.</div></div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Bereich „Öffentlich“ finden</b>Links auf das Symbol <kbd>{ }</kbd> klicken. Es gibt Abschnitte wie „Seiten“, „Öffentlich &amp; Backend“. Mit der Maus auf <b>Öffentlich</b> zeigen → <kbd>+</kbd> → <kbd>Neue .js-Datei</kbd>.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Datei benennen</b>Als Namen <code>termine.js</code> eintippen und <kbd>Enter</kbd> drücken.
+		<div class="ergebnis">Rechts öffnet sich eine leere bzw. fast leere Datei.</div></div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Code aus dem Paket öffnen</b>Im Paket die Datei <code>velo/public/termine.js</code> öffnen:<br><b style="display:inline">Windows:</b> rechte Maustaste → <kbd>Öffnen mit</kbd> → <kbd>Editor</kbd>.<br><b style="display:inline">Mac:</b> rechte Maustaste → <kbd>Öffnen mit</kbd> → <kbd>TextEdit</kbd>.</div></div>
+	<div class="schritt"><span class="n">5</span><div class="t"><b>Alles kopieren</b>In der geöffneten Datei alles markieren (<kbd>Strg</kbd> + <kbd>A</kbd>, Mac: <kbd>⌘</kbd> + <kbd>A</kbd>) und kopieren (<kbd>Strg</kbd> + <kbd>C</kbd>, Mac: <kbd>⌘</kbd> + <kbd>C</kbd>).</div></div>
+	<div class="schritt"><span class="n">6</span><div class="t"><b>In Wix einfügen</b>In Wix in die neue Datei klicken, eventuell vorhandenen Text markieren und löschen, dann einfügen (<kbd>Strg</kbd> + <kbd>V</kbd>, Mac: <kbd>⌘</kbd> + <kbd>V</kbd>). Wix speichert automatisch.</div></div>
+	<p>Schritte 2 bis 6 für diese Dateien wiederholen:</p>
+	<table>
+		<tr><th style="width:44%">Datei im Paket</th><th>Wo in Wix anlegen</th></tr>
+		<tr><td><code>velo/public/termine.js</code></td><td>Öffentlich → Datei <code>termine.js</code> (erledigt)</td></tr>
+		<tr><td><code>velo/public/laufband.js</code></td><td>Öffentlich → Datei <code>laufband.js</code></td></tr>
+		<tr><td><code>velo/public/custom-elements/<br>sturschaedl-laufband.js</code></td><td>Öffentlich → <kbd>+</kbd> → <kbd>Neuer Ordner</kbd> <code>custom-elements</code> → darin Datei <code>sturschaedl-laufband.js</code></td></tr>
+	</table>
+	<div class="kasten achtung"><b>Die Laufband-Datei ist sehr lang</b>Sie enthält die Schriften und ist deshalb über 100 KB groß. Das ist richtig so. Unbedingt mit <kbd>Strg</kbd> + <kbd>A</kbd> wirklich alles kopieren.</div>
+	<p>Die beiden Dateien aus <code>velo/seiten/</code> (Seitencode) werden in Teil 9 und 10 eingefügt.</p>
+</section>
+
+<!-- ============ 9 STARTSEITE ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">9</span><h2>Die Startseite aufbauen</h2></div>
+	<p class="intro">Legen Sie das Vorschaubild Ihres Designs (Ordner <code>vorschau</code>) neben den Editor und bauen Sie die Seite von oben nach unten nach. Genaue Maße stehen in <code>ANLEITUNG.html</code> unter „Startseite bauen“.</p>
+	<h3>Grundgriffe im Editor</h3>
+	<table>
+		<tr><th style="width:34%">Was</th><th>Wie</th></tr>
+		<tr><td>Neuen Abschnitt einfügen</td><td>Zwischen zwei Abschnitten mit der Maus auf die Trennlinie zeigen → <kbd>Abschnitt hinzufügen</kbd> → „Leer“.</td></tr>
+		<tr><td>Element hinzufügen</td><td>Links <kbd>+</kbd> (Hinzufügen) → z. B. <kbd>Text</kbd>, <kbd>Bild</kbd>, <kbd>Button</kbd>, <kbd>Box</kbd> → ins Bild ziehen.</td></tr>
+		<tr><td>Hintergrund eines Abschnitts</td><td>Abschnitt anklicken → <kbd>Abschnittshintergrund ändern</kbd> → Farbe oder Bild.</td></tr>
+		<tr><td>Löschen</td><td>Element anklicken → Taste <kbd>Entf</kbd>.</td></tr>
+		<tr><td>Rückgängig</td><td><kbd>Strg</kbd> + <kbd>Z</kbd> (Mac: <kbd>⌘</kbd> + <kbd>Z</kbd>).</td></tr>
+		<tr><td>Zwischenspeichern</td><td>Oben rechts <kbd>Speichern</kbd>.</td></tr>
+	</table>
+	<h3>Reihenfolge der Abschnitte</h3>
+	<table>
+		<tr><th style="width:5%">#</th><th style="width:22%">Abschnitt</th><th>Inhalt</th></tr>
+		<tr><td>1</td><td>Kopfzeile</td><td>Stierschädel-Logo, Schriftzug „Sturschädl“, Menü, Knopf „Jetzt anfragen“</td></tr>
+		<tr><td>2</td><td>Titelbereich</td><td>Bandfoto, „Mia san die Sturschädl“, Text, zwei Knöpfe. Gesichter frei lassen, Schrift unten. Design 1: Kasten „Nächster Auftritt“ (siehe unten)</td></tr>
+		<tr><td>3</td><td>Laufband</td><td>Das Custom Element (siehe unten)</td></tr>
+		<tr><td>4</td><td>Zahlen</td><td>Vier Spalten: 2015 · 5 · 10+ · ~970</td></tr>
+		<tr><td>5</td><td>Angebote</td><td>Drei Bildkacheln: Hochzeit, Kirwa &amp; Bierzelt, Party &amp; Firma</td></tr>
+		<tr><td>6</td><td>Vorstellung</td><td>Bandfoto links, Text „Ned bloß a Band – a Versprechen.“ rechts</td></tr>
+		<tr><td>7</td><td>Termine</td><td>Terminliste – Teil 10</td></tr>
+		<tr><td>8</td><td>Instagram</td><td><kbd>+</kbd> → <kbd>Social</kbd> → „Instagram Feed“ (kostenlose Wix-App) → mit dem Band-Konto verbinden</td></tr>
+		<tr><td>9</td><td>Aufruf</td><td>„Lasst’s scheppern!“ mit Knopf zur Kontaktseite</td></tr>
+		<tr><td>10</td><td>Fußzeile</td><td>Kontakt, Links, Impressum · Datenschutz</td></tr>
+	</table>
+	<h3>Das Laufband einsetzen</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Custom Element hinzufügen</b>Links <kbd>+</kbd> → <kbd>Einbetten &amp; Social</kbd> (bzw. „Einbetten“) → <kbd>Custom Element</kbd> → in den Abschnitt „Laufband“ ziehen.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Quelle wählen</b>Element anklicken → <kbd>Quelle wählen</kbd> → <b>Velo-Datei</b> → <code>sturschaedl-laufband.js</code>. Beim Feld „Tag-Name“ eintippen: <code>sturschaedl-laufband</code>.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Größe</b>Das Element auf volle Breite ziehen, Höhe etwa 58 Pixel.</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>ID vergeben</b>Element anklicken. Unten im Code-Feld bzw. rechts im Fenster „Eigenschaften &amp; Events“ steht eine ID wie <code>#customElement1</code>. Hineinklicken und ändern in <code>laufband</code>, <kbd>Enter</kbd>.</div></div>
+	<div class="kasten tipp"><b>Im Editor sieht das Laufband anders aus?</b>Das ist normal: Im Editor läuft es in einem Rahmen. Maßgeblich ist die <kbd>Vorschau</kbd> (oben rechts) bzw. die veröffentlichte Seite.</div>
+	<h3>Kasten „Nächster Auftritt“ (nur Design 1)</h3>
+	<p>Oben rechts im Titelbereich eine dunkle, halbdurchsichtige <kbd>Box</kbd> mit rotem Rand links. Darin drei Texte: „Nächster Auftritt“ (fest), darunter ein Text mit der ID <code>naechsterTitel</code> und einer mit der ID <code>naechsterDatum</code>. Den Inhalt der beiden setzt später der Code.</p>
+</section>
+
+<!-- ============ 10 TERMINLISTE ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">10</span><h2>Die Terminliste einbauen</h2></div>
+	<p class="intro">Die Terminliste ist ein Wiederholungsfeld: Man gestaltet <b>eine</b> Zeile, Wix wiederholt sie für jeden Termin.</p>
+	<h3>Auf der Startseite</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Wiederholungsfeld einfügen</b>Links <kbd>+</kbd> → <kbd>Liste</kbd> → <kbd>Wiederholungsfelder</kbd> (englisch „Repeater“) → eine einspaltige Variante in den Abschnitt „Termine“ ziehen.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Auf eine Zeile reduzieren</b>Im Wiederholungsfeld <kbd>Elemente verwalten</kbd> → überzählige Einträge löschen, bis nur <b>einer</b> übrig ist. Die Beispielbilder und -texte darin löschen.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Zeile gestalten</b>In die verbliebene Zeile diese Elemente setzen und jeweils die ID vergeben (Element anklicken → ID im Feld „Eigenschaften &amp; Events“ ändern):
+		<table style="margin-top:2mm">
+			<tr><th style="width:24%">ID</th><th>Element</th><th style="width:30%">Beispiel</th></tr>
+			<tr><td><code>tMonat</code></td><td>Kleiner Text, Großbuchstaben, Akzentfarbe (in einem Rahmen-Kasten links)</td><td>OKT.</td></tr>
+			<tr><td><code>tTag</code></td><td>Großer Text darunter</td><td>26</td></tr>
+			<tr><td><code>tTitel</code></td><td>Überschrift rechts daneben</td><td>Kirwa Stöckelsberg</td></tr>
+			<tr><td><code>tInfo</code></td><td>Kleiner Text unter dem Titel</td><td>Berg · 20:00 Uhr</td></tr>
+			<tr><td><code>tStatus</code></td><td>Kleiner Text mit Rahmen, ganz rechts</td><td>Vorbei</td></tr>
+			<tr><td><code>tLink</code></td><td>Knopf „Infos →“ (freiwillig)</td><td></td></tr>
+		</table></div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>ID des Wiederholungsfelds</b>Das ganze Wiederholungsfeld anklicken (Rand) und die ID auf <code>termineRepeater</code> ändern. <b>Nicht</b> mit einem Datensatz verbinden – das macht der Code.</div></div>
+	<div class="schritt"><span class="n">5</span><div class="t"><b>Kasten „Euer Fest?“</b>Über oder unter der Liste eine <kbd>Box</kbd> mit Text „Euer Fest? – Saison 2027 wird grad geplant“ und Knopf „Anfragen“ (Link zur Kontaktseite). ID der Box: <code>freiBox</code>.</div></div>
+	<div class="schritt"><span class="n">6</span><div class="t"><b>Seitencode einfügen</b>Unten im Code-Feld der Startseite den vorhandenen Code markieren und löschen. Die Datei <code>velo/seiten/Startseite.js</code> öffnen (wie in Teil 8), alles kopieren und einfügen.</div></div>
+	<div class="schritt"><span class="n">7</span><div class="t"><b>Design-Nummer eintragen</b>Im eingefügten Code steht oben die Zeile <code>const DESIGN = '1';</code> – die <b>1</b> durch die Nummer Ihres Designs ersetzen (z. B. <code>'3'</code>). Die Hochkommas bleiben stehen.</div></div>
+	<div class="schritt"><span class="n">8</span><div class="t"><b>Testen</b>Oben rechts <kbd>Vorschau</kbd> klicken.
+		<div class="ergebnis">Das Laufband läuft, die Terminliste zeigt Termine, der Kasten „Nächster Auftritt“ ist gefüllt.</div></div></div>
+	<h3>Auf der Seite „Termine“</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Seite öffnen</b>Oben links im Editor die Seitenauswahl öffnen → Seite <b>Termine</b> (falls nicht vorhanden: <kbd>Seite hinzufügen</kbd>, Name <code>Termine</code>).</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Zwei Listen</b>Zwei Wiederholungsfelder wie oben bauen (gleiche IDs in der Zeile: tMonat, tTag, tTitel, tInfo, tStatus). Das erste bekommt die ID <code>kommendRepeater</code> (Überschrift „Demnächst“), das zweite <code>rueckblickRepeater</code> (Überschrift „Rückblick“). Tipp: Das erste fertige Wiederholungsfeld kopieren (<kbd>Strg</kbd> + <kbd>C</kbd> / <kbd>Strg</kbd> + <kbd>V</kbd>) und nur die ID ändern.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Rückblick-Bereich</b>Um den Rückblick (Überschrift + zweite Liste) eine <kbd>Box</kbd> legen, ID <code>rueckblickBereich</code>. Dazu einen Kasten <code>freiBox</code> wie auf der Startseite.</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Seitencode</b>Den Code der Seite durch den Inhalt von <code>velo/seiten/Termine.js</code> ersetzen.</div></div>
+</section>
+
+<!-- ============ 11 WEITERE SEITEN ============ -->
+<section class="teil neu">
+	<div class="teil-kopf"><span class="nr">11</span><h2>Die weiteren Seiten</h2></div>
+	<p class="intro">Jede Unterseite beginnt mit einem dunklen Kopf: Hintergrundfoto (abgedunkelt), kleine rote Zeile, großer Titel, ein Satz darunter. Dann folgt der Inhalt.</p>
+	<h3>Hochzeiten</h3>
+	<p>Kopf mit Foto <code>ig-7.jpg</code> und „Euer Tag, unsere Musi“. Darunter vier Schritte nebeneinander (Sektempfang, Essen &amp; Reden, Brautentführung, Tanzfläche), dann „Alles aus oaner Hand“ mit Liste und Foto. Nur normale Text- und Bild-Elemente.</p>
+	<h3>Medien – Fotogalerie</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Galerie einfügen</b>Links <kbd>+</kbd> → <kbd>Galerie</kbd> → eine „Pro Gallery“ im Stil „Collage“ oder „Raster“ in den Abschnitt ziehen.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Fotos auswählen</b>Galerie anklicken → <kbd>Medien verwalten</kbd> → <kbd>Medien hinzufügen</kbd> → Fotos auswählen → <kbd>Zur Galerie hinzufügen</kbd> → <kbd>Fertig</kbd>.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Video</b>Links <kbd>+</kbd> → <kbd>Video &amp; Musik</kbd> → „YouTube-Player“ → Element anklicken → <kbd>Video ändern</kbd> → YouTube-Adresse einfügen.</div></div>
+	<h3>Über uns – Besetzung</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Wiederholungsfeld</b>Ein Wiederholungsfeld mit Karten (Bild oben, zwei Texte darunter) einfügen.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Mit Daten verbinden</b>Wiederholungsfeld anklicken → Symbol <kbd>Mit CMS verbinden</kbd> (Datenbank-Symbol) → Sammlung <b>Mitglieder</b> wählen. Sortierung: <code>reihenfolge</code> aufsteigend.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Felder zuordnen</b>Das Bild der Karte anklicken → „Bildquelle verbinden mit“ → <code>foto</code>. Ersten Text → <code>Titel</code> (Name), zweiten Text → <code>rolle</code>.
+		<div class="ergebnis">In der Vorschau erscheinen fünf Karten mit den Namen aus der Sammlung.</div></div></div>
+	<h3>Kontakt – Anfrageformular</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Formular einfügen</b>Links <kbd>+</kbd> → <kbd>Kontakt &amp; Formulare</kbd> → ein Kontaktformular einfügen.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Felder</b>Formular anklicken → <kbd>Formular bearbeiten</kbd>. Felder: Anlass (Auswahl: Hochzeit, Kirwa / Fest, Firmenfeier, Geburtstag, Sonstiges), Datum, Ort, Name*, Gäste, E-Mail*, Telefon, Nachricht, Zustimmung Datenschutz*.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Empfänger</b>In den Formular-Einstellungen unter „Benachrichtigungen“ bzw. „E-Mail-Benachrichtigung“ die Adresse <code>sturschaedl@web.de</code> eintragen.</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Kontaktkästen</b>Rechts daneben drei Kästen: „Direkt anrufen“ (Bensch Seitz, Telefon, E-Mail), „Sturschädl GbR“ (Anschrift), „Folgt uns“ (Instagram, Facebook).</div></div>
+	<div class="kasten achtung"><b>Pflicht: Impressum und Datenschutz</b>Beide Seiten müssen vollständig sein, bevor veröffentlicht wird. Wix bietet dafür eigene Vorlagen bzw. Rechtstext-Apps.</div>
+</section>
+
+<!-- ============ 12 HANDY ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">12</span><h2>Handy-Ansicht anpassen</h2></div>
+	<p class="intro">Wix baut aus der Computer-Ansicht automatisch eine Handy-Ansicht. Sie muss aber durchgesehen werden.</p>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Umschalten</b>Oben in der Leiste auf das <kbd>Handy-Symbol</kbd> klicken.
+		<div class="ergebnis">Die Seite erscheint schmal wie auf einem Handy.</div></div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Durchgehen</b>Von oben nach unten jeden Abschnitt prüfen: Nichts darf über den Rand ragen, Schrift muss lesbar sein, Gesichter auf Fotos sichtbar.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Anpassen</b>Elemente lassen sich in der Handy-Ansicht getrennt verschieben, verkleinern oder ausblenden (Element anklicken → Auge-Symbol „Auf Mobilgeräten ausblenden“). Änderungen hier betreffen nur das Handy.</div></div>
+	<ul>
+		<li>Zahlen 2 × 2, Angebote untereinander, Text und Foto untereinander.</li>
+		<li>Laufband volle Breite. Terminzeilen: Datum links, Titel und Ort daneben.</li>
+	</ul>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Zurück</b>Mit dem <kbd>Computer-Symbol</kbd> zur normalen Ansicht.</div></div>
+</section>
+
+<!-- ============ 13 VERÖFFENTLICHEN ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">13</span><h2>Prüfen und veröffentlichen</h2></div>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Vorschau</b>Oben rechts <kbd>Vorschau</kbd> und alle Seiten durchklicken.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Veröffentlichen</b>Oben rechts <kbd>Veröffentlichen</kbd>.
+		<div class="ergebnis">Wix meldet „Ihre Website ist online“ und zeigt die Adresse.</div></div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Echt testen</b>Die Adresse <code>sturschaedlband.de</code> in einem neuen Fenster öffnen – auch auf dem Handy.</div></div>
+	<h3>Checkliste</h3>
+	<ul class="check">
+		<li>Das Laufband läuft und zeigt die Begriffe aus der Sammlung „Laufband“.</li>
+		<li>Die Startseite zeigt Termine; der Kasten „Nächster Auftritt“ ist gefüllt (Design 1).</li>
+		<li>Die Seite „Termine“ zeigt „Demnächst“ bzw. „Euer Fest?“ und den Rückblick.</li>
+		<li>Test: in der Sammlung „Termine“ einen Termin mit Datum in der Zukunft anlegen – erscheint er oben?</li>
+		<li>Über uns zeigt fünf Karten aus der Sammlung „Mitglieder“.</li>
+		<li>Galerie und Video funktionieren.</li>
+		<li>Test-Anfrage über das Formular ist im Postfach angekommen.</li>
+		<li>Impressum und Datenschutzerklärung sind vollständig.</li>
+		<li>Handy-Ansicht durchgesehen.</li>
+	</ul>
+</section>
+
+<!-- ============ 14 PFLEGE ============ -->
+<section class="teil neu">
+	<div class="teil-kopf"><span class="nr">14</span><h2>Pflege im Alltag</h2><span class="ziel">Ohne Editor, nur im Dashboard.</span></div>
+	<h3>Neuen Termin eintragen</h3>
+	<div class="schritt"><span class="n">1</span><div class="t"><b>Anmelden</b><code>wix.com</code> → <kbd>Anmelden</kbd> → zum Dashboard der Website.</div></div>
+	<div class="schritt"><span class="n">2</span><div class="t"><b>Termine öffnen</b>Links <kbd>CMS</kbd> → Sammlung <b>Termine</b>.</div></div>
+	<div class="schritt"><span class="n">3</span><div class="t"><b>Eintrag hinzufügen</b><kbd>+ Element hinzufügen</kbd> (bzw. <kbd>Hinzufügen</kbd>). Titel = Name des Fests, Datum, Uhrzeit (z. B. <code>20:00</code>), Ort, ggf. Zusatz und Link.</div></div>
+	<div class="schritt"><span class="n">4</span><div class="t"><b>Speichern</b><kbd>Speichern</kbd> bzw. Fenster schließen – Wix speichert die Tabelle automatisch.
+		<div class="ergebnis">Der Termin erscheint sofort auf der Website. Nach dem Datum rutscht er von selbst in den Rückblick.</div></div></div>
+	<div class="kasten achtung"><b>Sandbox</b>Ist die Sandbox eingeschaltet, nach Änderungen <kbd>Mit Live synchronisieren</kbd> klicken.</div>
+	<h3>Weitere Aufgaben</h3>
+	<table>
+		<tr><th style="width:30%">Was</th><th>Wo</th></tr>
+		<tr><td>Termin ändern / löschen</td><td><kbd>CMS</kbd> → <b>Termine</b> → in die Zelle klicken und ändern bzw. Zeile markieren → <kbd>Löschen</kbd>.</td></tr>
+		<tr><td>Laufband-Begriffe</td><td><kbd>CMS</kbd> → <b>Laufband</b>: Zeile hinzufügen oder löschen; die Zahl „reihenfolge“ bestimmt die Reihenfolge.</td></tr>
+		<tr><td>Mitglieder</td><td><kbd>CMS</kbd> → <b>Mitglieder</b>: Name, Rolle, Foto (in die Zelle „foto“ klicken → Bild hochladen).</td></tr>
+		<tr><td>Fotos der Galerie</td><td>Editor → Seite „Medien“ → Galerie anklicken → <kbd>Medien verwalten</kbd> → danach <kbd>Veröffentlichen</kbd>.</td></tr>
+		<tr><td>Texte</td><td>Editor → Text anklicken → tippen → <kbd>Veröffentlichen</kbd>.</td></tr>
+		<tr><td>Anfragen lesen</td><td>Kommen per E-Mail; zusätzlich im Dashboard unter <kbd>Formulare &amp; Einsendungen</kbd>.</td></tr>
+	</table>
+	<div class="kasten tipp"><b>Mit dem Handy</b>Termine lassen sich auch über die App „Wix“ (Wix Owner) pflegen: Website wählen → CMS → Termine.</div>
+</section>
+
+<!-- ============ 15 PROBLEME ============ -->
+<section class="teil">
+	<div class="teil-kopf"><span class="nr">15</span><h2>Wenn etwas nicht klappt</h2></div>
+	<table>
+		<tr><th style="width:34%">Problem</th><th>Lösung</th></tr>
+		<tr><td>Das Laufband ist leer oder fehlt.</td><td>ID des Elements genau <code>laufband</code>? Tag-Name <code>sturschaedl-laufband</code>? Datei vollständig kopiert? Custom Elements funktionieren nur mit Premium und verbundener Domain. In der <kbd>Vorschau</kbd> prüfen, nicht im Editor.</td></tr>
+		<tr><td>Die Terminliste ist leer.</td><td>Sammlung heißt genau <code>Termine</code>? Feld-IDs klein (<code>datum</code>, <code>ort</code> …)? Datum-Feld vom Typ „Datum“? Berechtigung „Ansehen: Jeder“? Sandbox synchronisiert?</td></tr>
+		<tr><td>In der Liste stehen Beispieltexte.</td><td>Die IDs der Elemente in der Zeile prüfen (<code>tTitel</code>, <code>tInfo</code> … – Groß-/Kleinschreibung beachten!). Das Wiederholungsfeld darf nicht mit einem Datensatz verbunden sein.</td></tr>
+		<tr><td>Im Code-Feld sind rote Markierungen.</td><td>Beim Kopieren fehlt etwas. Inhalt in Wix komplett löschen und die Datei noch einmal mit <kbd>Strg</kbd> + <kbd>A</kbd> kopieren und einfügen.</td></tr>
+		<tr><td>Falsche Farbe oder Schrift im Laufband.</td><td>Im Seitencode der Startseite die Zeile <code>const DESIGN = '…';</code> prüfen.</td></tr>
+		<tr><td>Der Kasten „Nächster Auftritt“ zeigt nichts.</td><td>IDs <code>naechsterTitel</code> und <code>naechsterDatum</code> prüfen.</td></tr>
+		<tr><td>Etwas ist kaputt gegangen.</td><td>Editor → <kbd>Website</kbd> → <kbd>Website-Verlauf</kbd> → einen früheren Stand wiederherstellen. Die Kopie „Sturschädl alt“ (Teil 4) bleibt ebenfalls erhalten.</td></tr>
+	</table>
+</section>
+
+</body>
+</html>
