@@ -70,12 +70,16 @@ section{padding:96px 0}
 .hero .bg{position:absolute;inset:0;background-size:cover;background-position:center 12%}
 .hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,13,12,.35) 0%,rgba(15,13,12,0) 18%,rgba(15,13,12,0) 50%,rgba(15,13,12,.75) 70%,#0f0d0c 100%)}
 .hero .wrap{position:relative;padding-bottom:56px;width:100%}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:end}
+.hero-grid{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:end}
 .hero h1{font-size:clamp(48px,7cqi,96px)}
 .hero h1 .fr{display:block;font-size:.6em;color:var(--red);line-height:1;margin-bottom:4px}
 .hero p.lead{font-size:18px;max-width:520px;margin:0 0 24px;color:#e9e1d1}
 .hero .cta{display:flex;gap:14px;flex-wrap:wrap}
 .hero .bull{display:none}
+/* Marken-Lockup: Stierschädel + Schriftzug, sitzt unter den Gesichtern */
+.lockup{display:flex;align-items:center;gap:26px}
+.lockup .emb{width:clamp(110px,12cqi,168px);flex:none;filter:drop-shadow(0 14px 30px rgba(0,0,0,.75))}
+.lockup .rule{width:3px;align-self:stretch;margin:6px 0;background:var(--red);flex:none}
 .next-gig{position:absolute;right:32px;top:120px;background:rgba(15,13,12,.75);backdrop-filter:blur(6px);border-left:3px solid var(--red);padding:14px 18px;font-size:14px;color:#e9e1d1}
 .next-gig strong{display:block;font:700 18px/1.2 var(--fh);text-transform:uppercase;color:#fff;letter-spacing:.04em}
 
@@ -214,6 +218,7 @@ form.f{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--card
   .next-gig{margin:14px 18px 0;top:auto}
   .hero .bg::after{background:linear-gradient(180deg,rgba(15,13,12,.5) 0%,rgba(15,13,12,0) 25%,rgba(15,13,12,0) 75%,#0f0d0c 100%)}
   .hero-grid{grid-template-columns:1fr;gap:20px}
+  .lockup{gap:14px}.lockup .emb{width:78px}.lockup .rule{width:2px}
   .hero p.lead{font-size:17px}
   .hero .wrap{padding:6px 18px 48px}
   .next-gig{position:relative;right:auto;top:auto;margin-top:22px}
@@ -302,9 +307,13 @@ form.f{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--card
     <div class="bg" style="background-image:var(--i-band-wirtshaus-jpg)"></div>
     <div class="next-gig">Nächster Auftritt<strong>Saison 2027 – Termine folgen</strong>Jetzt noch Wunschtermin sichern</div>
     <div class="wrap"><div class="hero-grid">
-      <div>
-        <div class="kicker">Bayrisch · Rockig · Dorfmusi</div>
-        <h1><span class="fr">Mia san die</span>Sturschädl</h1>
+      <div class="lockup">
+        <img class="emb" data-img="bulle-hell.png" alt="Sturschädl-Stier">
+        <span class="rule"></span>
+        <div>
+          <div class="kicker">Bayrisch · Rockig · Dorfmusi</div>
+          <h1><span class="fr">Mia san die</span>Sturschädl</h1>
+        </div>
       </div>
       <div>
         <p class="lead">Eure Party- und Hochzeitsband aus der Oberpfalz. Fünf Mannsbuider, Lederhosn, Quetschn und E-Gitarre – vom Sektempfang bis zum letzten Maß.</p>
