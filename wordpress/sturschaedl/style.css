@@ -232,6 +232,8 @@ form.f{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--card
 /* <<< GRUNDSTIL */
 
 /* ---------- WordPress-Ergänzungen ---------- */
+.sec-head .kicker,.split .txt .kicker,.st-content p.is-style-kicker{margin-bottom:12px}
+.design-4-festplakat .poster h1{font-size:clamp(44px,8.6vw,124px);hyphens:auto;overflow-wrap:break-word}
 body{min-height:100vh}
 a{color:inherit}
 .nav ul li{list-style:none}
@@ -254,7 +256,7 @@ a{color:inherit}
 .st-content p.is-style-gross,.st-content p.big{font-size:22px;color:var(--ink);line-height:1.45}
 .st-content h2{font-size:clamp(40px,5.5vw,68px);margin:12px 0 22px}
 .st-content h3{font-size:30px;margin:0 0 10px}
-.st-content p.is-style-kicker{font:700 13px/1 var(--fh);letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin:0}
+.st-content p.is-style-kicker{font:700 13px/1 var(--fh);letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin:0 0 12px}
 .st-content .wp-block-columns.st-split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .st-content .wp-block-columns.st-split>.wp-block-column{margin:0;min-width:0}
 .st-content .wp-block-image{margin:0}

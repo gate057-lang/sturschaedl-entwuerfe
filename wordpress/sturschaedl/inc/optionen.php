@@ -130,7 +130,10 @@ function st_sanitize( $in ) {
 	$alt = (array) get_option( 'sturschaedl', array() );
 	$out = $alt;
 	$in  = (array) $in;
-	foreach ( st_schema() as $tab ) {
+	$schema = st_schema();
+	// Nur die Felder des abgeschickten Reiters verarbeiten (sonst würden Haken anderer Reiter zurückgesetzt).
+	$reiter = isset( $in['_reiter'] ) && isset( $schema[ $in['_reiter'] ] ) ? array( $schema[ $in['_reiter'] ] ) : $schema;
+	foreach ( $reiter as $tab ) {
 		foreach ( $tab['felder'] as $f ) {
 			if ( in_array( $f[0], array( 'h', 'p' ), true ) ) {
 				continue;
@@ -200,6 +203,7 @@ function st_options_page() {
 		</nav>
 		<form method="post" action="options.php">
 			<?php settings_fields( 'sturschaedl' ); ?>
+			<input type="hidden" name="sturschaedl[_reiter]" value="<?php echo esc_attr( $tab ); ?>">
 			<table class="form-table" role="presentation"><tbody>
 			<?php
 			foreach ( $schema[ $tab ]['felder'] as $f ) {
