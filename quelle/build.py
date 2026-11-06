@@ -266,7 +266,7 @@ INFO = {
 }
 cards = []
 for i, t in enumerate(THEMES, 1):
-    cards.append(f'<a class="card" href="sturschaedl-entwurf-{t["slug"]}.html"><img src="vorschau/{t["slug"]}.jpg" alt="Vorschau Entwurf {i}"><div><small>Entwurf {i}</small><b>{t["name"]}</b><p>{INFO[t["slug"]]}</p></div></a>')
+    cards.append(f'<a class="card" href="sturschaedl-entwurf-{t["slug"]}.html"><img src="data:image/jpeg;base64,{base64.b64encode((OUT / "vorschau" / (t["slug"] + ".jpg")).read_bytes()).decode()}" alt="Vorschau Entwurf {i}"><div><small>Entwurf {i}</small><b>{t["name"]}</b><p>{INFO[t["slug"]]}</p></div></a>')
 idx = (HIER / "index-vorlage.html").read_text(encoding="utf-8")
 idx = idx.replace("{{CARDS}}", "\n".join(cards)).replace("{{DATUM}}", "06.11.2026").replace("{{BULLE}}", data_uri("bulle-hell.png"))
 (OUT / "index.html").write_text(idx, encoding="utf-8")
