@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sturschädl – Website-Entwürfe</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&family=Pirata+One&display=swap">
+<style>
+:root{--bg:#0f0d0c;--card:#1c1917;--ink:#f4eee2;--mute:#b3aa9c;--red:#e3262b}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 Barlow,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:56px 16px 80px}
+header{display:flex;align-items:center;gap:22px;margin-bottom:14px}
+header img{width:84px}
+h1{font:800 clamp(40px,7vw,76px)/.95 "Barlow Condensed";text-transform:uppercase}
+h1 span{display:block;font:400 .5em/1 "Pirata One";text-transform:none;color:var(--red)}
+p.lead{color:var(--mute);max-width:640px;margin:14px 0 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+a.card{display:block;background:var(--card);color:inherit;text-decoration:none;border:1px solid rgba(255,255,255,.08);transition:transform .2s,border-color .2s}
+a.card:hover{transform:translateY(-4px);border-color:var(--red)}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block}
+.card div{padding:18px 20px 22px}
+.card b{display:block;font:800 26px/1.1 "Barlow Condensed";text-transform:uppercase}
+.card small{color:var(--red);font:700 13px/1 "Barlow Condensed";letter-spacing:.18em;text-transform:uppercase}
+.card p{color:var(--mute);font-size:15px;margin-top:6px}
+footer{margin-top:50px;color:var(--mute);font-size:14px}
+</style>
+</head>
+<body><div class="wrap">
+<header><img src="{{BULLE}}" alt=""><h1><span>Website-Entwürfe für</span>Sturschädl</h1></header>
+<p class="lead">Fünf Stilrichtungen für eine neue Band-Website. Jeder Entwurf ist klickbar: Oben in der dunklen Leiste lassen sich alle Seiten (Start, Termine, Hochzeiten, Medien, Über uns, Kontakt) und die Handy-Ansicht durchschalten.</p>
+<div class="grid">
+{{CARDS}}
+</div>
+<footer>Stand {{DATUM}} · Entwürfe, keine fertige Website. Texte und Bilder stammen von der bisherigen Website und von Instagram. Gelb markierte Stellen sind Platzhalter.</footer>
+</div></body>
+</html>
