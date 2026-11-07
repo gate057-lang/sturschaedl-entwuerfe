@@ -1,0 +1,22 @@
+{
+  "start-a-fakten-angebote": {
+    "desktop": 946,
+    "handy": 1431
+  },
+  "start-b-vorstellung": {
+    "desktop": 511,
+    "handy": 630
+  },
+  "start-c-termine-instagram": {
+    "desktop": 1008,
+    "handy": 1074
+  },
+  "cta": {
+    "desktop": 554,
+    "handy": 506
+  },
+  "fuss": {
+    "desktop": 307,
+    "handy": 558
+  }
+}
