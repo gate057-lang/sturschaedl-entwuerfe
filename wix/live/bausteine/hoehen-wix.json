@@ -21,8 +21,8 @@
     "handy": 507
   },
   "fuss": {
-    "desktop": 307,
-    "handy": 578
+    "desktop": 335,
+    "handy": 585
   },
   "seite-termine": {
     "desktop": 2391,
@@ -55,5 +55,9 @@
   "recht-agb": {
     "desktop": 681,
     "handy": 683
+  },
+  "seite-presse": {
+    "desktop": 2409,
+    "handy": 2658
   }
 }
