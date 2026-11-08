@@ -39,8 +39,10 @@ BILD = {  # Dateien in der Wix-Mediathek (identisch zu quelle/assets, per md5 ge
     "angebot-kirwa.jpg": "631ea1787bb74e3294b0d0c6eb512d93~mv2.jpg",
     "angebot-party.jpg": "ec5dc8d58fbd48a987d662464980c238~mv2.jpg",
     "hochzeit-gaeste.jpg": "91368e33f1174199b28a8677c8a103ca~mv2.jpg",
+    "hochzeit-gitarre.jpg": "f91e801672dc4a0d9ff316af6282dc35~mv2.jpg",
+    "hochzeit-oben.png": "546a6fa11daf48d69c35f97e42c882d6~mv2.png",
 }
-GROSS = {"band-wald.jpg", "band-wirtshaus.jpg", "angebot-hochzeit.jpg", "angebot-kirwa.jpg", "angebot-party.jpg", "hochzeit-gaeste.jpg"}  # große Fotos über Wix-Bilddienst verkleinern
+GROSS = {"band-wald.jpg", "band-wirtshaus.jpg", "angebot-hochzeit.jpg", "angebot-kirwa.jpg", "angebot-party.jpg", "hochzeit-gaeste.jpg", "hochzeit-gitarre.jpg", "hochzeit-oben.png"}  # große Fotos über Wix-Bilddienst verkleinern
 ZIEL = {"start": "/", "termine": "/termine", "hochzeit": "/hochzeiten", "medien": "/medien",
         "ueber": "/über-uns", "kontakt": "/kontakt"}
 INSTA = "https://www.instagram.com/stur.schaedl_band"
@@ -266,8 +268,8 @@ namen.append(baustein("seite-termine", t))
 
 # Hochzeitsseite (08.11.2026): Texte wie von Markus direkt in Wix geändert übernommen (Überschrift „Auftakt“,
 # Entwurfssatz und „prüfen“-Schilder raus), Kicker ohne „Vorschlag“, und zwei Fotos im Stil der Seite:
-# groß das Hochzeitsfoto im Rahmen mit versetzter Linie, klein davor das bisherige Bild, weiß gerahmt und schräg
-# wie das Bandfoto im Kopf der Startseite.
+# groß das Hochzeitsfoto im Rahmen mit versetzter Linie, darunter versetzt zwei Fotos weiß gerahmt und schräg
+# wie das Bandfoto im Kopf der Startseite (Gitarre + Biergarten von oben); kein Bild überdeckt ein anderes.
 h = unterseite("hochzeit")
 for a, b in (
     ('<div class="kicker">Neue Seite · Vorschlag</div>', '<div class="kicker">Hochzeiten</div>'),
@@ -276,16 +278,25 @@ for a, b in (
     ('Eigene Ton- und Lichttechnik <span class="ph-note">prüfen</span>', 'Eigene Ton- und Lichttechnik '),
     ('Flexibles Ende <span class="ph-note">prüfen</span>', 'Flexibles Ende '),
     ('<div class="photo-frame"><img data-img="ig-7.jpg" alt=""></div>',
-     '<div class="foto-duo"><div class="photo-frame"><img data-img="hochzeit-gaeste.jpg" alt="Sturschädl-Musiker in weißen Hemden bei einer Hochzeit"></div>'
-     '<img class="duo-klein" data-img="ig-7.jpg" alt="Sturschädl spielt auf einer Hochzeit"></div>'),
+     '<div class="foto-collage">'
+     '<div class="photo-frame"><img data-img="hochzeit-gaeste.jpg" alt="Sturschädl-Musiker in weißen Hemden bei einer Hochzeit"></div>'
+     '<div class="collage-unten">'
+     '<img class="polaroid links" data-img="hochzeit-gitarre.jpg" alt="Sturschädl-Gitarrist auf einer Hochzeitsfeier">'
+     '<img class="polaroid rechts" data-img="hochzeit-oben.png" alt="Sturschädl spielt akustisch im Biergarten">'
+     '</div></div>'),
 ):
     assert a in h, a
     h = h.replace(a, b)
 assert "ph-note" not in h and "Vorschlag" not in h
 DUO_CSS = """
-.foto-duo{position:relative}
-.foto-duo .duo-klein{position:relative;z-index:2;display:block;width:40%;margin:-22% 0 0 -28px;border:10px solid #fff;box-shadow:0 18px 40px rgba(26,23,20,.28);transform:rotate(-3deg)}
-body.m .foto-duo .duo-klein{margin-left:-6px;border-width:7px}
+.foto-collage{position:relative}
+.collage-unten{display:flex;justify-content:space-between;align-items:flex-start;margin-top:5%}
+.collage-unten .polaroid{display:block;border:10px solid #fff;box-shadow:0 18px 40px rgba(26,23,20,.28);position:relative;z-index:2}
+.collage-unten .links{width:38%;margin-left:-14px;transform:rotate(-3deg)}
+.collage-unten .rechts{width:54%;margin-top:9%;margin-right:-6px;transform:rotate(2.5deg)}
+body.m .collage-unten .polaroid{border-width:6px}
+body.m .collage-unten .links{margin-left:0}
+body.m .collage-unten .rechts{margin-right:0}
 """
 namen.append(baustein("seite-hochzeit", h, DUO_CSS))
 
