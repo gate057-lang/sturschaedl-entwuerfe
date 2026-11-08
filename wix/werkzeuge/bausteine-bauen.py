@@ -3,8 +3,9 @@
 CSS und HTML stammen 1:1 aus dem gebauten Entwurf sturschaedl-entwurf-2-wirtshaus.html.
 Jeder Baustein rendert den Entwurf in Originalgröße (Desktop 1440 px Breite, sichtbar der 1180-px-Inhaltsbereich, Handy 390 px)
 und skaliert ihn per CSS-zoom auf die Breite des Wix-Elements:
-  Desktop: Element 1036 px breit, X = -28  ->  Inhalt liegt exakt auf dem 980er-Raster (Faktor 0,878)
-  Handy:   Element 320 px breit, X = 0     ->  Faktor 320/390
+  Desktop: Element auf volle Breite gestreckt; Faktor fest 980/1116 (= 0,878), Inhalt zentriert auf dem
+           980er-Raster, Hintergründe laufen randlos über die ganze Fensterbreite
+  Handy:   Element 320 px breit, X = 0  ->  Faktor 320/390
 
 Ausgabe: wix/live/bausteine/<name>.html  +  hoehen.json (Höhe je Baustein für Desktop/Handy)
 Aufruf:  python3 wix/werkzeuge/bausteine-bauen.py
@@ -58,10 +59,10 @@ EIGEN = """
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:transparent;overflow:hidden}
 html.mess,html.mess body{overflow:visible}
-#site{width:1440px;margin-left:-130px;background:transparent !important;overflow:visible}
-body.m #site{width:390px;margin-left:0}
+#site{width:1440px;overflow:visible}
+body.m #site{width:390px !important;margin-left:0 !important}
 a{color:inherit;text-decoration:none}
-.cta-band{background:transparent !important}.cta-band .bg{display:none}
+.cta-band .bg{background-image:url(BETON)}
 .gig{color:inherit;text-decoration:none}
 .gig>div:nth-child(2){min-width:0}
 .gig h3,.gig p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -73,7 +74,7 @@ a.gig:not(.past):hover h3{color:var(--red)}
 
 JS = r"""
 const site=document.getElementById('site');
-function fit(){const m=innerWidth<600;document.body.classList.toggle('m',m);site.style.zoom=innerWidth/(m?390:1180);}
+function fit(){const m=innerWidth<600;document.body.classList.toggle('m',m);if(m){site.style.zoom=innerWidth/390;return;}const z=980/1116,v=innerWidth/z,w=Math.max(1440,v);site.style.zoom=z;site.style.width=w+'px';site.style.marginLeft=((v-w)/2)+'px';}
 fit();addEventListener('resize',fit);
 let codeDa=false;
 document.addEventListener('click',e=>{const a=e.target.closest('a[data-go]');if(!a||!codeDa)return;e.preventDefault();parent.postMessage({typ:'gehe',ziel:a.dataset.go},'*');});
@@ -123,6 +124,14 @@ def sections(html):
     return re.findall(r"  <section.*?</section>\n", html, re.S)
 
 
+def beton_uri():
+    import base64, io
+    from PIL import Image
+    im = Image.open(REPO / "quelle" / "assets" / "beton.jpg").convert("RGB"); im.thumbnail((1500, 1500))
+    buf = io.BytesIO(); im.save(buf, "JPEG", quality=72, optimize=True, progressive=True)
+    return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
+
+
 def baustein(name, inhalt, css=""):
     doc = f"""<!doctype html>
 <html lang="de"><head><meta charset="utf-8">
@@ -130,7 +139,7 @@ def baustein(name, inhalt, css=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="{FONTS}">
 <style>{CSS}
-{EIGEN}{css}</style></head>
+{EIGEN.replace("url(BETON)", "url(" + beton_uri() + ")") if "cta-band" in inhalt else EIGEN}{css}</style></head>
 <body><div id="site" class="light paper">
 {links(inhalt)}
 </div>
@@ -175,7 +184,7 @@ CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 hoehen = {}
 for n in namen:
     hoehen[n] = {}
-    for art, breite in (("desktop", 1036), ("handy", 320)):
+    for art, breite in (("desktop", 1353), ("handy", 320)):
         mess = (AUS / f"{n}.html").read_text(encoding="utf-8").replace(
             "function fit(){const m=innerWidth<600;", f"function fit(){{const innerWidth={breite};const m=innerWidth<600;").replace(
             "parent.postMessage({typ:'bereit'},'*');",
