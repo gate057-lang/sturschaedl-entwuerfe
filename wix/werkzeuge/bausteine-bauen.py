@@ -151,6 +151,15 @@ def links(html):
     return html
 
 
+
+def frei_als_link(html):
+    """Startseite: Zeile „Euer Fest? … jetzt anfragen“ komplett klickbar (→ Kontakt), Optik unverändert."""
+    alt = '<div class="gig free">'
+    i = html.index(alt)
+    j = html.index('<span class="tag">Frei</span></div>', i) + len('<span class="tag">Frei</span>')
+    return (html[:i] + f'<a class="gig free" href="{BASIS}/kontakt" target="_top" data-go="/kontakt">'
+            + html[i + len(alt):j] + '</a>' + html[j + len('</div>'):])
+
 def seite(name):
     m = re.search(r'<div class="page[^"]*" data-page="%s">(.*?)\n</div>\n' % name, ENTWURF, re.S)
     return m.group(1)
@@ -208,7 +217,7 @@ namen = [
     baustein("laufband", strip),
     baustein("start-a-fakten-angebote", S[0] + S[1]),
     baustein("start-b-vorstellung", S[2]),
-    baustein("start-c-termine-instagram", termine + insta),
+    baustein("start-c-termine-instagram", frei_als_link(termine) + insta),
     baustein("cta", vorlage("ctaT")),
 ]
 
