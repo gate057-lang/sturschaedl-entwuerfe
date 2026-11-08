@@ -329,5 +329,7 @@ addEventListener('message',e=>{const d=e.data||{};if(d.typ==='hallo')codeDa=true
   if(d.typ==='anfrage-ok'&&formular){formular.reset();formular.querySelector('button').disabled=false;meldung('Danke! Eure Anfrage ist angekommen – mia meldn uns gscheid schnell.',true);}
   if(d.typ==='anfrage-fehler'&&formular){formular.querySelector('button').disabled=false;meldung('Das hat leider nicht geklappt. Bitte direkt an sturschaedl@web.de schreiben.',false);}if(d.typ==='laufband')zeigeLaufband(d.woerter);});
 parent.postMessage({typ:'bereit'},'*');
+
+let mausZeit=0;document.addEventListener('mousemove',()=>{const t=Date.now();if(t-mausZeit<250)return;mausZeit=t;parent.postMessage({typ:'maus'},'*');},{passive:true});
 </script>
 </body></html>

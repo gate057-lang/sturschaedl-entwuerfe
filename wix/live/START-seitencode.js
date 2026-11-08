@@ -34,6 +34,12 @@ function bandfotoWechsel() {
     } else {
         foto.onMouseIn(zeigeStier);
         foto.onMouseOut(zeigeBand);
+        // Absicherung: Springt die Maus direkt aufs Laufband (eigener Rahmen), meldet es sich → Band zurück.
+        try {
+            $w('#html6').onMessage((ev) => {
+                if (ev && ev.data && ev.data.typ === 'maus') zeigeBand();
+            });
+        } catch (e) { /* Laufband fehlt */ }
     }
 }
 

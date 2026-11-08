@@ -187,6 +187,11 @@ def bild_vars():
     return "#site{" + ";".join(f"--{key(n)}:url({bild_url(n)})" for n in BILD) + "}"
 
 
+# Laufband liegt direkt unter dem Bandfoto: Springt die Maus vom Foto direkt in diesen Rahmen, meldet der Browser
+# das Verlassen des Fotos nicht immer. Deshalb meldet das Laufband „Maus ist hier“ → Seitencode zeigt wieder die Band.
+MAUS = "\nlet mausZeit=0;document.addEventListener('mousemove',()=>{const t=Date.now();if(t-mausZeit<250)return;mausZeit=t;parent.postMessage({typ:'maus'},'*');},{passive:true});\n"
+
+
 def baustein(name, inhalt, css=""):
     doc = f"""<!doctype html>
 <html lang="de"><head><meta charset="utf-8">
@@ -198,7 +203,7 @@ def baustein(name, inhalt, css=""):
 <body><div id="site" class="light paper">
 {links(inhalt)}
 </div>
-<script>{JS}</script>
+<script>{JS}{MAUS if name == "laufband" else ""}</script>
 </body></html>
 """
     (AUS / f"{name}.html").write_text(doc, encoding="utf-8")
