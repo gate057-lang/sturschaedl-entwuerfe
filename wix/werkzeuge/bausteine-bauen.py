@@ -300,7 +300,7 @@ MAIL = '<a href="mailto:sturschaedl@web.de" target="_top">sturschaedl@web.de</a>
 namen.append(baustein("recht-impressum", rechtsseite("Impressum", "ig-5.jpg",
     f"    <p><strong>Sturschädl GbR</strong><br>Kugelgasse 7, 92364 Deining</p>\n"
     f"    <h3>Vertreten durch:</h3>\n"
-    f"    <p>Benjamin Seitz<br>Tel: {TEL}<br>E-Mail: {MAIL}<br>www.sturschaedl-band.de</p>\n"
+    f"    <p>Benjamin Seitz<br>Tel: {TEL}<br>E-Mail: {MAIL}<br>www.sturschaedlband.de</p>\n"
     f"    <p>USt-IdNr.: DE133546405</p>"), RECHT_CSS))
 namen.append(baustein("recht-datenschutz", rechtsseite("Datenschutz", "ig-5.jpg",
     "    <p>Als Band für Partys legen wir großen Wert auf den Schutz Ihrer Daten. Datenschutz ist für uns ein wichtiger Aspekt unserer Website. "
@@ -319,7 +319,7 @@ namen.append(baustein("recht-datenschutz", rechtsseite("Datenschutz", "ig-5.jpg"
     "    <p>Der Schutz Ihrer Daten liegt uns am Herzen. Daher ergreifen wir umfassende Schutzmaßnahmen, einschließlich Datenverschlüsselung und "
     "Sicherheitsvorkehrungen für die Speicherung und Übertragung Ihrer Daten. Ihre Sicherheit steht bei uns an erster Stelle.</p>"), RECHT_CSS))
 namen.append(baustein("recht-agb", rechtsseite("AGB", "ig-5.jpg",
-    "    <p>Unsere Allgemeinen Geschäftsbedingungen (AGB) regeln die vertraglichen Beziehungen zwischen sturschädl-band.de und unseren Kunden. "
+    "    <p>Unsere Allgemeinen Geschäftsbedingungen (AGB) regeln die vertraglichen Beziehungen zwischen sturschaedlband.de und unseren Kunden. "
     "Sie dienen dazu, unsere Rechte und Pflichten klar und verständlich darzulegen. In unseren AGB finden Sie alle relevanten Informationen zu "
     "unseren Leistungen, Preisen, Zahlungsbedingungen und den Bedingungen für Vertragsabschluss, Stornierung und Widerruf. Wir legen großen Wert "
     "darauf, dass unsere AGB gesetzeskonform und kundenorientiert sind. Dennoch empfehlen wir, unsere AGB von einem Rechtsexperten prüfen zu lassen, "
