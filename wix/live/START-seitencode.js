@@ -14,18 +14,19 @@ function bandfotoWechsel() {
     try { foto = $w('#image11'); } catch (e) { return; }
     if (!foto || !foto.src) return;
     const band = foto.src;
-    const bandFit = foto.fitMode || 'fill';
+    // Anpassungsmodus EINMAL fest auf „fit“: Das Bandfoto hat fast genau das Seitenverhältnis des Rahmens
+    // (1600×1311 zu 466×386), sieht also gleich aus. Würde der Modus beim Wechsel umgestellt, blitzt der
+    // Stierkopf kurz vergrößert auf, bevor die Band kommt.
+    foto.fitMode = 'fit';
     let stier = false;
     const zeigeStier = () => {
         if (stier) return;
         stier = true;
-        foto.fitMode = 'fit';
         foto.src = STIERKOPF;
     };
     const zeigeBand = () => {
         if (!stier) return;
         stier = false;
-        foto.fitMode = bandFit;
         foto.src = band;
     };
     const touch = wixWindow.formFactor !== 'Desktop';
