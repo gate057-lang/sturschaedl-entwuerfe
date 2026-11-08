@@ -1,4 +1,8 @@
 {
+  "laufband": {
+    "desktop": 51,
+    "handy": 43
+  },
   "start-a-fakten-angebote": {
     "desktop": 946,
     "handy": 1431

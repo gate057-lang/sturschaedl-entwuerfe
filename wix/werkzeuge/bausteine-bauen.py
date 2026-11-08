@@ -96,7 +96,8 @@ function zeigeTermine(liste){
   html=html.concat(vorbei.slice(0,max-html.length).map(zeile));
   box.innerHTML=html.join('');
 }
-addEventListener('message',e=>{const d=e.data||{};if(d.typ==='hallo')codeDa=true;if(d.typ==='termine'){codeDa=true;zeigeTermine(d.liste);}});
+function zeigeLaufband(w){const s=document.querySelector('.strip span');if(!s||!Array.isArray(w)||!w.length)return;const eins=w.map(x=>esc(x)+' <em>✕</em>').join(' ');s.innerHTML=eins+' '+eins;}
+addEventListener('message',e=>{const d=e.data||{};if(d.typ==='hallo')codeDa=true;if(d.typ==='termine'){codeDa=true;zeigeTermine(d.liste);}if(d.typ==='laufband')zeigeLaufband(d.woerter);});
 parent.postMessage({typ:'bereit'},'*');
 """
 
@@ -159,7 +160,9 @@ insta = S[4].replace('<a class="btn ghost">Auf Instagram folgen →</a>',
 insta = re.sub(r'(<img data-img="ig-\d+\.jpg" alt="">)',
                lambda m: f'<a href="{INSTA}" target="_blank" rel="noopener">{m.group(1)}</a>', insta)
 
+strip = re.search(r'  <div class="strip">.*?</div>\n', START, re.S).group(0)
 namen = [
+    baustein("laufband", strip),
     baustein("start-a-fakten-angebote", S[0] + S[1]),
     baustein("start-b-vorstellung", S[2]),
     baustein("start-c-termine-instagram", termine + insta),
