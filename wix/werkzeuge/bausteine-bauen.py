@@ -35,8 +35,11 @@ BILD = {  # Dateien in der Wix-Mediathek (identisch zu quelle/assets, per md5 ge
     "band-wirtshaus.jpg": "f3e2cdef419341ef8cc9acb6ddf682e8~mv2.jpg",
     "bulle-hell.png": "31b7fc203858494794963fffd0307fa7~mv2.png",
     "bulle-dunkel.png": "352bfb0db9924201825c1bde2428348a~mv2.png",
+    "angebot-hochzeit.jpg": "ec5dc8d58fbd48a987d662464980c238~mv2.jpg",
+    "angebot-kirwa.jpg": "631ea1787bb74e3294b0d0c6eb512d93~mv2.jpg",
+    "angebot-party.jpg": "979aaab7021545079dbc2a341b5eadd0~mv2.jpg",
 }
-GROSS = {"band-wald.jpg", "band-wirtshaus.jpg"}  # große Fotos über Wix-Bilddienst verkleinern
+GROSS = {"band-wald.jpg", "band-wirtshaus.jpg", "angebot-hochzeit.jpg", "angebot-kirwa.jpg", "angebot-party.jpg"}  # große Fotos über Wix-Bilddienst verkleinern
 ZIEL = {"start": "/", "termine": "/termine", "hochzeit": "/hochzeiten", "medien": "/medien",
         "ueber": "/über-uns", "kontakt": "/kontakt"}
 INSTA = "https://www.instagram.com/stur.schaedl_band"
@@ -184,7 +187,8 @@ def beton_uri():
 
 
 def bild_vars():
-    return "#site{" + ";".join(f"--{key(n)}:url({bild_url(n)})" for n in BILD) + "}"
+    # nur als CSS-Hintergrund nutzbare Bilder; die Angebotsfotos stehen direkt als <img> im Baustein
+    return "#site{" + ";".join(f"--{key(n)}:url({bild_url(n)})" for n in BILD if not n.startswith("angebot-")) + "}"
 
 
 # Laufband liegt direkt unter dem Bandfoto: Springt die Maus vom Foto direkt in diesen Rahmen, meldet der Browser
@@ -219,10 +223,16 @@ insta = S[4].replace('<a class="btn ghost">Auf Instagram folgen →</a>',
 insta = re.sub(r'(<img data-img="ig-\d+\.jpg" alt="">)',
                lambda m: f'<a href="{INSTA}" target="_blank" rel="noopener">{m.group(1)}</a>', insta)
 
+# Angebotskarten: eigene Bandfotos (08.11.2026 von Markus geliefert) statt der Instagram-Bilder aus dem Entwurf
+angebote = S[1]
+for go, bild in (("hochzeit", "angebot-hochzeit.jpg"), ("termine", "angebot-kirwa.jpg"), ("kontakt", "angebot-party.jpg")):
+    angebote, n = re.subn(r'(<a class="offer" data-go="%s"><img data-img=")[\w.-]+(")' % go, r"\g<1>%s\2" % bild, angebote)
+    assert n == 1, go
+
 strip = re.search(r'  <div class="strip">.*?</div>\n', START, re.S).group(0)
 namen = [
     baustein("laufband", strip),
-    baustein("start-a-fakten-angebote", S[0] + S[1]),
+    baustein("start-a-fakten-angebote", S[0] + angebote),
     baustein("start-b-vorstellung", S[2]),
     baustein("start-c-termine-instagram", frei_als_link(termine) + insta),
     baustein("cta", vorlage("ctaT")),
