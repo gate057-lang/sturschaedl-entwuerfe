@@ -1,0 +1,14 @@
+{
+  "_hinweis": "In Wix eingestellte Höhen (Element = Abschnitt), am 08.11.2026 im echten Chrome nachgemessen (#site.getBoundingClientRect). hoehen.json aus headless Chrome weicht um bis zu 20 px ab – maßgeblich ist diese Datei.",
+  "laufband": {"desktop": 51, "handy": 43},
+  "start-a-fakten-angebote": {"desktop": 945, "handy": 1429},
+  "start-b-vorstellung": {"desktop": 512, "handy": 631},
+  "start-c-termine-instagram": {"desktop": 1004, "handy": 1068},
+  "cta": {"desktop": 555, "handy": 507},
+  "fuss": {"desktop": 307, "handy": 578},
+  "seite-termine": {"desktop": 2391, "handy": 2340},
+  "seite-hochzeit": {"desktop": 2253, "handy": 2564},
+  "seite-medien": {"desktop": 2692, "handy": 2591},
+  "seite-ueber": {"desktop": 2775, "handy": 3229},
+  "seite-kontakt": {"desktop": 1084, "handy": 1622}
+}

@@ -1,0 +1,75 @@
+<!doctype html><meta charset="utf-8"><title>Baustein-Test</title>
+<!-- Aufruf: in wix/live/  „python3 -m http.server 8799“ starten, dann http://localhost:8799/../werkzeuge/ geht nicht –
+     deshalb diese Datei nach wix/live/ kopieren oder dort einen Ordner b -> bausteine verlinken und index.html öffnen.
+     Prüft je Baustein: Links (data-go → postMessage, Fallback-href, target), Bilder, Hintergründe, Termine, Laufband, Filter, Kontaktformular. -->
+<style>body{font:13px monospace}iframe{width:1440px;height:900px;border:1px solid #999}</style>
+<pre id="log"></pre><div id="box"></div>
+<script>
+const MODULE=['laufband','start-a-fakten-angebote','start-b-vorstellung','start-c-termine-instagram','cta','fuss','seite-termine','seite-hochzeit','seite-medien','seite-ueber','seite-kontakt'];
+const BREITE=+(new URLSearchParams(location.search).get('w')||1440);
+const log=(...a)=>{document.getElementById('log').textContent+=a.join(' ')+'\n';};
+const warte=ms=>new Promise(r=>setTimeout(r,ms));
+const TERMINE=[
+ {titel:'Kirwa Teststadt',datum:'2027-05-01T18:00:00Z',zeit:'20:00',ort:'Deining',url:'https://www.sturschaedlband.de/event-details/kirwa',vorbei:false},
+ {titel:'Bierzelt Test',datum:'2027-06-01T18:00:00Z',zeit:'19:00',ort:'Neumarkt',url:'https://www.sturschaedlband.de/event-details/bz',vorbei:false},
+ {titel:'Alt',datum:'2025-08-21T17:00:00Z',zeit:'19:00',ort:'Burgthann',url:'https://www.sturschaedlband.de/event-details/alt',vorbei:true}];
+const ergebnis={};window.ERG=ergebnis;
+async function teste(name){
+  const r={fehler:[],links:0,go:0,extern:0,bilder:0,hg:0};ergebnis[name]=r;
+  const f=document.createElement('iframe');f.width=BREITE;f.style.width=BREITE+'px';f.src='b/'+name+'.html';
+  document.getElementById('box').innerHTML='';document.getElementById('box').appendChild(f);
+  await new Promise(res=>f.onload=res);await warte(800);
+  const w=f.contentWindow,d=f.contentDocument;
+  const nachrichten=[];const h=e=>{if(e.source===w)nachrichten.push(e.data)};addEventListener('message',h);
+  w.postMessage({typ:'hallo'},'*');w.postMessage({typ:'termine',liste:TERMINE},'*');w.postMessage({typ:'laufband',woerter:['Eins','Zwei','Drei']},'*');
+  await warte(600);
+  // Links
+  for(const a of d.querySelectorAll('a')){
+    r.links++;
+    const href=a.getAttribute('href')||'';
+    if(a.dataset.go){
+      nachrichten.length=0;a.click();await warte(30);
+      const m=nachrichten.find(x=>x&&x.typ==='gehe');
+      if(!m||m.ziel!==a.dataset.go)r.fehler.push('go ohne Nachricht: '+a.textContent.trim()+' '+a.dataset.go);
+      else r.go++;
+      if(!href.startsWith('https://www.sturschaedlband.de/'))r.fehler.push('go ohne Fallback-href: '+a.textContent.trim());
+      if(a.target!=='_top')r.fehler.push('go-Fallback ohne _top: '+a.textContent.trim());
+    } else if(/^(https?:|mailto:|tel:)/.test(href)){
+      r.extern++;
+      if(href.startsWith('http')&&!href.startsWith('https://www.sturschaedlband.de')&&a.target!=='_blank')r.fehler.push('extern ohne _blank: '+href);
+      if(href.startsWith('https://www.sturschaedlband.de')&&!['_top','_blank'].includes(a.target))r.fehler.push('intern ohne _top: '+href);
+      if(/^(mailto|tel):/.test(href)&&a.target!=='_top')r.fehler.push('mailto/tel ohne _top: '+href);
+    } else r.fehler.push('Link ohne Ziel: "'+a.textContent.trim().slice(0,40)+'" href='+href);
+  }
+  // Elemente, die wie Buttons aussehen, aber kein Link sind
+  for(const b of d.querySelectorAll('.btn,button,[class*=btn]')){if(!b.closest('a')&&b.tagName!=='A'&&b.tagName!=='BUTTON')r.fehler.push('Button ohne Link: '+b.textContent.trim().slice(0,40));}
+  // Bilder
+  for(const i of d.querySelectorAll('img')){r.bilder++;if(!i.complete||!i.naturalWidth){await warte(1500);if(!i.naturalWidth)r.fehler.push('Bild lädt nicht: '+i.src.slice(0,90));}}
+  const urls=new Set();for(const el of d.querySelectorAll('*')){const bg=w.getComputedStyle(el).backgroundImage;(bg.match(/url\("([^"]+)"\)/g)||[]).forEach(u=>urls.add(u.slice(5,-2)));}
+  for(const u of urls){r.hg++;const ok=await new Promise(res=>{const im=new Image();im.onload=()=>res(im.naturalWidth>0);im.onerror=()=>res(false);im.src=u;});if(!ok)r.fehler.push('Hintergrund lädt nicht: '+u.slice(0,90));}
+  // Termine angezeigt?
+  if(/termine/.test(name)){const t=d.body.innerText;if(!t.includes('Kirwa Teststadt'))r.fehler.push('Termine nicht angezeigt');}
+  if(name==='laufband'){if(!d.body.innerText.includes('Zwei'))r.fehler.push('Laufband-Wörter nicht übernommen');}
+  // Medien-Filter
+  if(name==='seite-medien'){for(const s of d.querySelectorAll('.filters span')){s.click();await warte(50);const sicht=[...d.querySelectorAll('.gal img')].filter(i=>i.style.display!=='none').length;r['filter '+s.textContent.trim()]=sicht;if(!sicht)r.fehler.push('Filter leer: '+s.textContent);}}
+  // Kontakt
+  if(name==='seite-kontakt'){
+    const form=d.querySelector('form')||d.querySelector('.f');
+    const knopf=d.querySelector('.f-senden button, .f-senden a, .f button');
+    nachrichten.length=0;knopf.click();await warte(100);
+    r.leer_meldung=(d.querySelector('.f-meldung')||{}).textContent;
+    if(nachrichten.some(x=>x.typ==='anfrage'))r.fehler.push('Leeres Formular wurde gesendet');
+    const felder=[...d.querySelectorAll('.f input, .f textarea, .f select')];
+    r.felder=felder.map(x=>(x.name||x.id||x.placeholder||x.type));
+    for(const x of felder){if(x.type==='email')x.value='test@example.org';else if(x.type==='date')x.value='2027-07-10';else if(x.type==='number')x.value='120';else if(x.tagName==='SELECT')x.selectedIndex=1;else x.value='Test Wert';x.dispatchEvent(new Event('input',{bubbles:true}));}
+    const chip=d.querySelector('.chips>span:nth-child(2)');if(chip){chip.click();r.chip_on=chip.classList.contains('on');}
+    nachrichten.length=0;knopf.click();await warte(200);
+    const an=nachrichten.find(x=>x.typ==='anfrage');r.anfrage=an?an.daten:null;if(!an)r.fehler.push('Ausgefülltes Formular sendet keine Anfrage');
+    w.postMessage({typ:'anfrage-ok'},'*');await warte(200);r.ok_meldung=(d.querySelector('.f-meldung')||{}).textContent;
+  }
+  r.hoehe=Math.round(d.documentElement.scrollHeight);
+  removeEventListener('message',h);
+  log(name, JSON.stringify(r));
+}
+(async()=>{for(const m of MODULE){try{await teste(m)}catch(e){log(m,'ABBRUCH',e.message)}}log('FERTIG');window.FERTIG=true;})();
+</script>
