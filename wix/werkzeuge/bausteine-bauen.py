@@ -220,7 +220,7 @@ fuss = fuss.replace("<span>Impressum · Datenschutz · AGB</span>",
                     f'<a href="{BASIS}/datenschutz" target="_top" data-go="/datenschutz">Datenschutz</a> · '
                     f'<a href="{BASIS}/agb" target="_top" data-go="/agb">AGB</a></span>')
 assert "<a>Facebook" not in fuss and "tel:" in fuss
-namen.append(baustein("fuss", fuss, "footer{border-top:0}"))
+namen.append(baustein("fuss", fuss, "footer{border-top:0}html,body{background:#0b0a09 !important}"))
 
 # ---------- Unterseiten ----------
 def unterseite(name, cta=True):
