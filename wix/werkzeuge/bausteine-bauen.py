@@ -38,8 +38,9 @@ BILD = {  # Dateien in der Wix-Mediathek (identisch zu quelle/assets, per md5 ge
     "angebot-hochzeit.jpg": "979aaab7021545079dbc2a341b5eadd0~mv2.jpg",
     "angebot-kirwa.jpg": "631ea1787bb74e3294b0d0c6eb512d93~mv2.jpg",
     "angebot-party.jpg": "ec5dc8d58fbd48a987d662464980c238~mv2.jpg",
+    "hochzeit-gaeste.jpg": "91368e33f1174199b28a8677c8a103ca~mv2.jpg",
 }
-GROSS = {"band-wald.jpg", "band-wirtshaus.jpg", "angebot-hochzeit.jpg", "angebot-kirwa.jpg", "angebot-party.jpg"}  # große Fotos über Wix-Bilddienst verkleinern
+GROSS = {"band-wald.jpg", "band-wirtshaus.jpg", "angebot-hochzeit.jpg", "angebot-kirwa.jpg", "angebot-party.jpg", "hochzeit-gaeste.jpg"}  # große Fotos über Wix-Bilddienst verkleinern
 ZIEL = {"start": "/", "termine": "/termine", "hochzeit": "/hochzeiten", "medien": "/medien",
         "ueber": "/über-uns", "kontakt": "/kontakt"}
 INSTA = "https://www.instagram.com/stur.schaedl_band"
@@ -188,7 +189,7 @@ def beton_uri():
 
 def bild_vars():
     # nur als CSS-Hintergrund nutzbare Bilder; die Angebotsfotos stehen direkt als <img> im Baustein
-    return "#site{" + ";".join(f"--{key(n)}:url({bild_url(n)})" for n in BILD if not n.startswith("angebot-")) + "}"
+    return "#site{" + ";".join(f"--{key(n)}:url({bild_url(n)})" for n in BILD if not n.startswith(("angebot-", "hochzeit-"))) + "}"
 
 
 # Laufband liegt direkt unter dem Bandfoto: Springt die Maus vom Foto direkt in diesen Rahmen, meldet der Browser
@@ -263,7 +264,30 @@ t = t.replace('<div class="gigs">', '<div class="gigs" data-kommend="8">', 1)
 t = t.replace('<div class="gigs">', '<div class="gigs" data-vorbei="1">', 1)
 namen.append(baustein("seite-termine", t))
 
-namen.append(baustein("seite-hochzeit", unterseite("hochzeit")))
+# Hochzeitsseite (08.11.2026): Texte wie von Markus direkt in Wix geändert übernommen (Überschrift „Auftakt“,
+# Entwurfssatz und „prüfen“-Schilder raus), Kicker ohne „Vorschlag“, und zwei Fotos im Stil der Seite:
+# groß das Hochzeitsfoto im Rahmen mit versetzter Linie, klein davor das bisherige Bild, weiß gerahmt und schräg
+# wie das Bandfoto im Kopf der Startseite.
+h = unterseite("hochzeit")
+for a, b in (
+    ('<div class="kicker">Neue Seite · Vorschlag</div>', '<div class="kicker">Hochzeiten</div>'),
+    ('<h2>Vom Sekt bis<br>zum Schluss</h2>', '<h2>Vom Auftakt bis<br>zum Schlussakkord</h2>'),
+    ('<p>Hochzeiten sind eine eigene Zielgruppe mit eigenen Fragen. Eine eigene Seite holt Brautpaare direkt ab.</p>', '<p></p>'),
+    ('Eigene Ton- und Lichttechnik <span class="ph-note">prüfen</span>', 'Eigene Ton- und Lichttechnik '),
+    ('Flexibles Ende <span class="ph-note">prüfen</span>', 'Flexibles Ende '),
+    ('<div class="photo-frame"><img data-img="ig-7.jpg" alt=""></div>',
+     '<div class="foto-duo"><div class="photo-frame"><img data-img="hochzeit-gaeste.jpg" alt="Sturschädl-Musiker in weißen Hemden bei einer Hochzeit"></div>'
+     '<img class="duo-klein" data-img="ig-7.jpg" alt="Sturschädl spielt auf einer Hochzeit"></div>'),
+):
+    assert a in h, a
+    h = h.replace(a, b)
+assert "ph-note" not in h and "Vorschlag" not in h
+DUO_CSS = """
+.foto-duo{position:relative}
+.foto-duo .duo-klein{position:relative;z-index:2;display:block;width:40%;margin:-22% 0 0 -28px;border:10px solid #fff;box-shadow:0 18px 40px rgba(26,23,20,.28);transform:rotate(-3deg)}
+body.m .foto-duo .duo-klein{margin-left:-6px;border-width:7px}
+"""
+namen.append(baustein("seite-hochzeit", h, DUO_CSS))
 
 m = unterseite("medien")
 m = m.replace('<div class="video"><div class="play"></div>',
