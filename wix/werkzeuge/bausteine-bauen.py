@@ -281,6 +281,48 @@ for alt, neu in (('placeholder="TT.MM.JJJJ"', 'name="datum" placeholder="TT.MM.J
     k = k.replace(alt, neu)
 namen.append(baustein("seite-kontakt", k))
 
+# ---------- Rechtsseiten (nicht im Entwurf: Wirtshaus-Seitenkopf + Text der bisherigen Seite, unverändert) ----------
+RECHT_CSS = (".recht{max-width:780px}.recht h2{font-size:32px;margin:44px 0 12px}.recht h3{font-size:24px;margin:30px 0 8px}"
+             ".recht p{font-size:18px;line-height:1.75;color:var(--mute);margin:0 0 16px}.recht p strong{color:var(--ink)}"
+             ".recht a{color:var(--red);text-decoration:none}.recht a:hover{text-decoration:underline}")
+
+
+def rechtsseite(titel, bild, inhalt):
+    return (f'<header class="phead"><div class="bg" style="background-image:var(--{key(bild)})"></div><div class="wrap">\n'
+            f'    <div class="kicker">Rechtliches</div><h1>{titel}</h1>\n  </div></header>\n'
+            f'  <section><div class="wrap"><div class="recht">\n{inhalt}\n  </div></div></section>\n')
+
+
+TEL = '<a href="tel:+491605555637" target="_top">+49 160 5555637</a>'
+MAIL = '<a href="mailto:sturschaedl@web.de" target="_top">sturschaedl@web.de</a>'
+namen.append(baustein("recht-impressum", rechtsseite("Impressum", "ig-5.jpg",
+    f"    <p><strong>Sturschädl GbR</strong><br>Kugelgasse 7, 92364 Deining</p>\n"
+    f"    <h3>Vertreten durch:</h3>\n"
+    f"    <p>Benjamin Seitz<br>Tel: {TEL}<br>E-Mail: {MAIL}<br>www.sturschaedl-band.de</p>\n"
+    f"    <p>USt-IdNr.: DE133546405</p>"), RECHT_CSS))
+namen.append(baustein("recht-datenschutz", rechtsseite("Datenschutz", "ig-5.jpg",
+    "    <p>Als Band für Partys legen wir großen Wert auf den Schutz Ihrer Daten. Datenschutz ist für uns ein wichtiger Aspekt unserer Website. "
+    "Die folgende Datenschutzerklärung gibt Ihnen einen Überblick darüber, wie wir Ihre Daten schützen und welche Art von Daten wir sammeln. "
+    "Bitte beachten Sie, dass die Datenschutzerklärung je nach den Funktionen unserer Website variieren kann. Wir sind bestrebt, Ihre Daten zu schützen "
+    "und transparent mit ihnen umzugehen, daher passen wir die Datenschutzerklärung entsprechend an. Die Datenschutzerklärung muss alle "
+    "Drittanbieter-Komponenten auflisten, die auf unserer Website verwendet werden. Der Link zur Datenschutzerklärung muss von jeder Seite unserer "
+    "Website aus leicht erreichbar sein.</p>\n"
+    "    <h2>Beispielinhalte:</h2>\n"
+    "    <h3>Datenerhebung, -nutzung und Weitergabe</h3>\n"
+    "    <p>In dieser Sektion erklären wir, welche Informationen wir sammeln, wie wir sie nutzen und ob wir sie an Dritte weitergeben.</p>\n"
+    "    <h3>Kontrolle über Daten</h3>\n"
+    "    <p>Wir geben Ihnen die Möglichkeit, Ihre personenbezogenen Informationen und Daten einzusehen, zu ändern und zu aktualisieren. "
+    "Zudem können Sie Bedenken bezüglich der Verwendung Ihrer Daten äußern.</p>\n"
+    "    <h3>Datensicherheit</h3>\n"
+    "    <p>Der Schutz Ihrer Daten liegt uns am Herzen. Daher ergreifen wir umfassende Schutzmaßnahmen, einschließlich Datenverschlüsselung und "
+    "Sicherheitsvorkehrungen für die Speicherung und Übertragung Ihrer Daten. Ihre Sicherheit steht bei uns an erster Stelle.</p>"), RECHT_CSS))
+namen.append(baustein("recht-agb", rechtsseite("AGB", "ig-5.jpg",
+    "    <p>Unsere Allgemeinen Geschäftsbedingungen (AGB) regeln die vertraglichen Beziehungen zwischen sturschädl-band.de und unseren Kunden. "
+    "Sie dienen dazu, unsere Rechte und Pflichten klar und verständlich darzulegen. In unseren AGB finden Sie alle relevanten Informationen zu "
+    "unseren Leistungen, Preisen, Zahlungsbedingungen und den Bedingungen für Vertragsabschluss, Stornierung und Widerruf. Wir legen großen Wert "
+    "darauf, dass unsere AGB gesetzeskonform und kundenorientiert sind. Dennoch empfehlen wir, unsere AGB von einem Rechtsexperten prüfen zu lassen, "
+    "um sicherzustellen, dass sie allen gesetzlichen Anforderungen entsprechen.</p>"), RECHT_CSS))
+
 # ---------- Höhen messen (headless Chrome) ----------
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 hoehen = {}

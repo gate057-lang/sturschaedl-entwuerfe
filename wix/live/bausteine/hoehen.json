@@ -42,5 +42,17 @@
   "seite-kontakt": {
     "desktop": 1088,
     "handy": 1637
+  },
+  "recht-impressum": {
+    "desktop": 748,
+    "handy": 566
+  },
+  "recht-datenschutz": {
+    "desktop": 1100,
+    "handy": 1326
+  },
+  "recht-agb": {
+    "desktop": 653,
+    "handy": 683
   }
 }
