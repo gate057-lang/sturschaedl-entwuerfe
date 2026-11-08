@@ -74,8 +74,9 @@ export async function ladeTermine() {
  * @param ids       z. B. ['#html1', '#html2']
  * @param termineId Baustein, der die Termine anzeigt (optional)
  * @param laufbandId Laufband-Baustein (optional), ladeWoerter = Funktion, die die Begriffe liefert
+ * @param sendeAnfrage async Funktion(daten) für das Kontaktformular (optional); Fehler → Meldung im Baustein
  */
-export function verbindeBausteine($w, ids, termineId, laufbandId, ladeWoerter) {
+export function verbindeBausteine($w, ids, termineId, laufbandId, ladeWoerter, sendeAnfrage) {
     const termine = termineId ? ladeTermine() : Promise.resolve(null);
     const woerter = laufbandId && ladeWoerter ? ladeWoerter().catch(() => []) : Promise.resolve([]);
     ids.forEach((id) => {
@@ -97,6 +98,12 @@ export function verbindeBausteine($w, ids, termineId, laufbandId, ladeWoerter) {
             const d = (ev && ev.data) || {};
             if (d.typ === 'gehe' && d.ziel) wixLocation.to(d.ziel);
             if (d.typ === 'bereit') senden();
+            if (d.typ === 'anfrage' && sendeAnfrage) {
+                Promise.resolve()
+                    .then(() => sendeAnfrage(d.daten || {}))
+                    .then(() => el.postMessage({ typ: 'anfrage-ok' }))
+                    .catch((e) => { console.log('Anfrage:', e); el.postMessage({ typ: 'anfrage-fehler' }); });
+            }
         });
         senden();
     });
