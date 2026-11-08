@@ -35,9 +35,9 @@ BILD = {  # Dateien in der Wix-Mediathek (identisch zu quelle/assets, per md5 ge
     "band-wirtshaus.jpg": "f3e2cdef419341ef8cc9acb6ddf682e8~mv2.jpg",
     "bulle-hell.png": "31b7fc203858494794963fffd0307fa7~mv2.png",
     "bulle-dunkel.png": "352bfb0db9924201825c1bde2428348a~mv2.png",
-    "angebot-hochzeit.jpg": "ec5dc8d58fbd48a987d662464980c238~mv2.jpg",
+    "angebot-hochzeit.jpg": "979aaab7021545079dbc2a341b5eadd0~mv2.jpg",
     "angebot-kirwa.jpg": "631ea1787bb74e3294b0d0c6eb512d93~mv2.jpg",
-    "angebot-party.jpg": "979aaab7021545079dbc2a341b5eadd0~mv2.jpg",
+    "angebot-party.jpg": "ec5dc8d58fbd48a987d662464980c238~mv2.jpg",
 }
 GROSS = {"band-wald.jpg", "band-wirtshaus.jpg", "angebot-hochzeit.jpg", "angebot-kirwa.jpg", "angebot-party.jpg"}  # große Fotos über Wix-Bilddienst verkleinern
 ZIEL = {"start": "/", "termine": "/termine", "hochzeit": "/hochzeiten", "medien": "/medien",
