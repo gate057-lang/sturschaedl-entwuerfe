@@ -43,6 +43,10 @@ INSTA = "https://www.instagram.com/stur.schaedl_band"
 FACEBOOK = "https://www.facebook.com/Sturschaedl5/"
 
 
+def key(name):
+    return "i-" + re.sub(r"\W", "-", name)
+
+
 def bild_url(n):
     u = WIX + BILD[n]
     if n in GROSS:
@@ -70,6 +74,13 @@ a.gig:not(.past):hover h3{color:var(--red)}
 .insta a{display:block}
 .legal a{display:inline;margin:0;color:inherit;text-decoration:none}
 .legal a:hover{color:#fff}
+.filters span{cursor:pointer}
+a.video{display:flex;text-decoration:none}
+.f .f-senden{display:flex;align-items:center;gap:18px}
+.f-meldung{font:500 15px/1.4 var(--fb);color:var(--mute);flex:1;min-width:0}
+.f-meldung.ok{color:#2f6b2f}.f-meldung.fehler{color:var(--red)}
+.f button:disabled{opacity:.6;cursor:wait}
+.side a{text-decoration:none}
 """
 
 JS = r"""
@@ -96,8 +107,33 @@ function zeigeTermine(liste){
   html=html.concat(vorbei.slice(0,max-html.length).map(zeile));
   box.innerHTML=html.join('');
 }
+function zeigeTerminSeite(liste){
+  const k=document.querySelector('.gigs[data-kommend]'),v=document.querySelector('.gigs[data-vorbei]');if(!k||!v||!Array.isArray(liste))return;
+  const gesamt=+k.dataset.kommend||8;const frei=k.querySelector('.gig.free').outerHTML;
+  const kommend=liste.filter(t=>!t.vorbei).sort((a,b)=>new Date(a.datum)-new Date(b.datum)).slice(0,gesamt-2);
+  const vorbei=liste.filter(t=>t.vorbei).sort((a,b)=>new Date(b.datum)-new Date(a.datum));
+  k.innerHTML=kommend.map(zeile).join('')+frei;
+  v.innerHTML=vorbei.slice(0,gesamt-kommend.length-1).map(t=>zeile(t).replace('War a Gaudi','Vorbei')).join('');
+}
 function zeigeLaufband(w){const s=document.querySelector('.strip span');if(!s||!Array.isArray(w)||!w.length)return;const eins=w.map(x=>esc(x)+' <em>✕</em>').join(' ');s.innerHTML=eins+' '+eins;}
-addEventListener('message',e=>{const d=e.data||{};if(d.typ==='hallo')codeDa=true;if(d.typ==='termine'){codeDa=true;zeigeTermine(d.liste);}if(d.typ==='laufband')zeigeLaufband(d.woerter);});
+// Medien: Filter
+document.querySelectorAll('.filters span').forEach(f=>f.addEventListener('click',()=>{const g=document.querySelector('.gal');if(g&&!g.dataset.h){g.dataset.h=1;g.style.minHeight=g.getBoundingClientRect().height/(parseFloat(site.style.zoom)||1)+'px';}document.querySelectorAll('.filters span').forEach(x=>x.classList.toggle('on',x===f));const k=f.dataset.kat||'alle';document.querySelectorAll('.gal img').forEach(i=>{i.style.display=(k==='alle'||(i.dataset.kat||'').split(' ').includes(k))?'':'none';});}));
+// Kontakt: Anlass-Chips + Absenden
+document.querySelectorAll('.chips').forEach(c=>c.addEventListener('click',e=>{const s=e.target.closest('.chips>span');if(!s)return;c.querySelectorAll(':scope>span').forEach(x=>x.classList.toggle('on',x===s));}));
+const formular=document.querySelector('form.f');
+function meldung(t,ok){const m=document.querySelector('.f-meldung');if(!m)return;m.textContent=t;m.className='f-meldung '+(ok?'ok':'fehler');}
+if(formular){formular.addEventListener('submit',e=>{e.preventDefault();
+  const w=n=>(formular.querySelector('[name='+n+']')||{}).value||'';
+  const daten={anlass:(formular.querySelector('.chips .on')||{}).textContent||'',datum:w('datum').trim(),ort:w('ort').trim(),name:w('name').trim(),gaeste:w('gaeste').trim(),email:w('email').trim(),telefon:w('telefon').trim(),nachricht:w('nachricht').trim()};
+  if(!daten.name||!daten.email){meldung('Bitte Name und E-Mail angeben.',false);return;}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(daten.email)){meldung('Bitte eine gültige E-Mail-Adresse angeben.',false);return;}
+  if(!codeDa){meldung('Senden ist gerade nicht möglich – bitte direkt an sturschaedl@web.de schreiben.',false);return;}
+  formular.querySelector('button').disabled=true;meldung('Wird gesendet …',true);
+  parent.postMessage({typ:'anfrage',daten},'*');
+});}
+addEventListener('message',e=>{const d=e.data||{};if(d.typ==='hallo')codeDa=true;if(d.typ==='termine'){codeDa=true;zeigeTermine(d.liste);zeigeTerminSeite(d.liste);}
+  if(d.typ==='anfrage-ok'&&formular){formular.reset();formular.querySelector('button').disabled=false;meldung('Danke! Eure Anfrage ist angekommen – mia meldn uns gscheid schnell.',true);}
+  if(d.typ==='anfrage-fehler'&&formular){formular.querySelector('button').disabled=false;meldung('Das hat leider nicht geklappt. Bitte direkt an sturschaedl@web.de schreiben.',false);}if(d.typ==='laufband')zeigeLaufband(d.woerter);});
 parent.postMessage({typ:'bereit'},'*');
 """
 
@@ -133,6 +169,10 @@ def beton_uri():
     return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
+def bild_vars():
+    return "#site{" + ";".join(f"--{key(n)}:url({bild_url(n)})" for n in BILD) + "}"
+
+
 def baustein(name, inhalt, css=""):
     doc = f"""<!doctype html>
 <html lang="de"><head><meta charset="utf-8">
@@ -140,7 +180,7 @@ def baustein(name, inhalt, css=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="{FONTS}">
 <style>{CSS}
-{EIGEN.replace("url(BETON)", "url(" + beton_uri() + ")") if "cta-band" in inhalt else EIGEN}{css}</style></head>
+{EIGEN.replace("url(BETON)", "url(" + beton_uri() + ")") if "cta-band" in inhalt else EIGEN}{bild_vars() if "var(--i-" in inhalt else ""}{css}</style></head>
 <body><div id="site" class="light paper">
 {links(inhalt)}
 </div>
@@ -181,6 +221,53 @@ fuss = fuss.replace("<span>Impressum · Datenschutz · AGB</span>",
                     f'<a href="{BASIS}/agb" target="_top" data-go="/agb">AGB</a></span>')
 assert "<a>Facebook" not in fuss and "tel:" in fuss
 namen.append(baustein("fuss", fuss, "footer{border-top:0}"))
+
+# ---------- Unterseiten ----------
+def unterseite(name, cta=True):
+    html = seite(name).replace("  <slot-nav></slot-nav>\n", "").replace("<slot-foot></slot-foot>", "")
+    html = html.replace("<slot-cta></slot-cta>", vorlage("ctaT") if cta else "")
+    assert "slot-" not in html, name
+    return html
+
+t = unterseite("termine")
+t = t.replace('<div class="gigs">', '<div class="gigs" data-kommend="8">', 1)
+t = t.replace('<div class="gigs">', '<div class="gigs" data-vorbei="1">', 1)
+namen.append(baustein("seite-termine", t))
+
+namen.append(baustein("seite-hochzeit", unterseite("hochzeit")))
+
+m = unterseite("medien")
+m = m.replace('<div class="video"><div class="play"></div>',
+              f'<a class="video" href="{INSTA}" target="_blank" rel="noopener"><div class="play"></div>')
+m = m.replace('Saisonrückblick</span></div>', 'Saisonrückblick</span></a>')
+m = m.replace('<span class="on">Alle</span><span>Kirwa &amp; Bierzelt</span><span>Hochzeiten</span><span>Band</span><span>Videos</span>',
+              '<span class="on" data-kat="alle">Alle</span><span data-kat="kirwa">Kirwa &amp; Bierzelt</span><span data-kat="hochzeit">Hochzeiten</span><span data-kat="band">Band</span><span data-kat="videos">Videos</span>')
+KAT = {"ig-1.jpg": "kirwa", "ig-2.jpg": "kirwa", "ig-9.jpg": "kirwa", "ig-4.jpg": "kirwa", "band-wald.jpg": "band",
+       "ig-6.jpg": "kirwa", "ig-11.jpg": "kirwa", "ig-7.jpg": "hochzeit", "band-wirtshaus.jpg": "band", "ig-10.jpg": "kirwa"}
+m = re.sub(r'<img( class="[^"]*")? data-img="([\w.-]+)"', lambda x: f'<img{x.group(1) or ""} data-kat="{KAT.get(x.group(2), "")}" data-img="{x.group(2)}"', m)
+assert 'Saisonrückblick</span></a>' in m
+namen.append(baustein("seite-medien", m, ".gal{align-content:start}"))
+
+namen.append(baustein("seite-ueber", unterseite("ueber")))
+
+k = unterseite("kontakt", cta=False)
+k = k.replace('<form class="f" onsubmit="return false">', '<form class="f" novalidate>')
+for alt, neu in (('placeholder="TT.MM.JJJJ"', 'name="datum" placeholder="TT.MM.JJJJ"'),
+                 ('placeholder="z. B. Deining"', 'name="ort" placeholder="z. B. Deining"'),
+                 ('placeholder="Vor- und Nachname"', 'name="name" placeholder="Vor- und Nachname"'),
+                 ('placeholder="z. B. 150"', 'name="gaeste" placeholder="z. B. 150"'),
+                 ('type="email" placeholder', 'type="email" name="email" placeholder'),
+                 ('type="tel" placeholder', 'type="tel" name="telefon" placeholder'),
+                 ('<textarea placeholder', '<textarea name="nachricht" placeholder'),
+                 ('<div class="full"><button class="btn red" type="button">Anfrage senden →</button></div>',
+                  '<div class="full f-senden"><button class="btn red" type="submit">Anfrage senden →</button><span class="f-meldung" role="status"></span></div>'),
+                 ('<a class="big" href="#">+49 160 5555637</a>', '<a class="big" href="tel:+491605555637" target="_top">+49 160 5555637</a>'),
+                 ('<a class="big" style="font-size:22px" href="#">sturschaedl@web.de</a>', '<a class="big" style="font-size:22px" href="mailto:sturschaedl@web.de" target="_top">sturschaedl@web.de</a>'),
+                 ('Instagram @stur.schaedl_band<br>Facebook „Sturschädl“',
+                  f'<a href="{INSTA}" target="_blank" rel="noopener" style="color:inherit">Instagram @stur.schaedl_band</a><br><a href="{FACEBOOK}" target="_blank" rel="noopener" style="color:inherit">Facebook „Sturschädl“</a>')):
+    assert alt in k, alt
+    k = k.replace(alt, neu)
+namen.append(baustein("seite-kontakt", k))
 
 # ---------- Höhen messen (headless Chrome) ----------
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"

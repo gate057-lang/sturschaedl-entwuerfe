@@ -22,5 +22,25 @@
   "fuss": {
     "desktop": 307,
     "handy": 558
+  },
+  "seite-termine": {
+    "desktop": 2403,
+    "handy": 2360
+  },
+  "seite-hochzeit": {
+    "desktop": 2251,
+    "handy": 2562
+  },
+  "seite-medien": {
+    "desktop": 2692,
+    "handy": 2592
+  },
+  "seite-ueber": {
+    "desktop": 2774,
+    "handy": 3226
+  },
+  "seite-kontakt": {
+    "desktop": 1088,
+    "handy": 1637
   }
 }

@@ -260,6 +260,13 @@ a.gig:not(.past):hover h3{color:var(--red)}
 .insta a{display:block}
 .legal a{display:inline;margin:0;color:inherit;text-decoration:none}
 .legal a:hover{color:#fff}
+.filters span{cursor:pointer}
+a.video{display:flex;text-decoration:none}
+.f .f-senden{display:flex;align-items:center;gap:18px}
+.f-meldung{font:500 15px/1.4 var(--fb);color:var(--mute);flex:1;min-width:0}
+.f-meldung.ok{color:#2f6b2f}.f-meldung.fehler{color:var(--red)}
+.f button:disabled{opacity:.6;cursor:wait}
+.side a{text-decoration:none}
 footer{border-top:0}</style></head>
 <body><div id="site" class="light paper">
 
@@ -298,8 +305,33 @@ function zeigeTermine(liste){
   html=html.concat(vorbei.slice(0,max-html.length).map(zeile));
   box.innerHTML=html.join('');
 }
+function zeigeTerminSeite(liste){
+  const k=document.querySelector('.gigs[data-kommend]'),v=document.querySelector('.gigs[data-vorbei]');if(!k||!v||!Array.isArray(liste))return;
+  const gesamt=+k.dataset.kommend||8;const frei=k.querySelector('.gig.free').outerHTML;
+  const kommend=liste.filter(t=>!t.vorbei).sort((a,b)=>new Date(a.datum)-new Date(b.datum)).slice(0,gesamt-2);
+  const vorbei=liste.filter(t=>t.vorbei).sort((a,b)=>new Date(b.datum)-new Date(a.datum));
+  k.innerHTML=kommend.map(zeile).join('')+frei;
+  v.innerHTML=vorbei.slice(0,gesamt-kommend.length-1).map(t=>zeile(t).replace('War a Gaudi','Vorbei')).join('');
+}
 function zeigeLaufband(w){const s=document.querySelector('.strip span');if(!s||!Array.isArray(w)||!w.length)return;const eins=w.map(x=>esc(x)+' <em>✕</em>').join(' ');s.innerHTML=eins+' '+eins;}
-addEventListener('message',e=>{const d=e.data||{};if(d.typ==='hallo')codeDa=true;if(d.typ==='termine'){codeDa=true;zeigeTermine(d.liste);}if(d.typ==='laufband')zeigeLaufband(d.woerter);});
+// Medien: Filter
+document.querySelectorAll('.filters span').forEach(f=>f.addEventListener('click',()=>{const g=document.querySelector('.gal');if(g&&!g.dataset.h){g.dataset.h=1;g.style.minHeight=g.getBoundingClientRect().height/(parseFloat(site.style.zoom)||1)+'px';}document.querySelectorAll('.filters span').forEach(x=>x.classList.toggle('on',x===f));const k=f.dataset.kat||'alle';document.querySelectorAll('.gal img').forEach(i=>{i.style.display=(k==='alle'||(i.dataset.kat||'').split(' ').includes(k))?'':'none';});}));
+// Kontakt: Anlass-Chips + Absenden
+document.querySelectorAll('.chips').forEach(c=>c.addEventListener('click',e=>{const s=e.target.closest('.chips>span');if(!s)return;c.querySelectorAll(':scope>span').forEach(x=>x.classList.toggle('on',x===s));}));
+const formular=document.querySelector('form.f');
+function meldung(t,ok){const m=document.querySelector('.f-meldung');if(!m)return;m.textContent=t;m.className='f-meldung '+(ok?'ok':'fehler');}
+if(formular){formular.addEventListener('submit',e=>{e.preventDefault();
+  const w=n=>(formular.querySelector('[name='+n+']')||{}).value||'';
+  const daten={anlass:(formular.querySelector('.chips .on')||{}).textContent||'',datum:w('datum').trim(),ort:w('ort').trim(),name:w('name').trim(),gaeste:w('gaeste').trim(),email:w('email').trim(),telefon:w('telefon').trim(),nachricht:w('nachricht').trim()};
+  if(!daten.name||!daten.email){meldung('Bitte Name und E-Mail angeben.',false);return;}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(daten.email)){meldung('Bitte eine gültige E-Mail-Adresse angeben.',false);return;}
+  if(!codeDa){meldung('Senden ist gerade nicht möglich – bitte direkt an sturschaedl@web.de schreiben.',false);return;}
+  formular.querySelector('button').disabled=true;meldung('Wird gesendet …',true);
+  parent.postMessage({typ:'anfrage',daten},'*');
+});}
+addEventListener('message',e=>{const d=e.data||{};if(d.typ==='hallo')codeDa=true;if(d.typ==='termine'){codeDa=true;zeigeTermine(d.liste);zeigeTerminSeite(d.liste);}
+  if(d.typ==='anfrage-ok'&&formular){formular.reset();formular.querySelector('button').disabled=false;meldung('Danke! Eure Anfrage ist angekommen – mia meldn uns gscheid schnell.',true);}
+  if(d.typ==='anfrage-fehler'&&formular){formular.querySelector('button').disabled=false;meldung('Das hat leider nicht geklappt. Bitte direkt an sturschaedl@web.de schreiben.',false);}if(d.typ==='laufband')zeigeLaufband(d.woerter);});
 parent.postMessage({typ:'bereit'},'*');
 </script>
 </body></html>
