@@ -20,8 +20,8 @@
     "handy": 506
   },
   "fuss": {
-    "desktop": 307,
-    "handy": 558
+    "desktop": 335,
+    "handy": 585
   },
   "seite-termine": {
     "desktop": 2403,
@@ -30,6 +30,10 @@
   "seite-hochzeit": {
     "desktop": 2214,
     "handy": 2474
+  },
+  "seite-presse": {
+    "desktop": 2405,
+    "handy": 2654
   },
   "seite-medien": {
     "desktop": 2692,

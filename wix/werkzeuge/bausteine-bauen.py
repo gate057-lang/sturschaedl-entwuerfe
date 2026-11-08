@@ -43,7 +43,7 @@ BILD = {  # Dateien in der Wix-Mediathek (identisch zu quelle/assets, per md5 ge
     "hochzeit-oben.png": "546a6fa11daf48d69c35f97e42c882d6~mv2.png",
 }
 GROSS = {"band-wald.jpg", "band-wirtshaus.jpg", "angebot-hochzeit.jpg", "angebot-kirwa.jpg", "angebot-party.jpg", "hochzeit-gaeste.jpg", "hochzeit-gitarre.jpg", "hochzeit-oben.png"}  # große Fotos über Wix-Bilddienst verkleinern
-ZIEL = {"start": "/", "termine": "/termine", "hochzeit": "/hochzeiten", "medien": "/medien",
+ZIEL = {"start": "/", "termine": "/termine", "hochzeit": "/hochzeiten", "medien": "/medien", "presse": "/presse",
         "ueber": "/über-uns", "kontakt": "/kontakt"}
 INSTA = "https://www.instagram.com/stur.schaedl_band"
 FACEBOOK = "https://www.facebook.com/Sturschaedl5/"
@@ -242,6 +242,7 @@ namen = [
 ]
 
 fuss = vorlage("footT")
+fuss = fuss.replace('<a data-go="ueber">Über uns</a></div>', '<a data-go="ueber">Über uns</a><a data-go="presse">Presse &amp; Veranstalter</a></div>')
 fuss = fuss.replace("<a>Bensch Seitz</a>", '<a href="tel:+491605555637" target="_top">Bensch Seitz</a>')
 fuss = fuss.replace("<a>+49 160 5555637</a>", '<a href="tel:+491605555637" target="_top">+49 160 5555637</a>')
 fuss = fuss.replace("<a>sturschaedl@web.de</a>", '<a href="mailto:sturschaedl@web.de" target="_top">sturschaedl@web.de</a>')
@@ -299,6 +300,52 @@ body.m .collage-unten .links{margin-left:0}
 body.m .collage-unten .rechts{margin-right:0}
 """
 namen.append(baustein("seite-hochzeit", h, DUO_CSS))
+
+# ---------- Presse & Veranstalter (08.11.2026, ersetzt die Wix-Musterseite „Presse“) ----------
+DL_FOTOS = "https://708e3179-2584-4117-bbfd-1131678f680d.usrfiles.com/archives/708e31_7a9524a87f0a4b3e82c564d4aa07fe61.zip"
+DL_LOGO = "https://708e3179-2584-4117-bbfd-1131678f680d.usrfiles.com/archives/708e31_b27e9ed0350d4c32b43347363495d758.zip"
+PRESSE = f"""<header class="phead"><div class="bg" style="background-image:var(--i-band-wald-jpg);background-position:center 92%"></div><div class="wrap">
+    <div class="kicker">Presse &amp; Veranstalter</div><h1><span class="fr" style="color:var(--red);font-size:.6em;display:block">Für eure Ankündigung,</span>Fotos &amp; Logo</h1>
+    <p>Plakat, Flyer, Zeitung oder Social Media: Hier gibt’s unsere Bandfotos und das Logo zum Herunterladen.</p>
+  </div></header>
+  <section><div class="wrap">
+    <div class="sec-head"><div><div class="kicker">Downloads</div><h2>Zum<br>Herunterladen</h2></div><p>Einfach anklicken – die Dateien kommen als ZIP-Paket.</p></div>
+    <div class="dl-grid">
+      <div class="dl-karte"><div class="dl-bild"><img data-img="band-wald.jpg" alt="Die Band Sturschädl"></div>
+        <div class="dl-text"><div class="kicker">ZIP · 1,9 MB · 6 Fotos</div><h3>Bandfotos</h3>
+        <p>Gruppenbilder und Live-Fotos in guter Auflösung – für Plakat, Zeitung und Social Media.</p>
+        <a class="btn red" href="{DL_FOTOS}" target="_blank" rel="noopener" download>Fotos herunterladen ↓</a></div></div>
+      <div class="dl-karte"><div class="dl-bild logo"><img data-img="bulle-dunkel.png" alt="Stierkopf-Logo von Sturschädl"></div>
+        <div class="dl-text"><div class="kicker">ZIP · 0,3 MB · 4 Dateien</div><h3>Logo &amp; Stierkopf</h3>
+        <p>Schriftzug und Stierkopf, je hell und dunkel, als PNG mit durchsichtigem Hintergrund.</p>
+        <a class="btn red" href="{DL_LOGO}" target="_blank" rel="noopener" download>Logo herunterladen ↓</a></div></div>
+    </div>
+  </div></section>
+  <section style="background:var(--bg2)"><div class="wrap split">
+    <div class="txt">
+      <div class="kicker">Kurzinfo</div>
+      <h2>Sturschädl<br>in Kürze</h2>
+      <p class="big">Bayrisch-rockige Party- und Hochzeitsband aus Deining in der Oberpfalz – seit 2015.</p>
+      <p>Mit Quetschn, E-Gitarre und am Schuss bayerischer Lässigkeit spielen die fünf Musikanten auf Kirwa, Bierzelt, Hochzeit und Firmenfeier.</p>
+      <p>Besetzung: Bensch (Gesang, Akkordeon), Mane (Gesang, Gitarre), Jo (Keyboard, Gitarre), Manu (Gesang, Schlagzeug), Ben (Bass).</p>
+      <a class="btn red" data-go="kontakt" style="margin-top:18px">Kontakt aufnehmen →</a>
+    </div>
+    <div class="photo-frame"><img data-img="band-wirtshaus.jpg" alt="Sturschädl im Wirtshaus"></div>
+  </div></section>
+""" + vorlage("ctaT")
+PRESSE_CSS = """
+.dl-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
+.dl-karte{background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column}
+.dl-bild{aspect-ratio:16/9;overflow:hidden;background:var(--bg2)}
+.dl-bild img{width:100%;height:100%;object-fit:cover;display:block}
+.dl-bild.logo{display:flex;align-items:center;justify-content:center}
+.dl-bild.logo img{width:auto;max-width:80%;height:62%;object-fit:contain}
+.dl-text{padding:30px 30px 34px}
+.dl-text h3{font-size:34px;margin:10px 0 12px}
+.dl-text p{color:var(--mute);margin-bottom:24px}
+@container (max-width:760px){.phead .bg{background-size:auto 190% !important;background-position:center 100% !important}.dl-grid{grid-template-columns:1fr}.dl-text{padding:24px}.dl-text h3{font-size:28px}}
+"""
+namen.append(baustein("seite-presse", PRESSE, PRESSE_CSS))
 
 m = unterseite("medien")
 m = m.replace('<div class="video"><div class="play"></div>',
