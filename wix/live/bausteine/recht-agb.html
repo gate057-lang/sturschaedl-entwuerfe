@@ -281,8 +281,10 @@ a.video{display:flex;text-decoration:none}
 </div>
 <script>
 const site=document.getElementById('site');
-function fit(){const m=innerWidth<600;document.body.classList.toggle('m',m);if(m){site.style.zoom=innerWidth/390;return;}const z=980/1116,v=innerWidth/z,w=Math.max(1440,v);site.style.zoom=z;site.style.width=w+'px';site.style.marginLeft=((v-w)/2)+'px';}
-fit();addEventListener('resize',fit);
+let fitBreite=-1;
+function fit(){const m=innerWidth<600;if(innerWidth===fitBreite)return;fitBreite=innerWidth;document.body.classList.toggle('m',m);if(m){site.style.zoom=innerWidth/390;site.style.width='';site.style.marginLeft='';return;}const z=980/1116,v=innerWidth/z,w=Math.max(1440,v);site.style.zoom=z;site.style.width=w+'px';site.style.marginLeft=((v-w)/2)+'px';}
+// Wix lädt den Rahmen oft erst schmal und zieht ihn später breit; Chrome meldet das bei Rahmen außerhalb des Bildes nicht zuverlässig per resize.
+fit();addEventListener('resize',fit);addEventListener('pageshow',fit);addEventListener('load',fit);try{new ResizeObserver(fit).observe(document.documentElement);}catch(e){}setInterval(fit,300);
 let codeDa=false;
 document.addEventListener('click',e=>{const a=e.target.closest('a[data-go]');if(!a||!codeDa)return;e.preventDefault();parent.postMessage({typ:'gehe',ziel:a.dataset.go},'*');});
 const MON=['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
