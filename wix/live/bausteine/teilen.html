@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>html,body{margin:0;background:transparent;overflow:hidden;font-family:"Barlow Condensed","Alegreya Sans",sans-serif}
+.leiste{display:flex;flex-direction:column;align-items:center;gap:4px;width:48px;padding:10px 0 8px;box-sizing:border-box;background:rgba(26,23,20,.92);border:1px solid rgba(244,238,226,.18);border-left:0;border-radius:0 10px 10px 0;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.titel{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#c9a96a;margin-bottom:6px}
+a,button{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:0;padding:0;background:transparent;color:#f4eee2;cursor:pointer;transition:background .2s,transform .2s}
+a:hover,button:hover,a:focus-visible,button:focus-visible{background:#8E1C16;transform:scale(1.08);outline:none}
+svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+svg.voll{fill:currentColor;stroke:none}
+.ok{background:#2f6b2f!important}
+@media (max-width:40px){.leiste{width:36px}a,button{width:30px;height:30px}svg{width:16px;height:16px}}
+</style></head><body>
+<nav class="leiste" aria-label="Seite teilen">
+  <span class="titel">Teilen</span>
+  <a id="fb" target="_blank" rel="noopener" title="Auf Facebook teilen" aria-label="Auf Facebook teilen"><svg class="voll" viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21z"/></svg></a>
+  <button id="ig" type="button" title="F&#252;r Instagram: Link kopieren" aria-label="F&#252;r Instagram teilen"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" class="voll"/></svg></button>
+  <a id="x" target="_blank" rel="noopener" title="Auf X teilen" aria-label="Auf X teilen"><svg class="voll" viewBox="0 0 24 24"><path d="M4 4h4.6l4 5.5L17.4 4H20l-6.2 7.2L20.4 20h-4.6l-4.3-5.9L6.4 20H3.8l6.6-7.6z"/></svg></a>
+  <a id="wa" target="_blank" rel="noopener" title="Per WhatsApp teilen" aria-label="Per WhatsApp teilen"><svg class="voll" viewBox="0 0 32 32"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.3.6 4.5 1.8 6.4L3 29l7.2-1.9c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.6 12.7-12.6S23 3 16 3zm0 23.1c-1.8 0-3.6-.5-5.2-1.4l-.4-.2-4.3 1.1 1.1-4.2-.2-.4c-1-1.6-1.5-3.5-1.5-5.4C5.5 9.8 10.2 5.2 16 5.2s10.5 4.6 10.5 10.4S21.8 26.1 16 26.1zm5.8-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8 0 1.6 1.2 3.2 1.4 3.4.2.2 2.4 3.6 5.7 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg></a>
+  <a id="mail" target="_top" title="Per E-Mail teilen" aria-label="Per E-Mail teilen"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></a>
+  <button id="link" type="button" title="Link kopieren" aria-label="Link kopieren"><svg viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2"/></svg></button>
+</nav>
+<script>
+let url='https://www.sturschaedlband.de/',titel='Stursch\u00e4dl \u2013 bayrisch-rockige Party- und Hochzeitsband aus der Oberpfalz';
+const e=encodeURIComponent;
+function setze(){
+  document.getElementById('fb').href='https://www.facebook.com/sharer/sharer.php?u='+e(url);
+  document.getElementById('x').href='https://twitter.com/intent/tweet?url='+e(url)+'&text='+e(titel);
+  document.getElementById('wa').href='https://wa.me/?text='+e(titel+' '+url);
+  document.getElementById('mail').href='mailto:?subject='+e(titel)+'&body='+e('Schau mal: '+url);
+}
+function kopiere(knopf){
+  const fertig=()=>{knopf.classList.add('ok');const alt=knopf.title;knopf.title='Link kopiert!';setTimeout(()=>{knopf.classList.remove('ok');knopf.title=alt;},1800);};
+  const notfall=()=>{const t=document.createElement('textarea');t.value=url;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(x){}t.remove();fertig();};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(fertig,notfall);else notfall();
+}
+document.getElementById('link').onclick=function(){kopiere(this);};
+document.getElementById('ig').onclick=function(){const k=this;
+  if(navigator.share){navigator.share({title:titel,url:url}).catch(()=>kopiere(k));}else kopiere(k);};
+addEventListener('message',m=>{const d=m.data||{};if(d.typ==='teilen'){if(d.url)url=d.url;if(d.titel)titel=d.titel;setze();}});
+setze();
+parent.postMessage({typ:'bereit'},'*');
+</script></body></html>

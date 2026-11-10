@@ -8,7 +8,9 @@ import { verbindeBausteine } from 'public/bausteine.js';
 $w.onReady(function () {
     verbindeBausteine($w, ['#html6']);
     let el;
-    try { el = $w('#html6'); } catch (e) { return; }
+    try { el = $w('#html6'); } catch (e) { /* unten */ }
+    if (!el || el.type !== '$w.HtmlComponent') { try { el = $w('HtmlComponent')[0]; } catch (e) { return; } }
+    if (!el) return;
     el.onMessage(async (ev) => {
         const d = (ev && ev.data) || {};
         if (d.typ !== 'newsletter' || !d.daten) return;
