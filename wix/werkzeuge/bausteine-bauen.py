@@ -493,7 +493,7 @@ BILDANSICHT = """<!doctype html>
 html,body{margin:0;height:100%;background:rgba(11,10,9,.96);overflow:hidden;font-family:"Alegreya Sans",sans-serif;color:#f4eee2}
 .ba{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:64px 16px 24px;box-sizing:border-box}
 .ba-bild{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center}
-.ba-bild img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.6);border:8px solid #fff;box-sizing:border-box;transition:opacity .2s}
+.ba-bild img{display:block;max-width:none;max-height:none;box-shadow:0 30px 80px rgba(0,0,0,.6);border:8px solid #fff;box-sizing:border-box;transition:opacity .2s}
 .ba-leiste{display:flex;align-items:center;gap:18px}
 .ba button{font:700 15px/1 "Alegreya Sans",sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:#f4eee2;background:transparent;border:1px solid rgba(244,238,226,.4);border-radius:40px;padding:14px 22px}
 .ba button:hover{background:#8E1C16;border-color:#8E1C16}
@@ -510,7 +510,12 @@ html,body{margin:0;height:100%;background:rgba(11,10,9,.96);overflow:hidden;font
 </div>
 <script>
 let bilder=[],i=0;const img=document.querySelector('.ba-bild img');
-function zeige(){if(!bilder.length)return;i=(i+bilder.length)%bilder.length;const b=bilder[i];img.style.opacity=0;img.onload=()=>img.style.opacity=1;img.src=b.gross||b.url;img.alt=b.titel||'';
+const flaeche=document.querySelector('.ba-bild');
+// Bild immer so groß wie die freie Fläche (auch kleine Originale werden hochskaliert), Seitenverhältnis bleibt.
+function passe(){const nw=img.naturalWidth,nh=img.naturalHeight;if(!nw||!nh)return;const r=flaeche.getBoundingClientRect();
+  const k=Math.min(r.width/nw,r.height/nh);img.style.width=Math.floor(nw*k)+'px';img.style.height=Math.floor(nh*k)+'px';}
+addEventListener('resize',passe);
+function zeige(){if(!bilder.length)return;i=(i+bilder.length)%bilder.length;const b=bilder[i];img.style.opacity=0;img.onload=()=>{passe();img.style.opacity=1;};img.src=b.gross||b.url;img.alt=b.titel||'';
   document.querySelector('.ba-titel').textContent=b.titel||'';document.querySelector('.ba-zahl').textContent=(i+1)+' / '+bilder.length;}
 const zu=()=>parent.postMessage({typ:'schliessen'},'*');
 document.querySelector('.ba-zur').onclick=()=>{i--;zeige();};document.querySelector('.ba-vor').onclick=()=>{i++;zeige();};
@@ -523,7 +528,16 @@ addEventListener('message',e=>{const d=e.data||{};if(d.typ==='bilder'&&Array.isA
 parent.postMessage({typ:'bereit'},'*');focus();
 </script></body></html>
 """.replace("FONTS", FONTS)
-(AUS / "bildansicht.html").write_text(BILDANSICHT, encoding="utf-8")
+# Nur ASCII ausliefern (Zeichen als &#x…; bzw. \\u…): Beim Einfügen über die Zwischenablage in Wix gehen sonst Pfeile/Umlaute kaputt.
+def nur_ascii(html):
+    kopf, rest = html.split("<script>", 1)
+    skript, ende = rest.split("</script>", 1)
+    ent = lambda t: "".join(c if ord(c) < 128 else f"&#x{ord(c):x};" for c in t)
+    esc = lambda t: "".join(c if ord(c) < 128 else f"\\u{ord(c):04x}" for c in t)
+    return ent(kopf) + "<script>" + esc(skript) + "</script>" + ent(ende)
+
+
+(AUS / "bildansicht.html").write_text(nur_ascii(BILDANSICHT), encoding="utf-8")
 
 # ---------- WhatsApp-Knopf (masterPage, standardmäßig AUS über CMS „Schalter“) ----------
 WHATSAPP = """<!doctype html>
