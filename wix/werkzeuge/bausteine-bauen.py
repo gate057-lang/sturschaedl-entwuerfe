@@ -199,6 +199,51 @@ def bild_vars():
 MAUS = "\nlet mausZeit=0;document.addEventListener('mousemove',()=>{const t=Date.now();if(t-mausZeit<250)return;mausZeit=t;parent.postMessage({typ:'maus'},'*');},{passive:true});\n"
 
 
+# Medien-Galerie (10.11.2026): Bilder kommen aus der Wix-CMS-Sammlung „Galerie“ (Seitencode MEDIEN schickt
+# {typ:'galerie', bilder:[{url,titel,kat}]}). Die Band pflegt die Bilder selbst im CMS. Je Seite 10 Bilder im
+# festen Raster des Entwurfs, darunter Blättern – so bleibt die Höhe des Wix-Elements immer gleich.
+# Ohne Seitencode (oder leere Sammlung) bleiben die fest eingebauten Bilder stehen.
+GALERIE_JS = r"""
+(function(){
+const g=document.querySelector('.gal');if(!g)return;
+const MUSTER=['w2 h2','','h2','','w2','','','','w2',''];const PRO_SEITE=10;
+let liste=[...g.querySelectorAll('img')].map(i=>({url:i.src,titel:i.alt||'',kat:i.dataset.kat||''}));
+let kat='alle',seite=0;
+const nav=document.createElement('div');nav.className='gal-nav';
+nav.innerHTML='<button type="button" class="gal-zur" aria-label="Vorherige Bilder">←</button><span class="gal-seite"></span><button type="button" class="gal-vor" aria-label="Weitere Bilder">Weitere →</button>';
+const leer=document.createElement('a');leer.className='gal-leer';leer.href='https://www.instagram.com/stur.schaedl_band';leer.target='_blank';leer.rel='noopener';leer.textContent='Unsere Clips gibt’s auf Instagram · @stur.schaedl_band →';
+function zeige(){
+  const f=kat==='alle'?liste:liste.filter(b=>b.kat===kat);
+  const seiten=Math.max(1,Math.ceil(f.length/PRO_SEITE));if(seite>=seiten)seite=seiten-1;
+  g.innerHTML='';g.appendChild(nav);
+  if(kat==='videos'||!f.length){g.appendChild(leer);leer.style.display='flex';
+    leer.textContent=kat==='videos'?'Unsere Clips gibt’s auf Instagram · @stur.schaedl_band →':'Hier kommen bald Fotos – schaut solang auf Instagram vorbei · @stur.schaedl_band →';}
+  else f.slice(seite*PRO_SEITE,seite*PRO_SEITE+PRO_SEITE).forEach((b,i)=>{const im=document.createElement('img');im.src=b.url;im.alt=b.titel;im.loading='lazy';if(MUSTER[i])im.className=MUSTER[i];g.appendChild(im);});
+  nav.style.display=seiten>1&&kat!=='videos'?'flex':'none';
+  nav.querySelector('.gal-seite').textContent=(seite+1)+' / '+seiten;
+  nav.querySelector('.gal-zur').disabled=seite===0;nav.querySelector('.gal-vor').disabled=seite>=seiten-1;
+}
+document.querySelectorAll('.filters span').forEach(alt=>{const f=alt.cloneNode(true);alt.replaceWith(f);
+  f.addEventListener('click',()=>{document.querySelectorAll('.filters span').forEach(x=>x.classList.toggle('on',x===f));kat=f.dataset.kat||'alle';seite=0;zeige();});});
+nav.querySelector('.gal-zur').addEventListener('click',()=>{seite--;zeige();});
+nav.querySelector('.gal-vor').addEventListener('click',()=>{seite++;zeige();});
+addEventListener('message',e=>{const d=e.data||{};if(d.typ==='galerie'&&Array.isArray(d.bilder)&&d.bilder.length){liste=d.bilder.filter(b=>b&&b.url);seite=0;zeige();}});
+zeige();
+// Höhe der Galerie beim Filtern halten (wie bisher)
+requestAnimationFrame(()=>{g.style.minHeight=g.getBoundingClientRect().height/(parseFloat(site.style.zoom)||1)+'px';});
+})();
+"""
+GALERIE_CSS = """
+.gal{position:relative;min-height:calc(4 * 240px + 3 * 8px)}
+.gal-nav{position:absolute;right:12px;bottom:12px;z-index:3;display:none;align-items:center;gap:6px;padding:6px;background:rgba(26,23,20,.86);border-radius:2px}
+.gal-nav button{font:700 13px/1 var(--fh);letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border:1px solid rgba(244,238,226,.35);background:transparent;color:#f4eee2;cursor:pointer}
+.gal-nav button:hover:not(:disabled){background:var(--red);border-color:var(--red)}
+.gal-nav button:disabled{opacity:.3;cursor:default}
+.gal-seite{font-size:13px;color:#ddd3c3;padding:0 6px;white-space:nowrap}
+@container (max-width:760px){.gal{min-height:calc(8 * 170px + 7 * 8px)}.gal-nav{right:8px;bottom:8px}.gal-nav button{padding:8px 9px;font-size:11px}.gal-seite{font-size:11px}}
+"""
+
+
 def baustein(name, inhalt, css=""):
     doc = f"""<!doctype html>
 <html lang="de"><head><meta charset="utf-8">
@@ -210,7 +255,7 @@ def baustein(name, inhalt, css=""):
 <body><div id="site" class="light paper">
 {links(inhalt)}
 </div>
-<script>{JS}{MAUS if name == "laufband" else ""}</script>
+<script>{JS}{MAUS if name == "laufband" else ""}{GALERIE_JS if name == "seite-medien" else ""}</script>
 </body></html>
 """
     (AUS / f"{name}.html").write_text(doc, encoding="utf-8")
@@ -357,7 +402,7 @@ KAT = {"ig-1.jpg": "kirwa", "ig-2.jpg": "kirwa", "ig-9.jpg": "kirwa", "ig-4.jpg"
        "ig-6.jpg": "kirwa", "ig-11.jpg": "kirwa", "ig-7.jpg": "hochzeit", "band-wirtshaus.jpg": "band", "ig-10.jpg": "kirwa"}
 m = re.sub(r'<img( class="[^"]*")? data-img="([\w.-]+)"', lambda x: f'<img{x.group(1) or ""} data-kat="{KAT.get(x.group(2), "")}" data-img="{x.group(2)}"', m)
 assert 'Saisonrückblick</span></a>' in m
-namen.append(baustein("seite-medien", m, ".gal{align-content:start}"))
+namen.append(baustein("seite-medien", m, ".gal{align-content:start}" + GALERIE_CSS))
 
 namen.append(baustein("seite-ueber", unterseite("ueber")))
 

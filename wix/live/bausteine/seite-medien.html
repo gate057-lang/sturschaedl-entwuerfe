@@ -269,7 +269,15 @@ a.video{display:flex;text-decoration:none}
 .side a{text-decoration:none}
 .gal .gal-leer{grid-column:1/-1;grid-row:span 2;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:var(--bg2);border:1px solid var(--line);font:700 20px/1.4 var(--fh);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);text-decoration:none}
 .gal .gal-leer:hover{color:var(--red)}
-#site{--i-ig-1-jpg:url(https://static.wixstatic.com/media/708e31_f50bf818ea8c41dcbd99c6774af57c1b~mv2.jpg);--i-ig-2-jpg:url(https://static.wixstatic.com/media/708e31_8cec5502b40547c7a1ec5b74659255c1~mv2.jpg);--i-ig-3-jpg:url(https://static.wixstatic.com/media/708e31_63aad68b9a5f4a5a90b4c312b380785a~mv2.jpg);--i-ig-4-jpg:url(https://static.wixstatic.com/media/708e31_c91f1a531ffe4292a90b31357219b5fc~mv2.jpg);--i-ig-5-jpg:url(https://static.wixstatic.com/media/708e31_aed4e449fb74424ca2f24f7e9b6bf0df~mv2.jpg);--i-ig-6-jpg:url(https://static.wixstatic.com/media/708e31_154c705f545847e0a544f1fd2627a3a4~mv2.jpg);--i-ig-7-jpg:url(https://static.wixstatic.com/media/708e31_e5a06f5e6a214c90bf2ea5ef18acfce0~mv2.jpg);--i-ig-8-jpg:url(https://static.wixstatic.com/media/708e31_4079959609d9450ab9a622612578e2b9~mv2.jpg);--i-ig-9-jpg:url(https://static.wixstatic.com/media/708e31_56196bc35b0449959eadf9e4e4646e5b~mv2.jpg);--i-ig-10-jpg:url(https://static.wixstatic.com/media/708e31_35e5228abd3e4663824ca5fdb53f3bd8~mv2.jpg);--i-ig-11-jpg:url(https://static.wixstatic.com/media/708e31_a062dcb019e0465581057dbb25c5dd3f~mv2.jpg);--i-band-wald-jpg:url(https://static.wixstatic.com/media/708e31_90c04f62be55433085bb852e59225f3f~mv2.jpg/v1/fit/w_1500,h_1500,q_85/band-wald.jpg);--i-band-wirtshaus-jpg:url(https://static.wixstatic.com/media/708e31_f3e2cdef419341ef8cc9acb6ddf682e8~mv2.jpg/v1/fit/w_1500,h_1500,q_85/band-wirtshaus.jpg);--i-bulle-hell-png:url(https://static.wixstatic.com/media/708e31_31b7fc203858494794963fffd0307fa7~mv2.png);--i-bulle-dunkel-png:url(https://static.wixstatic.com/media/708e31_352bfb0db9924201825c1bde2428348a~mv2.png)}.gal{align-content:start}</style></head>
+#site{--i-ig-1-jpg:url(https://static.wixstatic.com/media/708e31_f50bf818ea8c41dcbd99c6774af57c1b~mv2.jpg);--i-ig-2-jpg:url(https://static.wixstatic.com/media/708e31_8cec5502b40547c7a1ec5b74659255c1~mv2.jpg);--i-ig-3-jpg:url(https://static.wixstatic.com/media/708e31_63aad68b9a5f4a5a90b4c312b380785a~mv2.jpg);--i-ig-4-jpg:url(https://static.wixstatic.com/media/708e31_c91f1a531ffe4292a90b31357219b5fc~mv2.jpg);--i-ig-5-jpg:url(https://static.wixstatic.com/media/708e31_aed4e449fb74424ca2f24f7e9b6bf0df~mv2.jpg);--i-ig-6-jpg:url(https://static.wixstatic.com/media/708e31_154c705f545847e0a544f1fd2627a3a4~mv2.jpg);--i-ig-7-jpg:url(https://static.wixstatic.com/media/708e31_e5a06f5e6a214c90bf2ea5ef18acfce0~mv2.jpg);--i-ig-8-jpg:url(https://static.wixstatic.com/media/708e31_4079959609d9450ab9a622612578e2b9~mv2.jpg);--i-ig-9-jpg:url(https://static.wixstatic.com/media/708e31_56196bc35b0449959eadf9e4e4646e5b~mv2.jpg);--i-ig-10-jpg:url(https://static.wixstatic.com/media/708e31_35e5228abd3e4663824ca5fdb53f3bd8~mv2.jpg);--i-ig-11-jpg:url(https://static.wixstatic.com/media/708e31_a062dcb019e0465581057dbb25c5dd3f~mv2.jpg);--i-band-wald-jpg:url(https://static.wixstatic.com/media/708e31_90c04f62be55433085bb852e59225f3f~mv2.jpg/v1/fit/w_1500,h_1500,q_85/band-wald.jpg);--i-band-wirtshaus-jpg:url(https://static.wixstatic.com/media/708e31_f3e2cdef419341ef8cc9acb6ddf682e8~mv2.jpg/v1/fit/w_1500,h_1500,q_85/band-wirtshaus.jpg);--i-bulle-hell-png:url(https://static.wixstatic.com/media/708e31_31b7fc203858494794963fffd0307fa7~mv2.png);--i-bulle-dunkel-png:url(https://static.wixstatic.com/media/708e31_352bfb0db9924201825c1bde2428348a~mv2.png)}.gal{align-content:start}
+.gal{position:relative;min-height:calc(4 * 240px + 3 * 8px)}
+.gal-nav{position:absolute;right:12px;bottom:12px;z-index:3;display:none;align-items:center;gap:6px;padding:6px;background:rgba(26,23,20,.86);border-radius:2px}
+.gal-nav button{font:700 13px/1 var(--fh);letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border:1px solid rgba(244,238,226,.35);background:transparent;color:#f4eee2;cursor:pointer}
+.gal-nav button:hover:not(:disabled){background:var(--red);border-color:var(--red)}
+.gal-nav button:disabled{opacity:.3;cursor:default}
+.gal-seite{font-size:13px;color:#ddd3c3;padding:0 6px;white-space:nowrap}
+@container (max-width:760px){.gal{min-height:calc(8 * 170px + 7 * 8px)}.gal-nav{right:8px;bottom:8px}.gal-nav button{padding:8px 9px;font-size:11px}.gal-seite{font-size:11px}}
+</style></head>
 <body><div id="site" class="light paper">
 
   <header class="phead"><div class="bg" style="background-image:var(--i-ig-8-jpg)"></div><div class="wrap">
@@ -353,5 +361,34 @@ addEventListener('message',e=>{const d=e.data||{};if(d.typ==='hallo')codeDa=true
   if(d.typ==='anfrage-ok'&&formular){formular.reset();formular.querySelector('button').disabled=false;meldung('Danke! Eure Anfrage ist angekommen – mia meldn uns gscheid schnell.',true);}
   if(d.typ==='anfrage-fehler'&&formular){formular.querySelector('button').disabled=false;meldung('Das hat leider nicht geklappt. Bitte direkt an sturschaedl@web.de schreiben.',false);}if(d.typ==='laufband')zeigeLaufband(d.woerter);});
 parent.postMessage({typ:'bereit'},'*');
+
+(function(){
+const g=document.querySelector('.gal');if(!g)return;
+const MUSTER=['w2 h2','','h2','','w2','','','','w2',''];const PRO_SEITE=10;
+let liste=[...g.querySelectorAll('img')].map(i=>({url:i.src,titel:i.alt||'',kat:i.dataset.kat||''}));
+let kat='alle',seite=0;
+const nav=document.createElement('div');nav.className='gal-nav';
+nav.innerHTML='<button type="button" class="gal-zur" aria-label="Vorherige Bilder">←</button><span class="gal-seite"></span><button type="button" class="gal-vor" aria-label="Weitere Bilder">Weitere →</button>';
+const leer=document.createElement('a');leer.className='gal-leer';leer.href='https://www.instagram.com/stur.schaedl_band';leer.target='_blank';leer.rel='noopener';leer.textContent='Unsere Clips gibt’s auf Instagram · @stur.schaedl_band →';
+function zeige(){
+  const f=kat==='alle'?liste:liste.filter(b=>b.kat===kat);
+  const seiten=Math.max(1,Math.ceil(f.length/PRO_SEITE));if(seite>=seiten)seite=seiten-1;
+  g.innerHTML='';g.appendChild(nav);
+  if(kat==='videos'||!f.length){g.appendChild(leer);leer.style.display='flex';
+    leer.textContent=kat==='videos'?'Unsere Clips gibt’s auf Instagram · @stur.schaedl_band →':'Hier kommen bald Fotos – schaut solang auf Instagram vorbei · @stur.schaedl_band →';}
+  else f.slice(seite*PRO_SEITE,seite*PRO_SEITE+PRO_SEITE).forEach((b,i)=>{const im=document.createElement('img');im.src=b.url;im.alt=b.titel;im.loading='lazy';if(MUSTER[i])im.className=MUSTER[i];g.appendChild(im);});
+  nav.style.display=seiten>1&&kat!=='videos'?'flex':'none';
+  nav.querySelector('.gal-seite').textContent=(seite+1)+' / '+seiten;
+  nav.querySelector('.gal-zur').disabled=seite===0;nav.querySelector('.gal-vor').disabled=seite>=seiten-1;
+}
+document.querySelectorAll('.filters span').forEach(alt=>{const f=alt.cloneNode(true);alt.replaceWith(f);
+  f.addEventListener('click',()=>{document.querySelectorAll('.filters span').forEach(x=>x.classList.toggle('on',x===f));kat=f.dataset.kat||'alle';seite=0;zeige();});});
+nav.querySelector('.gal-zur').addEventListener('click',()=>{seite--;zeige();});
+nav.querySelector('.gal-vor').addEventListener('click',()=>{seite++;zeige();});
+addEventListener('message',e=>{const d=e.data||{};if(d.typ==='galerie'&&Array.isArray(d.bilder)&&d.bilder.length){liste=d.bilder.filter(b=>b&&b.url);seite=0;zeige();}});
+zeige();
+// Höhe der Galerie beim Filtern halten (wie bisher)
+requestAnimationFrame(()=>{g.style.minHeight=g.getBoundingClientRect().height/(parseFloat(site.style.zoom)||1)+'px';});
+})();
 </script>
 </body></html>
