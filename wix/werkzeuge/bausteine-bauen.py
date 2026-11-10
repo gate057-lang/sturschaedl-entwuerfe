@@ -402,6 +402,11 @@ KAT = {"ig-1.jpg": "kirwa", "ig-2.jpg": "kirwa", "ig-9.jpg": "kirwa", "ig-4.jpg"
        "ig-6.jpg": "kirwa", "ig-11.jpg": "kirwa", "ig-7.jpg": "hochzeit", "band-wirtshaus.jpg": "band", "ig-10.jpg": "kirwa"}
 m = re.sub(r'<img( class="[^"]*")? data-img="([\w.-]+)"', lambda x: f'<img{x.group(1) or ""} data-kat="{KAT.get(x.group(2), "")}" data-img="{x.group(2)}"', m)
 assert 'Saisonrückblick</span></a>' in m
+# Texte wie von Markus im Wix-Editor geändert (10.11.2026): Einleitungssatz und Mockup-Hinweis entfernt
+for a in ('\n    <p>Statt „Folgt noch…“: Fotos und Clips von Kirwa, Bierzelt und Hochzeit – direkt aus eurem Instagram-Fundus.</p>',
+          '\n    <p style="margin-top:22px;color:var(--mute);font-size:14px">Hinweis Mockup: Die Live-Fotos sind kleine Vorschaubilder aus Instagram – für die echte Seite brauchen wir die Originaldateien von der Band.</p>'):
+    assert a in m, a
+    m = m.replace(a, '')
 namen.append(baustein("seite-medien", m, ".gal{align-content:start}" + GALERIE_CSS))
 
 namen.append(baustein("seite-ueber", unterseite("ueber")))

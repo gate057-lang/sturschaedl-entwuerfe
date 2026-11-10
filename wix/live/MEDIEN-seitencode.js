@@ -1,5 +1,5 @@
 // Sturschädl – Seitencode der Seite MEDIEN (Wirtshaus-Design)
-// #html16 = Seiten-Baustein. Die Galerie-Bilder kommen aus der CMS-Sammlung „Galerie“
+// #html6 = Seiten-Baustein. Die Galerie-Bilder kommen aus der CMS-Sammlung „Galerie“
 // (Felder: Titel, Bild, Kategorie = Kirwa / Hochzeit / Band, Reihenfolge = Zahl, optional;
 // Bilder ohne Reihenfolge stehen vorne, neueste zuerst).
 // Die Band pflegt die Bilder selbst im Wix-Dashboard unter CMS → Galerie.
@@ -44,9 +44,9 @@ async function ladeGalerie() {
 }
 
 $w.onReady(function () {
-    verbindeBausteine($w, ['#html16']);
+    verbindeBausteine($w, ['#html6']);
     let el;
-    try { el = $w('#html16'); } catch (e) { return; }
+    try { el = $w('#html6'); } catch (e) { return; }
     const bilder = ladeGalerie();
     const senden = async () => {
         const b = await bilder;
