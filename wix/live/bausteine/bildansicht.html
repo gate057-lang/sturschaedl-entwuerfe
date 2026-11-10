@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700;800&family=Pirata+One&family=Alegreya:ital,wght@0,500;0,700;0,800;1,500&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<style>
+html,body{margin:0;height:100%;background:rgba(11,10,9,.96);overflow:hidden;font-family:"Alegreya Sans",sans-serif;color:#f4eee2}
+.ba{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:64px 16px 24px;box-sizing:border-box}
+.ba-bild{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center}
+.ba-bild img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.6);border:8px solid #fff;box-sizing:border-box;transition:opacity .2s}
+.ba-leiste{display:flex;align-items:center;gap:18px}
+.ba button{font:700 15px/1 "Alegreya Sans",sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:#f4eee2;background:transparent;border:1px solid rgba(244,238,226,.4);border-radius:40px;padding:14px 22px}
+.ba button:hover{background:#8E1C16;border-color:#8E1C16}
+.ba-zahl{font-size:15px;color:#ddd3c3;min-width:70px;text-align:center}
+.ba-titel{font-size:15px;color:#b3aa9c;text-align:center;min-height:1em}
+.ba-zu{position:fixed;top:16px;right:16px;width:48px;height:48px;padding:0!important;font-size:22px!important;letter-spacing:0!important}
+@media (max-width:600px){.ba{padding:60px 8px 18px;gap:12px}.ba button{padding:12px 16px;font-size:13px}.ba-bild img{border-width:5px}}
+</style></head><body>
+<div class="ba">
+  <button class="ba-zu" type="button" aria-label="Schließen">✕</button>
+  <div class="ba-bild"><img alt=""></div>
+  <div class="ba-titel"></div>
+  <div class="ba-leiste"><button class="ba-zur" type="button" aria-label="Vorheriges Bild">← Zurück</button><span class="ba-zahl"></span><button class="ba-vor" type="button" aria-label="Nächstes Bild">Weiter →</button></div>
+</div>
+<script>
+let bilder=[],i=0;const img=document.querySelector('.ba-bild img');
+function zeige(){if(!bilder.length)return;i=(i+bilder.length)%bilder.length;const b=bilder[i];img.style.opacity=0;img.onload=()=>img.style.opacity=1;img.src=b.gross||b.url;img.alt=b.titel||'';
+  document.querySelector('.ba-titel').textContent=b.titel||'';document.querySelector('.ba-zahl').textContent=(i+1)+' / '+bilder.length;}
+const zu=()=>parent.postMessage({typ:'schliessen'},'*');
+document.querySelector('.ba-zur').onclick=()=>{i--;zeige();};document.querySelector('.ba-vor').onclick=()=>{i++;zeige();};
+document.querySelector('.ba-zu').onclick=zu;
+document.querySelector('.ba').addEventListener('click',e=>{if(e.target.classList.contains('ba')||e.target.classList.contains('ba-bild'))zu();});
+addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){i--;zeige();}if(e.key==='ArrowRight'){i++;zeige();}if(e.key==='Escape')zu();});
+let x0=null;addEventListener('touchstart',e=>{x0=e.touches[0].clientX;},{passive:true});
+addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){i+=dx<0?1:-1;zeige();}x0=null;});
+addEventListener('message',e=>{const d=e.data||{};if(d.typ==='bilder'&&Array.isArray(d.bilder)){bilder=d.bilder;i=d.index||0;zeige();focus();}});
+parent.postMessage({typ:'bereit'},'*');focus();
+</script></body></html>

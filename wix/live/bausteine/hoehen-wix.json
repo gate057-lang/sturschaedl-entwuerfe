@@ -59,5 +59,9 @@
   "seite-presse": {
     "desktop": 2409,
     "handy": 2658
+  },
+  "seite-newsletter": {
+    "desktop": 1398,
+    "handy": 1257
   }
 }

@@ -208,7 +208,7 @@ GALERIE_JS = r"""
 const g=document.querySelector('.gal');if(!g)return;
 const MUSTER=['w2 h2','','h2','','w2','','','','w2',''];const PRO_SEITE=10;
 let liste=[...g.querySelectorAll('img')].map(i=>({url:i.src,titel:i.alt||'',kat:i.dataset.kat||''}));
-let kat='alle',seite=0;
+let kat='alle',seite=0,gross=false;
 const nav=document.createElement('div');nav.className='gal-nav';
 nav.innerHTML='<button type="button" class="gal-zur" aria-label="Vorherige Bilder">←</button><span class="gal-seite"></span><button type="button" class="gal-vor" aria-label="Weitere Bilder">Weitere →</button>';
 const leer=document.createElement('a');leer.className='gal-leer';leer.href='https://www.instagram.com/stur.schaedl_band';leer.target='_blank';leer.rel='noopener';leer.textContent='Unsere Clips gibt’s auf Instagram · @stur.schaedl_band →';
@@ -218,7 +218,8 @@ function zeige(){
   g.innerHTML='';g.appendChild(nav);
   if(kat==='videos'||!f.length){g.appendChild(leer);leer.style.display='flex';
     leer.textContent=kat==='videos'?'Unsere Clips gibt’s auf Instagram · @stur.schaedl_band →':'Hier kommen bald Fotos – schaut solang auf Instagram vorbei · @stur.schaedl_band →';}
-  else f.slice(seite*PRO_SEITE,seite*PRO_SEITE+PRO_SEITE).forEach((b,i)=>{const im=document.createElement('img');im.src=b.url;im.alt=b.titel;im.loading='lazy';if(MUSTER[i])im.className=MUSTER[i];g.appendChild(im);});
+  else f.slice(seite*PRO_SEITE,seite*PRO_SEITE+PRO_SEITE).forEach((b,i)=>{const im=document.createElement('img');im.src=b.url;im.alt=b.titel;im.loading='lazy';if(MUSTER[i])im.className=MUSTER[i];
+    im.addEventListener('click',()=>{if(gross)parent.postMessage({typ:'grossansicht',bilder:f,index:seite*PRO_SEITE+i},'*');});g.appendChild(im);});
   nav.style.display=seiten>1&&kat!=='videos'?'flex':'none';
   nav.querySelector('.gal-seite').textContent=(seite+1)+' / '+seiten;
   nav.querySelector('.gal-zur').disabled=seite===0;nav.querySelector('.gal-vor').disabled=seite>=seiten-1;
@@ -227,13 +228,21 @@ document.querySelectorAll('.filters span').forEach(alt=>{const f=alt.cloneNode(t
   f.addEventListener('click',()=>{document.querySelectorAll('.filters span').forEach(x=>x.classList.toggle('on',x===f));kat=f.dataset.kat||'alle';seite=0;zeige();});});
 nav.querySelector('.gal-zur').addEventListener('click',()=>{seite--;zeige();});
 nav.querySelector('.gal-vor').addEventListener('click',()=>{seite++;zeige();});
-addEventListener('message',e=>{const d=e.data||{};if(d.typ==='galerie'&&Array.isArray(d.bilder)&&d.bilder.length){liste=d.bilder.filter(b=>b&&b.url);seite=0;zeige();}});
+addEventListener('message',e=>{const d=e.data||{};if(d.typ!=='galerie')return;
+  g.classList.toggle('effekt',!!d.effekt);gross=!!d.gross;g.classList.toggle('klickbar',gross);
+  if(Array.isArray(d.bilder)&&d.bilder.length){liste=d.bilder.filter(b=>b&&b.url);seite=0;zeige();}});
 zeige();
 // Höhe der Galerie beim Filtern halten (wie bisher)
 requestAnimationFrame(()=>{g.style.minHeight=g.getBoundingClientRect().height/(parseFloat(site.style.zoom)||1)+'px';});
 })();
 """
 GALERIE_CSS = """
+.gal img{transition:transform .28s ease,opacity .28s ease,filter .28s ease,box-shadow .28s ease}
+.gal.klickbar img{cursor:zoom-in}
+.gal.effekt:hover img{opacity:.55;filter:saturate(.7)}
+.gal.effekt img:hover{opacity:1;filter:none;transform:scale(1.05);position:relative;z-index:2;box-shadow:0 22px 50px rgba(26,23,20,.38)}
+.gal.effekt img:active{transform:scale(.97)}
+@media (hover:none){.gal.effekt:hover img{opacity:1;filter:none}}
 .gal{position:relative;min-height:calc(4 * 240px + 3 * 8px)}
 .gal-nav{position:absolute;right:12px;bottom:12px;z-index:3;display:none;align-items:center;gap:6px;padding:6px;background:rgba(26,23,20,.86);border-radius:2px}
 .gal-nav button{font:700 13px/1 var(--fh);letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border:1px solid rgba(244,238,226,.35);background:transparent;color:#f4eee2;cursor:pointer}
@@ -242,6 +251,9 @@ GALERIE_CSS = """
 .gal-seite{font-size:13px;color:#ddd3c3;padding:0 6px;white-space:nowrap}
 @container (max-width:760px){.gal{min-height:calc(8 * 170px + 7 * 8px)}.gal-nav{right:8px;bottom:8px}.gal-nav button{padding:8px 9px;font-size:11px}.gal-seite{font-size:11px}}
 """
+
+
+NEWSLETTER_JS = ""
 
 
 def baustein(name, inhalt, css=""):
@@ -255,7 +267,7 @@ def baustein(name, inhalt, css=""):
 <body><div id="site" class="light paper">
 {links(inhalt)}
 </div>
-<script>{JS}{MAUS if name == "laufband" else ""}{GALERIE_JS if name == "seite-medien" else ""}</script>
+<script>{JS}{MAUS if name == "laufband" else ""}{GALERIE_JS if name == "seite-medien" else ""}{NEWSLETTER_JS if name == "seite-newsletter" else ""}</script>
 </body></html>
 """
     (AUS / f"{name}.html").write_text(doc, encoding="utf-8")
@@ -471,6 +483,104 @@ namen.append(baustein("recht-agb", rechtsseite("AGB", "ig-5.jpg",
     "unseren Leistungen, Preisen, Zahlungsbedingungen und den Bedingungen für Vertragsabschluss, Stornierung und Widerruf. Wir legen großen Wert "
     "darauf, dass unsere AGB gesetzeskonform und kundenorientiert sind. Dennoch empfehlen wir, unsere AGB von einem Rechtsexperten prüfen zu lassen, "
     "um sicherzustellen, dass sie allen gesetzlichen Anforderungen entsprechen.</p>"), RECHT_CSS))
+
+# ---------- Großansicht (Wix-Lightbox „Bildansicht“, 10.11.2026) ----------
+# Vollbild: großes Bild, darunter Pfeile ← →, Zähler, Schließen (X / Esc / Klick daneben), Pfeiltasten, Wischen.
+BILDANSICHT = """<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="FONTS">
+<style>
+html,body{margin:0;height:100%;background:rgba(11,10,9,.96);overflow:hidden;font-family:"Alegreya Sans",sans-serif;color:#f4eee2}
+.ba{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:64px 16px 24px;box-sizing:border-box}
+.ba-bild{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center}
+.ba-bild img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.6);border:8px solid #fff;box-sizing:border-box;transition:opacity .2s}
+.ba-leiste{display:flex;align-items:center;gap:18px}
+.ba button{font:700 15px/1 "Alegreya Sans",sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:#f4eee2;background:transparent;border:1px solid rgba(244,238,226,.4);border-radius:40px;padding:14px 22px}
+.ba button:hover{background:#8E1C16;border-color:#8E1C16}
+.ba-zahl{font-size:15px;color:#ddd3c3;min-width:70px;text-align:center}
+.ba-titel{font-size:15px;color:#b3aa9c;text-align:center;min-height:1em}
+.ba-zu{position:fixed;top:16px;right:16px;width:48px;height:48px;padding:0!important;font-size:22px!important;letter-spacing:0!important}
+@media (max-width:600px){.ba{padding:60px 8px 18px;gap:12px}.ba button{padding:12px 16px;font-size:13px}.ba-bild img{border-width:5px}}
+</style></head><body>
+<div class="ba">
+  <button class="ba-zu" type="button" aria-label="Schließen">✕</button>
+  <div class="ba-bild"><img alt=""></div>
+  <div class="ba-titel"></div>
+  <div class="ba-leiste"><button class="ba-zur" type="button" aria-label="Vorheriges Bild">← Zurück</button><span class="ba-zahl"></span><button class="ba-vor" type="button" aria-label="Nächstes Bild">Weiter →</button></div>
+</div>
+<script>
+let bilder=[],i=0;const img=document.querySelector('.ba-bild img');
+function zeige(){if(!bilder.length)return;i=(i+bilder.length)%bilder.length;const b=bilder[i];img.style.opacity=0;img.onload=()=>img.style.opacity=1;img.src=b.gross||b.url;img.alt=b.titel||'';
+  document.querySelector('.ba-titel').textContent=b.titel||'';document.querySelector('.ba-zahl').textContent=(i+1)+' / '+bilder.length;}
+const zu=()=>parent.postMessage({typ:'schliessen'},'*');
+document.querySelector('.ba-zur').onclick=()=>{i--;zeige();};document.querySelector('.ba-vor').onclick=()=>{i++;zeige();};
+document.querySelector('.ba-zu').onclick=zu;
+document.querySelector('.ba').addEventListener('click',e=>{if(e.target.classList.contains('ba')||e.target.classList.contains('ba-bild'))zu();});
+addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){i--;zeige();}if(e.key==='ArrowRight'){i++;zeige();}if(e.key==='Escape')zu();});
+let x0=null;addEventListener('touchstart',e=>{x0=e.touches[0].clientX;},{passive:true});
+addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){i+=dx<0?1:-1;zeige();}x0=null;});
+addEventListener('message',e=>{const d=e.data||{};if(d.typ==='bilder'&&Array.isArray(d.bilder)){bilder=d.bilder;i=d.index||0;zeige();focus();}});
+parent.postMessage({typ:'bereit'},'*');focus();
+</script></body></html>
+""".replace("FONTS", FONTS)
+(AUS / "bildansicht.html").write_text(BILDANSICHT, encoding="utf-8")
+
+# ---------- WhatsApp-Knopf (masterPage, standardmäßig AUS über CMS „Schalter“) ----------
+WHATSAPP = """<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>html,body{margin:0;background:transparent;overflow:hidden}
+a{display:flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:50%;background:#25D366;box-shadow:0 8px 24px rgba(0,0,0,.28);transition:transform .2s}
+a:hover{transform:scale(1.08)}svg{width:34px;height:34px;fill:#fff}</style></head><body>
+<a id="wa" href="https://wa.me/" target="_blank" rel="noopener" aria-label="Anfrage per WhatsApp">
+<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.3.6 4.5 1.8 6.4L3 29l7.2-1.9c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.6 12.7-12.6S23 3 16 3zm0 23.1c-1.8 0-3.6-.5-5.2-1.4l-.4-.2-4.3 1.1 1.1-4.2-.2-.4c-1-1.6-1.5-3.5-1.5-5.4C5.5 9.8 10.2 5.2 16 5.2s10.5 4.6 10.5 10.4S21.8 26.1 16 26.1zm5.8-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8 0 1.6 1.2 3.2 1.4 3.4.2.2 2.4 3.6 5.7 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg></a>
+<script>addEventListener('message',e=>{const d=e.data||{};if(d.typ==='whatsapp'&&d.nummer){document.getElementById('wa').href='https://wa.me/'+d.nummer+(d.text?'?text='+encodeURIComponent(d.text):'');}});
+parent.postMessage({typ:'bereit'},'*');</script></body></html>
+"""
+(AUS / "whatsapp.html").write_text(WHATSAPP, encoding="utf-8")
+
+# ---------- Newsletter-Seite (versteckt, im Seitenmenü ausgeblendet) ----------
+NEWSLETTER = """<header class="phead"><div class="bg" style="background-image:var(--i-band-wirtshaus-jpg);background-position:center 85%"></div><div class="wrap">
+    <div class="kicker">Newsletter</div><h1><span class="fr" style="color:var(--red);font-size:.6em;display:block">Nix mehr verpassen,</span>mia schreibn eich</h1>
+    <p>Neue Termine, Kirwa-Saison und was sonst so los is – kurz und ohne Spam per E-Mail.</p>
+  </div></header>
+  <section><div class="wrap nl-wrap">
+    <form class="nl" novalidate>
+      <label>Vorname<input type="text" name="vorname" placeholder="Vorname" autocomplete="given-name"></label>
+      <label>E-Mail<input type="email" name="email" placeholder="name@beispiel.de" autocomplete="email"></label>
+      <label class="full nl-ok"><input type="checkbox" name="einwilligung"><span>Ja, ich möchte den Newsletter von Sturschädl per E-Mail bekommen. Abmelden geht jederzeit über den Link in jeder E-Mail. Mehr dazu in der <a href="https://www.sturschaedlband.de/datenschutz" target="_top">Datenschutzerklärung</a>.</span></label>
+      <div class="full f-senden"><button class="btn red" type="submit">Anmelden →</button><span class="nl-meldung" role="status"></span></div>
+    </form>
+  </div></section>
+""" + vorlage("ctaT")
+NEWSLETTER_CSS = """
+.nl-wrap{max-width:760px}
+form.nl{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--card);padding:36px;border:1px solid var(--line)}
+.nl label{display:flex;flex-direction:column;gap:7px;font:700 13px/1 var(--fh);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.nl .full{grid-column:1/-1}
+.nl input[type=text],.nl input[type=email]{font:400 16px Barlow;padding:14px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:2px}
+.nl .nl-ok{flex-direction:row;align-items:flex-start;gap:12px;font:400 15px/1.5 var(--fb);letter-spacing:0;text-transform:none;color:var(--ink)}
+.nl .nl-ok input{width:20px;height:20px;margin-top:2px;accent-color:var(--red);flex:none}
+.nl .nl-ok a{color:var(--red)}
+.nl .f-senden{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.nl-meldung{font:500 15px/1.4 var(--fb);color:var(--mute);flex:1;min-width:0}
+.nl-meldung.ok{color:#2f6b2f}.nl-meldung.fehler{color:var(--red)}
+@container (max-width:760px){form.nl{grid-template-columns:1fr;padding:24px}}
+"""
+NEWSLETTER_JS = r"""
+(function(){const f=document.querySelector('form.nl');if(!f)return;
+const m=(t,ok)=>{const e=f.querySelector('.nl-meldung');e.textContent=t;e.className='nl-meldung '+(ok?'ok':'fehler');};
+f.addEventListener('submit',e=>{e.preventDefault();
+  const daten={vorname:f.vorname.value.trim(),email:f.email.value.trim(),einwilligung:f.einwilligung.checked};
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(daten.email)){m('Bitte eine gültige E-Mail-Adresse angeben.',false);return;}
+  if(!daten.einwilligung){m('Bitte das Häkchen für die Einwilligung setzen.',false);return;}
+  if(!codeDa){m('Die Anmeldung ist gerade nicht möglich.',false);return;}
+  f.querySelector('button').disabled=true;m('Wird gesendet …',true);parent.postMessage({typ:'newsletter',daten},'*');});
+addEventListener('message',e=>{const d=e.data||{};
+  if(d.typ==='newsletter-ok'){f.reset();f.querySelector('button').disabled=false;m('Danke! Du bist eingetragen – mia meldn uns.',true);}
+  if(d.typ==='newsletter-fehler'){f.querySelector('button').disabled=false;m('Das hat leider nicht geklappt. Bitte später nochmal probieren.',false);}});
+})();
+"""
+namen.append(baustein("seite-newsletter", NEWSLETTER, NEWSLETTER_CSS))
 
 # ---------- Höhen messen (headless Chrome) ----------
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"

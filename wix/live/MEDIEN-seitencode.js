@@ -1,18 +1,20 @@
 // Sturschädl – Seitencode der Seite MEDIEN (Wirtshaus-Design)
 // #html6 = Seiten-Baustein. Die Galerie-Bilder kommen aus der CMS-Sammlung „Galerie“
 // (Felder: Titel, Bild, Kategorie = Kirwa / Hochzeit / Band, Reihenfolge = Zahl, optional;
-// Bilder ohne Reihenfolge stehen vorne, neueste zuerst).
-// Die Band pflegt die Bilder selbst im Wix-Dashboard unter CMS → Galerie.
+// Bilder ohne Reihenfolge stehen vorne, neueste zuerst). Die Band pflegt sie selbst unter CMS → Galerie.
+// Mauseffekt und Großansicht werden in der CMS-Sammlung „Schalter“ an- und ausgeschaltet.
+// Großansicht = Wix-Lightbox „Bildansicht“ (Vollbild mit Pfeilen).
 import wixData from 'wix-data';
+import wixWindow from 'wix-window';
 import { verbindeBausteine } from 'public/bausteine.js';
 
 // wix:image://v1/708e31_abc~mv2.jpg/name.jpg#originWidth=… → Bild-Adresse in passender Größe
-function bildUrl(bild) {
+function bildUrl(bild, groesse) {
     if (!bild) return '';
     if (/^https?:/.test(bild)) return bild;
     const m = String(bild).match(/^wix:image:\/\/v1\/([^/#]+)/);
     if (!m) return '';
-    return `https://static.wixstatic.com/media/${m[1]}/v1/fit/w_1200,h_1200,q_85/${m[1]}`;
+    return `https://static.wixstatic.com/media/${m[1]}/v1/fit/w_${groesse},h_${groesse},q_85/${m[1]}`;
 }
 
 // Freitext der Band → Filter der Seite (kirwa / hochzeit / band)
@@ -35,7 +37,7 @@ async function ladeGalerie() {
                 if (ra !== rb) return ra - rb;
                 return new Date(b._createdDate) - new Date(a._createdDate);
             })
-            .map((i) => ({ url: bildUrl(i.bild), titel: i.title || '', kat: kategorie(i.kategorie) }))
+            .map((i) => ({ url: bildUrl(i.bild, 1200), gross: bildUrl(i.bild, 2000), titel: i.title || '', kat: kategorie(i.kategorie) }))
             .filter((b) => b.url);
     } catch (e) {
         console.log('Galerie:', e);
@@ -43,15 +45,31 @@ async function ladeGalerie() {
     }
 }
 
+async function ladeSchalter() {
+    try {
+        const res = await wixData.query('Schalter').limit(1).find();
+        const s = res.items[0] || {};
+        return { effekt: s.mauseffekt !== false, gross: s.grossansicht !== false };
+    } catch (e) {
+        return { effekt: false, gross: false };
+    }
+}
+
 $w.onReady(function () {
     verbindeBausteine($w, ['#html6']);
     let el;
     try { el = $w('#html6'); } catch (e) { return; }
-    const bilder = ladeGalerie();
+    const daten = Promise.all([ladeGalerie(), ladeSchalter()]);
     const senden = async () => {
-        const b = await bilder;
-        if (b.length) el.postMessage({ typ: 'galerie', bilder: b });
+        const [bilder, schalter] = await daten;
+        el.postMessage({ typ: 'galerie', bilder, effekt: schalter.effekt, gross: schalter.gross });
     };
-    el.onMessage((ev) => { if (ev && ev.data && ev.data.typ === 'bereit') senden(); });
+    el.onMessage((ev) => {
+        const d = (ev && ev.data) || {};
+        if (d.typ === 'bereit') senden();
+        if (d.typ === 'grossansicht' && Array.isArray(d.bilder)) {
+            wixWindow.openLightbox('Bildansicht', { bilder: d.bilder, index: d.index || 0 });
+        }
+    });
     senden();
 });
