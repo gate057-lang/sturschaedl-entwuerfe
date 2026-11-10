@@ -1,5 +1,5 @@
 // Sturschädl – Seitencode der Seite MEDIEN (Wirtshaus-Design)
-// #html6 = Seiten-Baustein. Die Galerie-Bilder kommen aus der CMS-Sammlung „Galerie“
+// #html17 = Seiten-Baustein. Die Galerie-Bilder kommen aus der CMS-Sammlung „Galerie“
 // (Felder: Titel, Bild, Kategorie = Kirwa / Hochzeit / Band, Reihenfolge = Zahl, optional;
 // Bilder ohne Reihenfolge stehen vorne, neueste zuerst). Die Band pflegt sie selbst unter CMS → Galerie.
 // Mauseffekt und Großansicht werden in der CMS-Sammlung „Schalter“ an- und ausgeschaltet.
@@ -56,9 +56,9 @@ async function ladeSchalter() {
 }
 
 $w.onReady(function () {
-    verbindeBausteine($w, ['#html6']);
+    verbindeBausteine($w, ['#html17']);
     let el;
-    try { el = $w('#html6'); } catch (e) { return; }
+    try { el = $w('#html17'); } catch (e) { return; }
     const daten = Promise.all([ladeGalerie(), ladeSchalter()]);
     const senden = async () => {
         const [bilder, schalter] = await daten;
