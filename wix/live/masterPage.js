@@ -4,8 +4,11 @@
 //   Ausblenden geht über die CMS-Sammlung „Schalter“, Feld „Teilen ausblenden“ (angehakt = Leiste weg).
 // WhatsApp-Knopf #htmlWhatsapp (unten links angeheftet, beim Laden ausgeblendet) wird nur gezeigt,
 //   wenn in „Schalter“ „WhatsApp anzeigen“ angehakt ist.
+// Auf dem Handy beide komplett weg (collapse): Wix zeigt im Handy ausgeblendete Kopfzeilen-Elemente sonst
+//   beim Öffnen des Menüs trotzdem an (Fehler vom 17.11.2026).
 import wixData from 'wix-data';
 import wixLocation from 'wix-location';
+import wixWindow from 'wix-window';
 import { verbindeBausteine } from 'public/bausteine.js';
 
 function waNummer(n) {
@@ -23,8 +26,14 @@ const TITEL = 'Sturschädl – bayrisch-rockige Party- und Hochzeitsband aus der
 
 $w.onReady(function () {
     verbindeBausteine($w, ['#html5']);
-    const teilen = element('#htmlTeilen');
-    const wa = element('#htmlWhatsapp');
+    let teilen = element('#htmlTeilen');
+    let wa = element('#htmlWhatsapp');
+    if (wixWindow.formFactor === 'Mobile') {
+        if (teilen) teilen.collapse();
+        if (wa) wa.collapse();
+        teilen = null;
+        wa = null;
+    }
 
     if (teilen) {
         const senden = () => teilen.postMessage({ typ: 'teilen', url: wixLocation.url.split('?')[0], titel: TITEL });
