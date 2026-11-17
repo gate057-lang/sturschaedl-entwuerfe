@@ -601,6 +601,83 @@ parent.postMessage({typ:'bereit'},'*');
 """.replace("BASIS", BASIS)
 (AUS / "teilen.html").write_text(nur_ascii(TEILEN), encoding="utf-8")
 
+# ---------- Teilen auf dem Handy (17.11.2026): kleiner Knopf in der Handy-Kopfzeile + Teilen-Fenster ----------
+# Wix kann auf dem Handy nichts schwebend anheften. Darum: Knopf „Teilen“ neben dem Menü-Symbol (eigener Baustein,
+# nur in der Handy-Ansicht), der Tipp darauf öffnet die Wix-Lightbox „Teilen“ mit großen Knöpfen.
+SYMBOLE = re.findall(r'<svg.*?</svg>', TEILEN, re.S)  # Facebook, Instagram, X, WhatsApp, E-Mail, Link
+assert len(SYMBOLE) == 6, len(SYMBOLE)
+TEILEN_KNOPF = """<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+button{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:100%;box-sizing:border-box;border:1px solid rgba(201,169,106,.55);border-radius:40px;background:rgba(26,23,20,.92);color:#c9a96a;font:700 11px/1 "Barlow Condensed","Alegreya Sans",sans-serif;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;padding:0 10px}
+button:active{transform:scale(.96)}
+svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+</style></head><body>
+<button type="button" aria-label="Seite teilen"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/></svg>Teilen</button>
+<script>document.querySelector('button').onclick=()=>parent.postMessage({typ:'teilen-oeffnen'},'*');
+parent.postMessage({typ:'bereit'},'*');</script></body></html>
+"""
+(AUS / "teilen-knopf.html").write_text(nur_ascii(TEILEN_KNOPF), encoding="utf-8")
+
+TEILEN_FENSTER = """<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="FONTS">
+<style>html,body{margin:0;height:100%;background:#141210;color:#f4eee2;font-family:"Alegreya Sans",sans-serif;overflow:hidden}
+.f{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;padding:28px 22px;box-sizing:border-box}
+.kicker{font:700 12px/1 "Barlow Condensed",sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#c9a96a;margin-bottom:8px}
+h2{font:700 30px/1.1 "Alegreya","Alegreya Sans",serif;margin:0 0 22px}
+.raster{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+a,button.k{display:flex;align-items:center;gap:12px;min-height:56px;padding:0 16px;box-sizing:border-box;border:1px solid rgba(244,238,226,.18);border-radius:12px;background:rgba(244,238,226,.04);color:#f4eee2;text-decoration:none;font:600 16px/1.2 "Alegreya Sans",sans-serif;cursor:pointer;text-align:left}
+a:active,button.k:active{background:#8E1C16;border-color:#8E1C16}
+.ok{background:#2f6b2f!important;border-color:#2f6b2f!important}
+svg{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+svg.voll{fill:currentColor;stroke:none}
+.zu{position:fixed;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(244,238,226,.35);background:transparent;color:#f4eee2;font-size:20px;cursor:pointer}
+.hinweis{margin-top:16px;font-size:14px;color:#b3aa9c;min-height:1.2em}
+</style></head><body>
+<div class="f">
+  <button class="zu" type="button" aria-label="Schließen">&#x2715;</button>
+  <div class="kicker">Seite teilen</div><h2>Sag&#x2019;s weiter!</h2>
+  <div class="raster">
+    <a id="fb" target="_blank" rel="noopener">S0Facebook</a>
+    <button class="k" id="ig" type="button">S1Instagram</button>
+    <a id="x" target="_blank" rel="noopener">S2X</a>
+    <a id="wa" target="_blank" rel="noopener">S3WhatsApp</a>
+    <a id="mail" target="_top">S4E-Mail</a>
+    <button class="k" id="link" type="button">S5Link kopieren</button>
+  </div>
+  <div class="hinweis" role="status"></div>
+</div>
+<script>
+let url='BASIS/',titel='Sturschädl – bayrisch-rockige Party- und Hochzeitsband aus der Oberpfalz';
+const e=encodeURIComponent,h=document.querySelector('.hinweis');
+function setze(){
+  document.getElementById('fb').href='https://www.facebook.com/sharer/sharer.php?u='+e(url);
+  document.getElementById('x').href='https://twitter.com/intent/tweet?url='+e(url)+'&text='+e(titel);
+  document.getElementById('wa').href='https://wa.me/?text='+e(titel+' '+url);
+  document.getElementById('mail').href='mailto:?subject='+e(titel)+'&body='+e('Schau mal: '+url);
+}
+function kopiere(k,text){
+  const fertig=()=>{k.classList.add('ok');h.textContent=text;setTimeout(()=>k.classList.remove('ok'),1800);};
+  const notfall=()=>{const t=document.createElement('textarea');t.value=url;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(x){}t.remove();fertig();};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(fertig,notfall);else notfall();
+}
+document.getElementById('link').onclick=function(){kopiere(this,'Link kopiert – jetzt einfach einfügen.');};
+document.getElementById('ig').onclick=function(){const k=this;
+  if(navigator.share){navigator.share({title:titel,url:url}).catch(()=>kopiere(k,'Link kopiert – in Instagram einfügen (Story oder Nachricht).'));}
+  else kopiere(k,'Link kopiert – in Instagram einfügen (Story oder Nachricht).');};
+const zu=()=>parent.postMessage({typ:'schliessen'},'*');
+document.querySelector('.zu').onclick=zu;
+document.querySelector('.f').addEventListener('click',ev=>{if(ev.target.classList.contains('f'))zu();});
+addEventListener('message',m=>{const d=m.data||{};if(d.typ==='teilen'){if(d.url)url=d.url;if(d.titel)titel=d.titel;setze();}});
+setze();
+parent.postMessage({typ:'bereit'},'*');
+</script></body></html>
+""".replace("FONTS", FONTS).replace("BASIS", BASIS)
+for n, svg in enumerate(SYMBOLE):
+    TEILEN_FENSTER = TEILEN_FENSTER.replace(f"S{n}", svg, 1)
+(AUS / "teilen-fenster.html").write_text(nur_ascii(TEILEN_FENSTER), encoding="utf-8")
+
 # ---------- Newsletter-Seite (versteckt, im Seitenmenü ausgeblendet) ----------
 NEWSLETTER = """<header class="phead"><div class="bg" style="background-image:var(--i-band-wirtshaus-jpg);background-position:center 85%"></div><div class="wrap">
     <div class="kicker">Newsletter</div><h1><span class="fr" style="color:var(--red);font-size:.6em;display:block">Nix mehr verpassen,</span>mia schreibn eich</h1>
