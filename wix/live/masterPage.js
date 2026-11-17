@@ -6,6 +6,7 @@
 //   wenn in „Schalter“ „WhatsApp anzeigen“ angehakt ist.
 // Auf dem Handy beide komplett weg (collapse): Wix zeigt im Handy ausgeblendete Kopfzeilen-Elemente sonst
 //   beim Öffnen des Menüs trotzdem an (Fehler vom 17.11.2026).
+// Handy statt Leiste: kleiner Knopf #htmlTeilenKnopf in der Handy-Kopfzeile öffnet die Lightbox „Teilen“.
 import wixData from 'wix-data';
 import wixLocation from 'wix-location';
 import wixWindow from 'wix-window';
@@ -33,6 +34,14 @@ $w.onReady(function () {
         if (wa) wa.collapse();
         teilen = null;
         wa = null;
+        const knopf = element('#htmlTeilenKnopf');
+        if (knopf) {
+            knopf.onMessage((ev) => {
+                if (ev && ev.data && ev.data.typ === 'teilen-oeffnen') {
+                    wixWindow.openLightbox('Teilen', { url: wixLocation.url.split('?')[0], titel: TITEL });
+                }
+            });
+        }
     }
 
     if (teilen) {
